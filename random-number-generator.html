@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Random Number Generator - ToolSathi</title>
+
+  <meta
+    name="description"
+    content="Free online Random Number Generator. Generate random numbers between any minimum and maximum value with ToolSathi."
+  >
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #222;
+    }
+
+    header {
+      background: #2563eb;
+      color: white;
+      text-align: center;
+      padding: 25px 15px;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+    }
+
+    header p {
+      margin: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 35px auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    .input-group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    input {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: #2563eb;
+      color: white;
+      font-size: 17px;
+      cursor: pointer;
+      margin-top: 5px;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .clear {
+      background: #555;
+      margin-top: 12px;
+    }
+
+    .clear:hover {
+      background: #333;
+    }
+
+    .result {
+      margin-top: 20px;
+      padding: 25px;
+      background: #eef4ff;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .number {
+      display: block;
+      font-size: 48px;
+      font-weight: bold;
+      color: #2563eb;
+      margin-bottom: 8px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #666;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>ToolSathi</h1>
+  <p>Free Online Random Number Generator</p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+
+    <h2>Random Number Generator</h2>
+
+    <div class="input-group">
+
+      <label for="minNumber">
+        Minimum Number
+      </label>
+
+      <input
+        type="number"
+        id="minNumber"
+        value="1"
+        step="1"
+      >
+
+    </div>
+
+    <div class="input-group">
+
+      <label for="maxNumber">
+        Maximum Number
+      </label>
+
+      <input
+        type="number"
+        id="maxNumber"
+        value="100"
+        step="1"
+      >
+
+    </div>
+
+    <button onclick="generateRandomNumber()">
+      Generate Random Number
+    </button>
+
+    <button
+      class="clear"
+      onclick="clearFields()"
+    >
+      Clear
+    </button>
+
+    <div class="result" id="result">
+      <span class="number">?</span>
+      Enter a range and generate a number.
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+  © 2026 ToolSathi
+</footer>
+
+<script>
+
+  function generateRandomNumber() {
+
+    const min =
+      Number(document.getElementById("minNumber").value);
+
+    const max =
+      Number(document.getElementById("maxNumber").value);
+
+    const result =
+      document.getElementById("result");
+
+    if (
+      !Number.isFinite(min) ||
+      !Number.isFinite(max)
+    ) {
+
+      result.innerHTML =
+        "Please enter valid numbers.";
+
+      return;
+    }
+
+    if (
+      !Number.isInteger(min) ||
+      !Number.isInteger(max)
+    ) {
+
+      result.innerHTML =
+        "Please enter whole numbers.";
+
+      return;
+    }
+
+    if (min > max) {
+
+      result.innerHTML =
+        "Minimum number cannot be greater than maximum number.";
+
+      return;
+    }
+
+    const randomNumber =
+      Math.floor(
+        Math.random() * (max - min + 1)
+      ) + min;
+
+    result.innerHTML = `
+      <span class="number">${randomNumber}</span>
+      Random number between ${min} and ${max}
+    `;
+  }
+
+
+  function clearFields() {
+
+    document.getElementById("minNumber").value = "1";
+
+    document.getElementById("maxNumber").value = "100";
+
+    document.getElementById("result").innerHTML = `
+      <span class="number">?</span>
+      Enter a range and generate a number.
+    `;
+  }
+
+</script>
+
+</body>
+</html>
