@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Palindrome Checker - ToolSathi</title>
+
+  <meta
+    name="description"
+    content="Free online Palindrome Checker. Check whether a word, phrase or text is a palindrome with ToolSathi."
+  >
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #222;
+    }
+
+    header {
+      background: #2563eb;
+      color: white;
+      text-align: center;
+      padding: 25px 15px;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+    }
+
+    header p {
+      margin: 0;
+    }
+
+    .container {
+      max-width: 650px;
+      margin: 35px auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    .info {
+      background: #f1f5f9;
+      padding: 12px;
+      border-radius: 8px;
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 13px;
+      border: none;
+      border-radius: 8px;
+      background: #2563eb;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .clear {
+      background: #555;
+    }
+
+    .clear:hover {
+      background: #333;
+    }
+
+    .result {
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: 10px;
+      background: #eef4ff;
+      text-align: center;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .result strong {
+      display: block;
+      font-size: 24px;
+      margin-bottom: 5px;
+      color: #2563eb;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #666;
+    }
+
+    @media (max-width: 500px) {
+      .buttons {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>ToolSathi</h1>
+  <p>Free Online Palindrome Checker</p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+
+    <h2>Palindrome Checker</h2>
+
+    <div class="info">
+      A palindrome reads the same forward and backward.
+      Spaces, punctuation and capitalization are ignored.
+    </div>
+
+    <input
+      type="text"
+      id="textInput"
+      placeholder="Example: Madam"
+      onkeydown="handleEnter(event)"
+    >
+
+    <div class="buttons">
+
+      <button onclick="checkPalindrome()">
+        Check Palindrome
+      </button>
+
+      <button class="clear" onclick="clearText()">
+        Clear
+      </button>
+
+    </div>
+
+    <div class="result" id="result">
+      Enter text to check.
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+  © 2026 ToolSathi
+</footer>
+
+<script>
+
+  function checkPalindrome() {
+
+    const text =
+      document.getElementById("textInput").value;
+
+    const result =
+      document.getElementById("result");
+
+    if (text.trim() === "") {
+
+      result.innerHTML =
+        "Please enter some text.";
+
+      return;
+    }
+
+    /*
+      Convert to lowercase and remove
+      spaces, punctuation and symbols.
+    */
+
+    const cleaned = text
+      .toLowerCase()
+      .replace(/[^a-z0-9]/g, "");
+
+    if (cleaned === "") {
+
+      result.innerHTML =
+        "Please enter letters or numbers.";
+
+      return;
+    }
+
+    const reversed =
+      Array.from(cleaned).reverse().join("");
+
+    if (cleaned === reversed) {
+
+      result.innerHTML = `
+        <strong>Yes! It is a Palindrome ✅</strong>
+        The text reads the same forward and backward.
+      `;
+
+    } else {
+
+      result.innerHTML = `
+        <strong>No, it is not a Palindrome ❌</strong>
+        The text does not read the same backward.
+      `;
+    }
+  }
+
+
+  function handleEnter(event) {
+
+    if (event.key === "Enter") {
+      checkPalindrome();
+    }
+  }
+
+
+  function clearText() {
+
+    document.getElementById("textInput").value = "";
+
+    document.getElementById("result").innerHTML =
+      "Enter text to check.";
+  }
+
+</script>
+
+</body>
+</html>
