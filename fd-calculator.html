@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>FD Calculator - ToolSathi</title>
+
+  <meta
+    name="description"
+    content="Free online FD Calculator. Calculate fixed deposit maturity amount, interest earned and total investment easily with ToolSathi."
+  >
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #222;
+    }
+
+    header {
+      background: #2563eb;
+      color: white;
+      text-align: center;
+      padding: 25px 15px;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+    }
+
+    header p {
+      margin: 0;
+    }
+
+    .container {
+      max-width: 650px;
+      margin: 35px auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    .info {
+      background: #f1f5f9;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-size: 14px;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .input-group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      background: white;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      margin-top: 5px;
+      border: none;
+      border-radius: 8px;
+      background: #2563eb;
+      color: white;
+      font-size: 17px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .clear {
+      background: #555;
+      margin-top: 12px;
+    }
+
+    .clear:hover {
+      background: #333;
+    }
+
+    .result {
+      margin-top: 22px;
+      padding: 20px;
+      background: #eef4ff;
+      border-radius: 10px;
+    }
+
+    .result h3 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    .result-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 12px 0;
+      border-bottom: 1px solid #dbe4f0;
+    }
+
+    .result-row:last-child {
+      border-bottom: none;
+    }
+
+    .maturity {
+      font-size: 23px;
+      color: #2563eb;
+    }
+
+    .note {
+      margin-top: 18px;
+      text-align: center;
+      color: #666;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #666;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>ToolSathi</h1>
+  <p>Free Online FD Calculator</p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+
+    <h2>FD Calculator</h2>
+
+    <div class="info">
+      Calculate estimated Fixed Deposit maturity amount and interest earned.
+    </div>
+
+    <div class="input-group">
+      <label for="principal">
+        Deposit Amount (₹)
+      </label>
+
+      <input
+        type="number"
+        id="principal"
+        placeholder="Example: 100000"
+        min="1"
+        step="1"
+      >
+    </div>
+
+    <div class="input-group">
+      <label for="rate">
+        Annual Interest Rate (%)
+      </label>
+
+      <input
+        type="number"
+        id="rate"
+        placeholder="Example: 7"
+        min="0"
+        step="0.01"
+      >
+    </div>
+
+    <div class="input-group">
+      <label for="years">
+        Tenure (Years)
+      </label>
+
+      <input
+        type="number"
+        id="years"
+        placeholder="Example: 5"
+        min="0.01"
+        step="0.01"
+      >
+    </div>
+
+    <div class="input-group">
+      <label for="frequency">
+        Compounding Frequency
+      </label>
+
+      <select id="frequency">
+        <option value="4">Quarterly</option>
+        <option value="2">Half-Yearly</option>
+        <option value="1">Yearly</option>
+        <option value="12">Monthly</option>
+      </select>
+    </div>
+
+    <button onclick="calculateFD()">
+      Calculate FD
+    </button>
+
+    <button
+      class="clear"
+      onclick="clearFields()"
+    >
+      Clear
+    </button>
+
+    <div class="result">
+
+      <h3>FD Result</h3>
+
+      <div class="result-row">
+        <span>Principal Amount</span>
+        <strong id="principalResult">₹0</strong>
+      </div>
+
+      <div class="result-row">
+        <span>Interest Earned</span>
+        <strong id="interestResult">₹0</strong>
+      </div>
+
+      <div class="result-row">
+        <span>Maturity Amount</span>
+        <strong class="maturity" id="maturityResult">₹0</strong>
+      </div>
+
+    </div>
+
+    <div class="note">
+      This calculator provides an estimate. Actual FD returns may vary
+      according to the bank, tenure and applicable terms.
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+  © 2026 ToolSathi
+</footer>
+
+<script>
+
+  function formatRupees(value) {
+    return "₹" + Math.round(value).toLocaleString("en-IN");
+  }
+
+
+  function calculateFD() {
+
+    const principal =
+      Number(
+        document.getElementById("principal").value
+      );
+
+    const annualRate =
+      Number(
+        document.getElementById("rate").value
+      );
+
+    const years =
+      Number(
+        document.getElementById("years").value
+      );
+
+    const frequency =
+      Number(
+        document.getElementById("frequency").value
+      );
+
+
+    if (
+      !principal ||
+      principal <= 0 ||
+      annualRate < 0 ||
+      !years ||
+      years <= 0
+    ) {
+
+      alert(
+        "Please enter valid FD details."
+      );
+
+      return;
+    }
+
+
+    const rate =
+      annualRate / 100;
+
+
+    /*
+      Compound interest formula:
+
+      A = P(1 + r/n)^(nt)
+
+      P = Principal
+      r = Annual interest rate
+      n = Compounding frequency
+      t = Time in years
+    */
+
+    const maturity =
+      principal *
+      Math.pow(
+        1 + rate / frequency,
+        frequency * years
+      );
+
+
+    const interest =
+      maturity - principal;
+
+
+    document.getElementById("principalResult").textContent =
+      formatRupees(principal);
+
+    document.getElementById("interestResult").textContent =
+      formatRupees(interest);
+
+    document.getElementById("maturityResult").textContent =
+      formatRupees(maturity);
+  }
+
+
+  function clearFields() {
+
+    document.getElementById("principal").value = "";
+
+    document.getElementById("rate").value = "";
+
+    document.getElementById("years").value = "";
+
+    document.getElementById("frequency").value = "4";
+
+    document.getElementById("principalResult").textContent =
+      "₹0";
+
+    document.getElementById("interestResult").textContent =
+      "₹0";
+
+    document.getElementById("maturityResult").textContent =
+      "₹0";
+  }
+
+</script>
+
+</body>
+</html>
