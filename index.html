@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ToolSathi - 100 Free Online Tools & Calculators</title>
+
+  <meta
+    name="description"
+    content="ToolSathi provides 100 free online calculators, converters, text tools, date tools and useful everyday tools."
+  >
+
+  <meta
+    name="keywords"
+    content="online tools, calculator, converter, percentage calculator, EMI calculator, unit converter, ToolSathi"
+  >
+
+  <link
+    rel="canonical"
+    href="https://toolsathi99-create.github.io/Tools-Sathi-/"
+  >
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #222;
+    }
+
+    header {
+      background: #2563eb;
+      color: white;
+      text-align: center;
+      padding: 35px 15px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 38px;
+    }
+
+    header p {
+      margin: 10px 0 0;
+      font-size: 18px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 25px 15px;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 20px 0 30px;
+    }
+
+    .hero h2 {
+      font-size: 30px;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .search-box {
+      display: flex;
+      max-width: 700px;
+      margin: 25px auto;
+      gap: 10px;
+    }
+
+    .search-box input {
+      flex: 1;
+      padding: 14px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    .search-box button {
+      padding: 14px 20px;
+      border: none;
+      border-radius: 8px;
+      background: #2563eb;
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .categories {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 20px 0 30px;
+    }
+
+    .category-btn {
+      border: none;
+      background: white;
+      padding: 10px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .category-btn.active,
+    .category-btn:hover {
+      background: #2563eb;
+      color: white;
+    }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 18px;
+    }
+
+    .tool-card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+      transition: transform 0.2s;
+    }
+
+    .tool-card:hover {
+      transform: translateY(-3px);
+    }
+
+    .tool-card h3 {
+      margin-top: 0;
+      font-size: 19px;
+    }
+
+    .tool-card p {
+      color: #666;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .tool-card a {
+      display: block;
+      text-align: center;
+      margin-top: 15px;
+      padding: 11px;
+      background: #2563eb;
+      color: white;
+      text-decoration: none;
+      border-radius: 7px;
+    }
+
+    .tool-card a:hover {
+      background: #1d4ed8;
+    }
+
+    .about {
+      background: white;
+      margin-top: 40px;
+      padding: 25px;
+      border-radius: 12px;
+      line-height: 1.7;
+    }
+
+    .no-result {
+      display: none;
+      text-align: center;
+      padding: 30px;
+      color: #666;
+    }
+
+    footer {
+      margin-top: 40px;
+      background: #111827;
+      color: white;
+      text-align: center;
+      padding: 25px;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 30px;
+      }
+
+      .search-box {
+        flex-direction: column;
+      }
+
+      .search-box button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>🛠️ ToolSathi</h1>
+  <p>100 Free Online Tools & Calculators</p>
+</header>
+
+<div class="container">
+
+  <section class="hero">
+    <h2>Free Online Tools</h2>
+
+    <p>
+      Calculate, convert and solve everyday problems with
+      simple and free online tools.
+    </p>
+
+    <div class="search-box">
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Search for a tool..."
+        onkeyup="searchTools()"
+      >
+
+      <button onclick="searchTools()">
+        Search
+      </button>
+    </div>
+  </section>
+
+  <div class="categories">
+    <button class="category-btn active" onclick="filterTools('All', this)">
+      All
+    </button>
+
+    <button class="category-btn" onclick="filterTools('Calculator', this)">
+      Calculators
+    </button>
+
+    <button class="category-btn" onclick="filterTools('Converter', this)">
+      Converters
+    </button>
+
+    <button class="category-btn" onclick="filterTools('Text', this)">
+      Text Tools
+    </button>
+
+    <button class="category-btn" onclick="filterTools('Date', this)">
+      Date Tools
+    </button>
+
+    <button class="category-btn" onclick="filterTools('Utility', this)">
+      Utility
+    </button>
+  </div>
+
+  <div class="tools-grid" id="toolsGrid"></div>
+
+  <div class="no-result" id="noResult">
+    No tools found.
+  </div>
+
+  <section class="about">
+    <h2>About ToolSathi</h2>
+
+    <p>
+      ToolSathi is a free online tools website designed to provide
+      useful calculators, converters, text tools, date tools and
+      everyday utilities in one place.
+    </p>
+
+    <p>
+      All tools are simple to use and work directly in your browser.
+    </p>
+  </section>
+
+</div>
+
+<footer>
+  © 2026 ToolSathi — Free Online Tools
+</footer>
+
+<script>
+
+const tools = [
+
+  /* =========================
+     CALCULATORS
+  ========================= */
+
+  {
+    name: "Percentage Calculator",
+    file: "percentage-calculator.html",
+    category: "Calculator",
+    description: "Calculate percentages quickly."
+  },
+
+  {
+    name: "BMI Calculator",
+    file: "bmi-calculator.html",
+    category: "Calculator",
+    description: "Calculate BMI using height and weight."
+  },
+
+  {
+    name: "Basic Calculator",
+    file: "basic-calculator.html",
+    category: "Calculator",
+    description: "Perform basic mathematical calculations."
+  },
+
+  {
+    name: "Discount Calculator",
+    file: "discount-calculator.html",
+    category: "Calculator",
+    description: "Calculate discounts and final prices."
+  },
+
+  {
+    name: "Profit Calculator",
+    file: "profit-calculator.html",
+    category: "Calculator",
+    description: "Calculate profit and profit percentage."
+  },
+
+  {
+    name: "Average Calculator",
+    file: "average-calculator.html",
+    category: "Calculator",
+    description: "Calculate the average of numbers."
+  },
+
+  {
+    name: "Ratio Calculator",
+    file: "ratio-calculator.html",
+    category: "Calculator",
+    description: "Calculate and simplify ratios."
+  },
+
+  {
+    name: "GST Calculator",
+    file: "gst-calculator.html",
+    category: "Calculator",
+    description: "Calculate GST amount and final price."
+  },
+
+  {
+    name: "Simple Interest Calculator",
+    file: "simple-interest-calculator.html",
+    category: "Calculator",
+    description: "Calculate simple interest."
+  },
+
+  {
+    name: "Compound Interest Calculator",
+    file: "compound-interest-calculator.html",
+    category: "Calculator",
+    description: "Calculate compound interest."
+  },
+
+  {
+    name: "EMI Calculator",
+    file: "emi-calculator.html",
+    category: "Calculator",
+    description: "Calculate monthly loan EMI."
+  },
+
+  {
+    name: "Tip Calculator",
+    file: "tip-calculator.html",
+    category: "Calculator",
+    description: "Calculate tip and split bills."
+  },
+
+  {
+    name: "Square Calculator",
+    file: "square-calculator.html",
+    category: "Calculator",
+    description: "Calculate the square of a number."
+  },
+
+  {
+    name: "Cube Calculator",
+    file: "cube-calculator.html",
+    category: "Calculator",
+    description: "Calculate the cube of a number."
+  },
+
+  {
+    name: "Square Root Calculator",
+    file: "square-root-calculator.html",
+    category: "Calculator",
+    description: "Calculate square roots."
+  },
+
+  {
+    name: "CGPA to Percentage",
+    file: "cgpa-to-percentage.html",
+    category: "Calculator",
+    description: "Convert CGPA into percentage."
+  },
+
+  {
+    name: "Marks Percentage Calculator",
+    file: "marks-percentage.html",
+    category: "Calculator",
+    description: "Calculate marks percentage."
+  },
+
+  {
+    name: "Percentage Increase",
+    file: "percentage-increase.html",
+    category: "Calculator",
+    description: "Calculate percentage increase."
+  },
+
+  {
+    name: "Percentage Decrease",
+    file: "percentage-decrease.html",
+    category: "Calculator",
+    description: "Calculate percentage decrease."
+  },
+
+
+  /* =========================
+     CONVERTERS
+  ========================= */
+
+  {
+    name: "Length Converter",
+    file: "length-converter.html",
+    category: "Converter",
+    description: "Convert different length units."
+  },
+
+  {
+    name: "Weight Converter",
+    file: "weight-converter.html",
+    category: "Converter",
+    description: "Convert kilograms, pounds and more."
+  },
+
+  {
+    name: "Temperature Converter",
+    file: "temperature-converter.html",
+    category: "Converter",
+    description: "Convert Celsius, Fahrenheit and Kelvin."
+  },
+
+  {
+    name: "Kilometer to Miles",
+    file: "kilometer-to-miles.html",
+    category: "Converter",
+    description: "Convert kilometers into miles."
+  },
+
+  {
+    name: "Miles to Kilometer",
+    file: "miles-to-kilometer.html",
+    category: "Converter",
+    description: "Convert miles into kilometers."
+  },
+
+  {
+    name: "Kg to Pounds",
+    file: "kg-to-pounds.html",
+    category: "Converter",
+    description: "Convert kilograms into pounds."
+  },
+
+
+  /* =========================
+     FUTURE TOOLS
+  ========================= */
+
+  {
+    name: "Pounds to Kg",
+    file: "pounds-to-kg.html",
+    category: "Converter",
+    description: "Convert pounds into kilograms."
+  },
+
+  {
+    name: "Liters to Gallons",
+    file: "liters-to-gallons.html",
+    category: "Converter",
+    description: "Convert liters into gallons."
+  },
+
+  {
+    name: "Gallons to Liters",
+    file: "gallons-to-liters.html",
+    category: "Converter",
+    description: "Convert gallons into liters."
+  },
+
+  {
+    name: "Feet to Meters",
+    file: "feet-to-meters.html",
+    category: "Converter",
+    description: "Convert feet into meters."
+  },
+
+  {
+    name: "Word Counter",
+    file: "word-counter.html",
+    category: "Text",
+    description: "Count words in your text."
+  },
+
+  {
+    name: "Character Counter",
+    file: "character-counter.html",
+    category: "Text",
+    description: "Count characters in text."
+  },
+
+  {
+    name: "Sentence Counter",
+    file: "sentence-counter.html",
+    category: "Text",
+    description: "Count sentences in text."
+  },
+
+  {
+    name: "Line Counter",
+    file: "line-counter.html",
+    category: "Text",
+    description: "Count lines in text."
+  },
+
+  {
+    name: "Uppercase Converter",
+    file: "uppercase-converter.html",
+    category: "Text",
+    description: "Convert text to uppercase."
+  },
+
+  {
+    name: "Lowercase Converter",
+    file: "lowercase-converter.html",
+    category: "Text",
+    description: "Convert text to lowercase."
+  },
+
+  {
+    name: "Reverse Text",
+    file: "reverse-text.html",
+    category: "Text",
+    description: "Reverse any text."
+  },
+
+  {
+    name: "Remove Extra Spaces",
+    file: "remove-extra-spaces.html",
+    category: "Text",
+    description: "Remove unnecessary spaces."
+  },
+
+  {
+    name: "Palindrome Checker",
+    file: "palindrome-checker.html",
+    category: "Text",
+    description: "Check whether text is a palindrome."
+  },
+
+  {
+    name: "Vowel Counter",
+    file: "vowel-counter.html",
+    category: "Text",
+    description: "Count vowels in text."
+  },
+
+  {
+    name: "Date Difference",
+    file: "date-difference.html",
+    category: "Date",
+    description: "Calculate difference between dates."
+  },
+
+  {
+    name: "Day of Week",
+    file: "day-of-week.html",
+    category: "Date",
+    description: "Find the day of the week."
+  },
+
+  {
+    name: "Leap Year Checker",
+    file: "leap-year-checker.html",
+    category: "Date",
+    description: "Check whether a year is a leap year."
+  },
+
+  {
+    name: "Add Days to Date",
+    file: "add-days-to-date.html",
+    category: "Date",
+    description: "Add days to any date."
+  },
+
+  {
+    name: "Random Number Generator",
+    file: "random-number-generator.html",
+    category: "Utility",
+    description: "Generate random numbers."
+  },
+
+  {
+    name: "Password Generator",
+    file: "password-generator.html",
+    category: "Utility",
+    description: "Generate random passwords."
+  },
+
+  {
+    name: "Decimal to Binary",
+    file: "decimal-to-binary.html",
+    category: "Utility",
+    description: "Convert decimal numbers to binary."
+  },
+
+  {
+    name: "Decimal to Hex",
+    file: "decimal-to-hex.html",
+    category: "Utility",
+    description: "Convert decimal numbers to hexadecimal."
+  },
+
+  {
+    name: "Base64 Encoder",
+    file: "base64-encoder.html",
+    category: "Utility",
+    description: "Encode text using Base64."
+  },
+
+  {
+    name: "JSON Formatter",
+    file: "json-formatter.html",
+    category: "Utility",
+    description: "Format JSON data easily."
+  }
+
+];
+
+
+/* =========================
+   DISPLAY TOOLS
+========================= */
+
+function displayTools(list) {
+
+  const grid = document.getElementById("toolsGrid");
+  const noResult = document.getElementById("noResult");
+
+  grid.innerHTML = "";
+
+  if (list.length === 0) {
+    noResult.style.display = "block";
+    return;
+  }
+
+  noResult.style.display = "none";
+
+  list.forEach(function(tool) {
+
+    const card = document.createElement("div");
+
+    card.className = "tool-card";
+
+    card.dataset.category = tool.category;
+
+    card.innerHTML = `
+      <h3>${tool.name}</h3>
+
+      <p>${tool.description}</p>
+
+      <a href="${tool.file}">
+        Open Tool
+      </a>
+    `;
+
+    grid.appendChild(card);
+
+  });
+}
+
+
+/* =========================
+   CATEGORY FILTER
+========================= */
+
+function filterTools(category, button) {
+
+  document.querySelectorAll(".category-btn")
+    .forEach(function(btn) {
+      btn.classList.remove("active");
+    });
+
+  button.classList.add("active");
+
+  const searchText =
+    document.getElementById("searchInput")
+      .value
+      .toLowerCase()
+      .trim();
+
+  let filtered = tools;
+
+  if (category !== "All") {
+    filtered = filtered.filter(function(tool) {
+      return tool.category === category;
+    });
+  }
+
+  if (searchText !== "") {
+    filtered = filtered.filter(function(tool) {
+
+      return (
+        tool.name.toLowerCase().includes(searchText) ||
+        tool.description.toLowerCase().includes(searchText)
+      );
+
+    });
+  }
+
+  displayTools(filtered);
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+function searchTools() {
+
+  const searchText =
+    document.getElementById("searchInput")
+      .value
+      .toLowerCase()
+      .trim();
+
+  const activeButton =
+    document.querySelector(".category-btn.active");
+
+  const activeCategory =
+    activeButton ? activeButton.textContent.trim() : "All";
+
+  let category = "All";
+
+  if (activeCategory === "Calculators") {
+    category = "Calculator";
+  }
+
+  if (activeCategory === "Converters") {
+    category = "Converter";
+  }
+
+  if (activeCategory === "Text Tools") {
+    category = "Text";
+  }
+
+  if (activeCategory === "Date Tools") {
+    category = "Date";
+  }
+
+  if (activeCategory === "Utility") {
+    category = "Utility";
+  }
+
+  let filtered = tools;
+
+  if (category !== "All") {
+    filtered = filtered.filter(function(tool) {
+      return tool.category === category;
+    });
+  }
+
+  if (searchText !== "") {
+
+    filtered = filtered.filter(function(tool) {
+
+      return (
+        tool.name.toLowerCase().includes(searchText) ||
+        tool.description.toLowerCase().includes(searchText)
+      );
+
+    });
+
+  }
+
+  displayTools(filtered);
+}
+
+
+/* =========================
+   INITIAL LOAD
+========================= */
+
+displayTools(tools);
+
+</script>
+
+</body>
+  </html>
