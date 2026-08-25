@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Meta Tag Generator - Free SEO Meta Tags Tool | ToolSathi</title>
+
+  <meta
+    name="description"
+    content="Free Meta Tag Generator. Create SEO title, description, keywords, robots and social media meta tags for your website."
+  >
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #222;
+    }
+
+    header {
+      background: #2563eb;
+      color: white;
+      text-align: center;
+      padding: 28px 15px;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+    }
+
+    header p {
+      margin: 0;
+    }
+
+    .container {
+      max-width: 850px;
+      margin: 30px auto;
+      padding: 15px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    .info {
+      background: #eef4ff;
+      padding: 14px;
+      border-radius: 9px;
+      margin-bottom: 20px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .input-group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      font-family: Arial, sans-serif;
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: #2563eb;
+      color: white;
+      font-size: 17px;
+      cursor: pointer;
+      margin-top: 5px;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .clear {
+      background: #555;
+      margin-top: 12px;
+    }
+
+    .clear:hover {
+      background: #333;
+    }
+
+    .output {
+      display: none;
+    }
+
+    .code-box {
+      background: #111827;
+      color: #e5e7eb;
+      padding: 18px;
+      border-radius: 10px;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+      line-height: 1.6;
+      font-family: monospace;
+      font-size: 14px;
+    }
+
+    .copy {
+      background: #16a34a;
+      margin-top: 12px;
+    }
+
+    .copy:hover {
+      background: #15803d;
+    }
+
+    .preview {
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 18px;
+      margin-top: 20px;
+    }
+
+    .preview-title {
+      color: #1a0dab;
+      font-size: 20px;
+      margin-bottom: 6px;
+    }
+
+    .preview-url {
+      color: #188038;
+      font-size: 14px;
+      margin-bottom: 8px;
+      word-break: break-all;
+    }
+
+    .preview-description {
+      color: #444;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .counter {
+      text-align: right;
+      color: #666;
+      font-size: 12px;
+      margin-top: 5px;
+    }
+
+    .note {
+      text-align: center;
+      color: #666;
+      font-size: 13px;
+      line-height: 1.5;
+      margin-top: 18px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #666;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 10px;
+      }
+
+      .card {
+        padding: 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>ToolSathi</h1>
+  <p>Free SEO Meta Tag Generator</p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+
+    <h2>🏷️ Meta Tag Generator</h2>
+
+    <div class="info">
+      Enter your website details and generate ready-to-use
+      SEO meta tags for your HTML page.
+    </div>
+
+    <div class="input-group">
+      <label for="pageTitle">
+        Page Title
+      </label>
+
+      <input
+        type="text"
+        id="pageTitle"
+        placeholder="Example: Free Online Calculator"
+        maxlength="60"
+        oninput="updateCounter()"
+      >
+
+      <div class="counter">
+        <span id="titleCount">0</span>/60 characters
+      </div>
+    </div>
+
+    <div class="input-group">
+      <label for="description">
+        Meta Description
+      </label>
+
+      <textarea
+        id="description"
+        placeholder="Example: Use our free online calculator..."
+        maxlength="160"
+        oninput="updateCounter()"
+      ></textarea>
+
+      <div class="counter">
+        <span id="descriptionCount">0</span>/160 characters
+      </div>
+    </div>
+
+    <div class="input-group">
+      <label for="keywords">
+        Keywords
+      </label>
+
+      <input
+        type="text"
+        id="keywords"
+        placeholder="calculator, online calculator, free calculator"
+      >
+    </div>
+
+    <div class="input-group">
+      <label for="url">
+        Website URL
+      </label>
+
+      <input
+        type="url"
+        id="url"
+        placeholder="https://example.com/"
+      >
+    </div>
+
+    <div class="input-group">
+      <label for="author">
+        Author / Website Name
+      </label>
+
+      <input
+        type="text"
+        id="author"
+        placeholder="Example: ToolSathi"
+      >
+    </div>
+
+    <div class="input-group">
+      <label for="robots">
+        Robots
+      </label>
+
+      <select id="robots">
+        <option value="index, follow">
+          index, follow
+        </option>
+
+        <option value="noindex, follow">
+          noindex, follow
+        </option>
+
+        <option value="index, nofollow">
+          index, nofollow
+        </option>
+
+        <option value="noindex, nofollow">
+          noindex, nofollow
+        </option>
+      </select>
+    </div>
+
+    <button onclick="generateTags()">
+      Generate Meta Tags
+    </button>
+
+    <button
+      class="clear"
+      onclick="clearTool()"
+    >
+      Clear
+    </button>
+
+  </div>
+
+
+  <div
+    class="card output"
+    id="outputCard"
+  >
+
+    <h2>Generated Meta Tags</h2>
+
+    <div
+      class="code-box"
+      id="codeOutput"
+    ></div>
+
+    <button
+      class="copy"
+      onclick="copyCode()"
+    >
+      📋 Copy Meta Tags
+    </button>
+
+
+    <div class="preview">
+
+      <h3>Search Preview</h3>
+
+      <div
+        class="preview-title"
+        id="previewTitle"
+      >
+        Your Page Title
+      </div>
+
+      <div
+        class="preview-url"
+        id="previewURL"
+      >
+        https://example.com/
+      </div>
+
+      <div
+        class="preview-description"
+        id="previewDescription"
+      >
+        Your meta description will appear here.
+      </div>
+
+    </div>
+
+    <div class="note">
+      Meta tags help describe your page to search engines and
+      social platforms. Search engines may choose their own
+      title or description in search results.
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+  © 2026 ToolSathi
+</footer>
+
+
+<script>
+
+  function escapeHTML(value) {
+
+    return value
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+
+  function updateCounter() {
+
+    const title =
+      document.getElementById(
+        "pageTitle"
+      ).value;
+
+    const description =
+      document.getElementById(
+        "description"
+      ).value;
+
+
+    document.getElementById(
+      "titleCount"
+    ).textContent =
+      title.length;
+
+
+    document.getElementById(
+      "descriptionCount"
+    ).textContent =
+      description.length;
+  }
+
+
+  function generateTags() {
+
+    const title =
+      document.getElementById(
+        "pageTitle"
+      ).value.trim();
+
+    const description =
+      document.getElementById(
+        "description"
+      ).value.trim();
+
+    const keywords =
+      document.getElementById(
+        "keywords"
+      ).value.trim();
+
+    const url =
+      document.getElementById(
+        "url"
+      ).value.trim();
+
+    const author =
+      document.getElementById(
+        "author"
+      ).value.trim();
+
+    const robots =
+      document.getElementById(
+        "robots"
+      ).value;
+
+
+    if (!title) {
+
+      alert(
+        "Please enter a page title."
+      );
+
+      return;
+    }
+
+
+    if (!description) {
+
+      alert(
+        "Please enter a meta description."
+      );
+
+      return;
+    }
+
+
+    let tags = "";
+
+    tags +=
+      '<title>' +
+      escapeHTML(title) +
+      '</title>\n\n';
+
+    tags +=
+      '<meta name="description" content="' +
+      escapeHTML(description) +
+      '">\n';
+
+    if (keywords) {
+
+      tags +=
+        '<meta name="keywords" content="' +
+        escapeHTML(keywords) +
+        '">\n';
+    }
+
+    tags +=
+      '<meta name="robots" content="' +
+      escapeHTML(robots) +
+      '">\n';
+
+    if (author) {
+
+      tags +=
+        '<meta name="author" content="' +
+        escapeHTML(author) +
+        '">\n';
+    }
+
+    if (url) {
+
+      tags +=
+        '<link rel="canonical" href="' +
+        escapeHTML(url) +
+        '">\n';
+    }
+
+
+    tags += "\n";
+
+    tags +=
+      '<meta property="og:title" content="' +
+      escapeHTML(title) +
+      '">\n';
+
+    tags +=
+      '<meta property="og:description" content="' +
+      escapeHTML(description) +
+      '">\n';
+
+    if (url) {
+
+      tags +=
+        '<meta property="og:url" content="' +
+        escapeHTML(url) +
+        '">\n';
+    }
+
+    tags +=
+      '<meta property="og:type" content="website">\n';
+
+
+    tags += "\n";
+
+    tags +=
+      '<meta name="twitter:card" content="summary_large_image">\n';
+
+    tags +=
+      '<meta name="twitter:title" content="' +
+      escapeHTML(title) +
+      '">\n';
+
+    tags +=
+      '<meta name="twitter:description" content="' +
+      escapeHTML(description) +
+      '">';
+
+
+    document.getElementById(
+      "codeOutput"
+    ).textContent = tags;
+
+
+    document.getElementById(
+      "previewTitle"
+    ).textContent =
+      title;
+
+
+    document.getElementById(
+      "previewURL"
+    ).textContent =
+      url || "https://example.com/";
+
+
+    document.getElementById(
+      "previewDescription"
+    ).textContent =
+      description;
+
+
+    document.getElementById(
+      "outputCard"
+    ).style.display =
+      "block";
+
+
+    document.getElementById(
+      "outputCard"
+    ).scrollIntoView({
+      behavior: "smooth"
+    });
+  }
+
+
+  function copyCode() {
+
+    const code =
+      document.getElementById(
+        "codeOutput"
+      ).textContent;
+
+
+    navigator.clipboard
+      .writeText(code)
+      .then(function() {
+
+        alert(
+          "Meta tags copied successfully!"
+        );
+
+      })
+      .catch(function() {
+
+        alert(
+          "Copy failed. Please copy the code manually."
+        );
+
+      });
+  }
+
+
+  function clearTool() {
+
+    document.getElementById(
+      "pageTitle"
+    ).value = "";
+
+    document.getElementById(
+      "description"
+    ).value = "";
+
+    document.getElementById(
+      "keywords"
+    ).value = "";
+
+    document.getElementById(
+      "url"
+    ).value = "";
+
+    document.getElementById(
+      "author"
+    ).value = "";
+
+    document.getElementById(
+      "robots"
+    ).value =
+      "index, follow";
+
+
+    document.getElementById(
+      "outputCard"
+    ).style.display =
+      "none";
+
+
+    updateCounter();
+  }
+
+</script>
+
+</body>
+  </html>
