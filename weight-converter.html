@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Weight Converter - ToolSathi</title>
+  <meta name="description" content="Free online Weight Converter. Convert kilograms, grams, pounds, ounces and tons quickly and easily with ToolSathi.">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #222;
+    }
+
+    header {
+      background: #2563eb;
+      color: white;
+      text-align: center;
+      padding: 25px 15px;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+    }
+
+    header p {
+      margin: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 35px auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 7px;
+      font-weight: bold;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      background: white;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: #2563eb;
+      color: white;
+      font-size: 17px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .result {
+      margin-top: 20px;
+      padding: 18px;
+      background: #eef4ff;
+      border-radius: 8px;
+      line-height: 1.8;
+      font-size: 17px;
+      text-align: center;
+      word-break: break-word;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #666;
+    }
+
+    @media (max-width: 500px) {
+      .row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>ToolSathi</h1>
+  <p>Free Online Weight Converter</p>
+</header>
+
+<div class="container">
+  <div class="card">
+
+    <h2>Weight Converter</h2>
+
+    <label for="value">Enter Weight</label>
+    <input
+      type="number"
+      id="value"
+      placeholder="Example: 10"
+      step="any"
+    >
+
+    <div class="row">
+
+      <div>
+        <label for="fromUnit">From</label>
+        <select id="fromUnit">
+          <option value="kilogram">Kilogram (kg)</option>
+          <option value="gram">Gram (g)</option>
+          <option value="milligram">Milligram (mg)</option>
+          <option value="pound">Pound (lb)</option>
+          <option value="ounce">Ounce (oz)</option>
+          <option value="ton">Metric Ton (t)</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="toUnit">To</label>
+        <select id="toUnit">
+          <option value="kilogram">Kilogram (kg)</option>
+          <option value="gram">Gram (g)</option>
+          <option value="milligram">Milligram (mg)</option>
+          <option value="pound">Pound (lb)</option>
+          <option value="ounce">Ounce (oz)</option>
+          <option value="ton">Metric Ton (t)</option>
+        </select>
+      </div>
+
+    </div>
+
+    <button onclick="convertWeight()">
+      Convert
+    </button>
+
+    <div class="result" id="result">
+      Result will appear here
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  © 2026 ToolSathi
+</footer>
+
+<script>
+  // Conversion factors are based on kilograms.
+  const units = {
+    kilogram: 1,
+    gram: 0.001,
+    milligram: 0.000001,
+    pound: 0.45359237,
+    ounce: 0.028349523125,
+    ton: 1000
+  };
+
+  const unitNames = {
+    kilogram: "kg",
+    gram: "g",
+    milligram: "mg",
+    pound: "lb",
+    ounce: "oz",
+    ton: "t"
+  };
+
+  function convertWeight() {
+
+    const value = parseFloat(
+      document.getElementById("value").value
+    );
+
+    const fromUnit =
+      document.getElementById("fromUnit").value;
+
+    const toUnit =
+      document.getElementById("toUnit").value;
+
+    const resultBox =
+      document.getElementById("result");
+
+    if (!Number.isFinite(value)) {
+      resultBox.innerHTML =
+        "Please enter a valid number.";
+      return;
+    }
+
+    // Convert input to kilograms.
+    const kilograms = value * units[fromUnit];
+
+    // Convert kilograms to target unit.
+    const result = kilograms / units[toUnit];
+
+    resultBox.innerHTML = `
+      ${value} ${unitNames[fromUnit]} =
+      <strong>${result.toLocaleString(undefined, {
+        maximumFractionDigits: 10
+      })} ${unitNames[toUnit]}</strong>
+    `;
+  }
+</script>
+
+</body>
+</html>
