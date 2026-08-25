@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Remove Extra Spaces - ToolSathi</title>
+
+  <meta
+    name="description"
+    content="Free online Remove Extra Spaces tool. Clean extra spaces and line breaks from text quickly with ToolSathi."
+  >
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #222;
+    }
+
+    header {
+      background: #2563eb;
+      color: white;
+      text-align: center;
+      padding: 25px 15px;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+    }
+
+    header p {
+      margin: 0;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 35px auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 220px;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      resize: vertical;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 13px;
+      border: none;
+      border-radius: 8px;
+      background: #2563eb;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .clear {
+      background: #555;
+    }
+
+    .clear:hover {
+      background: #333;
+    }
+
+    .result {
+      margin-top: 20px;
+    }
+
+    .result h3 {
+      margin-bottom: 8px;
+    }
+
+    #output {
+      width: 100%;
+      min-height: 160px;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background: #f8fafc;
+      font-size: 16px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #666;
+    }
+
+    @media (max-width: 500px) {
+      .buttons {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>ToolSathi</h1>
+  <p>Free Online Remove Extra Spaces Tool</p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+
+    <h2>Remove Extra Spaces</h2>
+
+    <textarea
+      id="textInput"
+      placeholder="Type or paste text with extra spaces..."
+    ></textarea>
+
+    <div class="buttons">
+
+      <button onclick="removeExtraSpaces()">
+        Remove Extra Spaces
+      </button>
+
+      <button class="clear" onclick="clearText()">
+        Clear
+      </button>
+
+    </div>
+
+    <div class="result">
+
+      <h3>Cleaned Text</h3>
+
+      <div id="output">
+        Your cleaned text will appear here.
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+  © 2026 ToolSathi
+</footer>
+
+<script>
+
+  function removeExtraSpaces() {
+
+    const text =
+      document.getElementById("textInput").value;
+
+    const output =
+      document.getElementById("output");
+
+    if (text.trim() === "") {
+
+      output.textContent =
+        "Please enter some text.";
+
+      return;
+    }
+
+    /*
+      Remove extra spaces between words.
+      Also remove spaces at the beginning/end
+      of each line while keeping line breaks.
+    */
+
+    const cleaned = text
+      .split(/\r?\n/)
+      .map(function(line) {
+        return line.trim().replace(/\s+/g, " ");
+      })
+      .join("\n")
+      .trim();
+
+    output.textContent = cleaned;
+  }
+
+
+  function clearText() {
+
+    document.getElementById("textInput").value = "";
+
+    document.getElementById("output").textContent =
+      "Your cleaned text will appear here.";
+  }
+
+</script>
+
+</body>
+</html>￼Enter
