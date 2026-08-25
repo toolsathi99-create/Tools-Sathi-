@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Gratuity Calculator - ToolSathi</title>
+
+  <meta
+    name="description"
+    content="Free Gratuity Calculator for India. Calculate estimated gratuity based on last drawn salary and years of service."
+  >
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #222;
+    }
+
+    header {
+      background: #2563eb;
+      color: white;
+      text-align: center;
+      padding: 25px 15px;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+    }
+
+    header p {
+      margin: 0;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 30px auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    .info {
+      background: #eef4ff;
+      padding: 14px;
+      border-radius: 9px;
+      margin-bottom: 20px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .input-group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      margin-top: 5px;
+      border: none;
+      border-radius: 8px;
+      background: #2563eb;
+      color: white;
+      font-size: 17px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .clear {
+      background: #555;
+      margin-top: 12px;
+    }
+
+    .clear:hover {
+      background: #333;
+    }
+
+    .result {
+      margin-top: 25px;
+      padding: 20px;
+      background: #eef4ff;
+      border-radius: 10px;
+    }
+
+    .result h3 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 12px 0;
+      border-bottom: 1px solid #d5deeb;
+    }
+
+    .row:last-child {
+      border-bottom: none;
+    }
+
+    .highlight {
+      color: #2563eb;
+      font-size: 22px;
+    }
+
+    .warning {
+      margin-top: 18px;
+      padding: 12px;
+      background: #fff7ed;
+      border-radius: 8px;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .note {
+      margin-top: 18px;
+      color: #666;
+      font-size: 13px;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #666;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>ToolSathi</h1>
+  <p>Free Online Gratuity Calculator</p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+
+    <h2>💰 Gratuity Calculator</h2>
+
+    <div class="info">
+      Calculate your estimated gratuity using your last drawn
+      salary and years of service.
+    </div>
+
+    <div class="input-group">
+      <label for="salary">
+        Last Drawn Basic Salary + DA (₹ / Month)
+      </label>
+
+      <input
+        type="number"
+        id="salary"
+        placeholder="Example: 50000"
+        min="0"
+        step="1"
+      >
+    </div>
+
+    <div class="input-group">
+      <label for="years">
+        Completed Years of Service
+      </label>
+
+      <input
+        type="number"
+        id="years"
+        placeholder="Example: 10"
+        min="0"
+        step="1"
+      >
+    </div>
+
+    <div class="input-group">
+      <label for="months">
+        Additional Completed Months
+      </label>
+
+      <input
+        type="number"
+        id="months"
+        placeholder="Example: 7"
+        min="0"
+        max="11"
+        step="1"
+      >
+    </div>
+
+    <button onclick="calculateGratuity()">
+      Calculate Gratuity
+    </button>
+
+    <button
+      class="clear"
+      onclick="clearFields()"
+    >
+      Clear
+    </button>
+
+    <div class="result">
+
+      <h3>Gratuity Result</h3>
+
+      <div class="row">
+        <span>Monthly Basic + DA</span>
+        <strong id="salaryResult">₹0</strong>
+      </div>
+
+      <div class="row">
+        <span>Service Period</span>
+        <strong id="serviceResult">0 years</strong>
+      </div>
+
+      <div class="row">
+        <span>Eligible Years Used</span>
+        <strong id="eligibleYears">0 years</strong>
+      </div>
+
+      <div class="row">
+        <span>Estimated Gratuity</span>
+        <strong
+          class="highlight"
+          id="gratuityResult"
+        >
+          ₹0
+        </strong>
+      </div>
+
+    </div>
+
+    <div class="warning">
+      For the standard Payment of Gratuity Act formula,
+      service of 6 months or more in the additional year
+      is generally counted as the next completed year.
+    </div>
+
+    <div class="note">
+      Standard formula used:
+      (Last Drawn Salary × 15 × Eligible Years) ÷ 26.
+      Actual eligibility and calculation can depend on
+      applicable law and employment circumstances.
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+  © 2026 ToolSathi
+</footer>
+
+<script>
+
+  function formatRupees(value) {
+    return "₹" +
+      Math.round(value).toLocaleString("en-IN");
+  }
+
+
+  function calculateGratuity() {
+
+    const salary =
+      Number(
+        document.getElementById("salary").value
+      ) || 0;
+
+    const years =
+      Number(
+        document.getElementById("years").value
+      ) || 0;
+
+    const months =
+      Number(
+        document.getElementById("months").value
+      ) || 0;
+
+
+    if (
+      salary <= 0 ||
+      years < 0 ||
+      months < 0 ||
+      months > 11
+    ) {
+
+      alert(
+        "Please enter valid salary and service details."
+      );
+
+      return;
+    }
+
+
+    /*
+      Gratuity eligibility under the standard formula:
+      Additional service of 6 months or more
+      is rounded up to the next year.
+    */
+
+    let eligibleYears = years;
+
+    if (months >= 6) {
+      eligibleYears = years + 1;
+    }
+
+
+    /*
+      Standard gratuity formula:
+
+      Gratuity =
+      (Last drawn salary × 15 × years) / 26
+    */
+
+    const gratuity =
+      (
+        salary *
+        15 *
+        eligibleYears
+      ) / 26;
+
+
+    document.getElementById("salaryResult").textContent =
+      formatRupees(salary);
+
+    document.getElementById("serviceResult").textContent =
+      years + " years " +
+      months + " months";
+
+    document.getElementById("eligibleYears").textContent =
+      eligibleYears + " years";
+
+    document.getElementById("gratuityResult").textContent =
+      formatRupees(gratuity);
+  }
+
+
+  function clearFields() {
+
+    document.getElementById("salary").value = "";
+
+    document.getElementById("years").value = "";
+
+    document.getElementById("months").value = "";
+
+    document.getElementById("salaryResult").textContent =
+      "₹0";
+
+    document.getElementById("serviceResult").textContent =
+      "0 years";
+
+    document.getElementById("eligibleYears").textContent =
+      "0 years";
+
+    document.getElementById("gratuityResult").textContent =
+      "₹0";
+  }
+
+</script>
+
+</body>
+</html>
