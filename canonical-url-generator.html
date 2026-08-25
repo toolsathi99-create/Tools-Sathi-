@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Canonical URL Generator - Free SEO Tool | ToolSathi</title>
+
+  <meta name="description"
+    content="Free Canonical URL Generator. Generate rel canonical tags for your web pages and improve your technical SEO setup.">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #222;
+    }
+
+    header {
+      background: #2563eb;
+      color: white;
+      text-align: center;
+      padding: 28px 15px;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+    }
+
+    header p {
+      margin: 0;
+    }
+
+    .container {
+      max-width: 850px;
+      margin: 30px auto;
+      padding: 15px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    .info {
+      background: #eef4ff;
+      padding: 14px;
+      border-radius: 9px;
+      margin-bottom: 20px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .input-group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: #2563eb;
+      color: white;
+      font-size: 17px;
+      cursor: pointer;
+      margin-top: 5px;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .clear {
+      background: #555;
+      margin-top: 12px;
+    }
+
+    .clear:hover {
+      background: #333;
+    }
+
+    .output {
+      display: none;
+    }
+
+    .code-box {
+      background: #111827;
+      color: #e5e7eb;
+      padding: 18px;
+      border-radius: 10px;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-family: monospace;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .copy {
+      background: #16a34a;
+      margin-top: 12px;
+    }
+
+    .copy:hover {
+      background: #15803d;
+    }
+
+    .note {
+      text-align: center;
+      color: #666;
+      font-size: 13px;
+      line-height: 1.5;
+      margin-top: 18px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #666;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 10px;
+      }
+
+      .card {
+        padding: 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>ToolSathi</h1>
+  <p>Free Canonical URL Generator</p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+
+    <h2>🔗 Canonical URL Generator</h2>
+
+    <div class="info">
+      Enter the preferred URL of your page to generate a
+      ready-to-use canonical link tag.
+    </div>
+
+    <div class="input-group">
+      <label for="url">
+        Preferred Canonical URL
+      </label>
+
+      <input
+        type="url"
+        id="url"
+        placeholder="https://example.com/page.html"
+      >
+    </div>
+
+    <button onclick="generateCanonical()">
+      Generate Canonical Tag
+    </button>
+
+    <button
+      class="clear"
+      onclick="clearTool()"
+    >
+      Clear
+    </button>
+
+  </div>
+
+
+  <div
+    class="card output"
+    id="outputCard"
+  >
+
+    <h2>Generated Canonical Tag</h2>
+
+    <div
+      class="code-box"
+      id="output"
+    ></div>
+
+    <button
+      class="copy"
+      onclick="copyCode()"
+    >
+      📋 Copy Canonical Tag
+    </button>
+
+    <div class="note">
+      Place this link element inside the HTML
+      &lt;head&gt; section of the preferred page.
+      A canonical tag is a hint to search engines,
+      not an absolute guarantee of which URL will be selected.
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+  © 2026 ToolSathi
+</footer>
+
+
+<script>
+
+  function escapeHTML(value) {
+
+    return value
+      .replace(/&/g, "&amp;")
+      .replace(/"/g, "&quot;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;");
+  }
+
+
+  function generateCanonical() {
+
+    const url =
+      document
+        .getElementById("url")
+        .value
+        .trim();
+
+
+    if (!url) {
+
+      alert(
+        "Please enter a canonical URL."
+      );
+
+      return;
+    }
+
+
+    try {
+
+      new URL(url);
+
+    } catch (error) {
+
+      alert(
+        "Please enter a valid URL, for example https://example.com/page.html"
+      );
+
+      return;
+    }
+
+
+    const tag =
+      '<link rel="canonical" href="' +
+      escapeHTML(url) +
+      '">';
+
+
+    document.getElementById(
+      "output"
+    ).textContent = tag;
+
+
+    document.getElementById(
+      "outputCard"
+    ).style.display = "block";
+
+
+    document.getElementById(
+      "outputCard"
+    ).scrollIntoView({
+      behavior: "smooth"
+    });
+  }
+
+
+  function copyCode() {
+
+    const code =
+      document.getElementById(
+        "output"
+      ).textContent;
+
+
+    navigator.clipboard
+      .writeText(code)
+      .then(function() {
+
+        alert(
+          "Canonical tag copied successfully!"
+        );
+
+      })
+      .catch(function() {
+
+        alert(
+          "Copy failed. Please copy the code manually."
+        );
+
+      });
+  }
+
+
+  function clearTool() {
+
+    document.getElementById(
+      "url"
+    ).value = "";
+
+    document.getElementById(
+      "output"
+    ).textContent = "";
+
+    document.getElementById(
+      "outputCard"
+    ).style.display = "none";
+  }
+
+</script>
+
+</body>
+</html>
