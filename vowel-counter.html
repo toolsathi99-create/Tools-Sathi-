@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Vowel Counter - ToolSathi</title>
+
+  <meta
+    name="description"
+    content="Free online Vowel Counter. Count vowels A, E, I, O and U in your text quickly with ToolSathi."
+  >
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #222;
+    }
+
+    header {
+      background: #2563eb;
+      color: white;
+      text-align: center;
+      padding: 25px 15px;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+    }
+
+    header p {
+      margin: 0;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 35px auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 220px;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      resize: vertical;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    .stat {
+      background: #eef4ff;
+      padding: 15px 5px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 24px;
+      color: #2563eb;
+      margin-bottom: 5px;
+    }
+
+    .stat span {
+      font-size: 13px;
+      color: #555;
+    }
+
+    .total {
+      margin-top: 15px;
+      padding: 18px;
+      background: #f1f5f9;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .total strong {
+      font-size: 28px;
+      color: #2563eb;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 13px;
+      border: none;
+      border-radius: 8px;
+      background: #2563eb;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #666;
+    }
+
+    @media (max-width: 600px) {
+      .stats {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>ToolSathi</h1>
+  <p>Free Online Vowel Counter</p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+
+    <h2>Vowel Counter</h2>
+
+    <textarea
+      id="textInput"
+      placeholder="Type or paste your text here..."
+      oninput="countVowels()"
+    ></textarea>
+
+    <div class="stats">
+
+      <div class="stat">
+        <strong id="aCount">0</strong>
+        <span>A</span>
+      </div>
+
+      <div class="stat">
+        <strong id="eCount">0</strong>
+        <span>E</span>
+      </div>
+
+      <div class="stat">
+        <strong id="iCount">0</strong>
+        <span>I</span>
+      </div>
+
+      <div class="stat">
+        <strong id="oCount">0</strong>
+        <span>O</span>
+      </div>
+
+      <div class="stat">
+        <strong id="uCount">0</strong>
+        <span>U</span>
+      </div>
+
+      <div class="stat">
+        <strong id="yCount">0</strong>
+        <span>Y</span>
+      </div>
+
+    </div>
+
+    <div class="total">
+      Total Vowels:
+      <strong id="totalVowels">0</strong>
+    </div>
+
+    <button onclick="clearText()">
+      Clear Text
+    </button>
+
+  </div>
+
+</div>
+
+<footer>
+  © 2026 ToolSathi
+</footer>
+
+<script>
+
+  function countVowels() {
+
+    const text =
+      document.getElementById("textInput").value
+      .toLowerCase();
+
+    const counts = {
+      a: 0,
+      e: 0,
+      i: 0,
+      o: 0,
+      u: 0,
+      y: 0
+    };
+
+    for (const character of text) {
+
+      if (counts.hasOwnProperty(character)) {
+        counts[character]++;
+      }
+    }
+
+    document.getElementById("aCount").textContent = counts.a;
+    document.getElementById("eCount").textContent = counts.e;
+    document.getElementById("iCount").textContent = counts.i;
+    document.getElementById("oCount").textContent = counts.o;
+    document.getElementById("uCount").textContent = counts.u;
+    document.getElementById("yCount").textContent = counts.y;
+
+    /*
+      A, E, I, O, U are treated as standard vowels.
+      Y is displayed separately and is not included
+      in the total vowel count.
+    */
+
+    const total =
+      counts.a +
+      counts.e +
+      counts.i +
+      counts.o +
+      counts.u;
+
+    document.getElementById("totalVowels").textContent = total;
+  }
+
+
+  function clearText() {
+
+    document.getElementById("textInput").value = "";
+
+    countVowels();
+  }
+
+</script>
+
+</body>
+</html>
