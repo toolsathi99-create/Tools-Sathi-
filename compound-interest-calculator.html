@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Compound Interest Calculator - ToolSathi</title>
+  <meta name="description" content="Free online Compound Interest Calculator. Calculate compound interest and total amount quickly with ToolSathi.">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #222;
+    }
+
+    header {
+      background: #2563eb;
+      color: white;
+      text-align: center;
+      padding: 25px 15px;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+    }
+
+    header p {
+      margin: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 35px auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 7px;
+      font-weight: bold;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      background: white;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: #2563eb;
+      color: white;
+      font-size: 17px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .result {
+      margin-top: 20px;
+      padding: 18px;
+      background: #eef4ff;
+      border-radius: 8px;
+      line-height: 1.8;
+      font-size: 17px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #666;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>ToolSathi</h1>
+  <p>Free Online Compound Interest Calculator</p>
+</header>
+
+<div class="container">
+  <div class="card">
+
+    <h2>Compound Interest Calculator</h2>
+
+    <label for="principal">Principal Amount (₹)</label>
+    <input
+      type="number"
+      id="principal"
+      placeholder="Example: 10000"
+    >
+
+    <label for="rate">Interest Rate (% per year)</label>
+    <input
+      type="number"
+      id="rate"
+      placeholder="Example: 8"
+    >
+
+    <label for="time">Time (Years)</label>
+    <input
+      type="number"
+      id="time"
+      placeholder="Example: 5"
+    >
+
+    <label for="frequency">Compounding Frequency</label>
+    <select id="frequency">
+      <option value="1">Annually</option>
+      <option value="2">Half-Yearly</option>
+      <option value="4">Quarterly</option>
+      <option value="12" selected>Monthly</option>
+    </select>
+
+    <button onclick="calculateCompoundInterest()">
+      Calculate
+    </button>
+
+    <div class="result" id="result">
+      Result will appear here
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  © 2026 ToolSathi
+</footer>
+
+<script>
+  function calculateCompoundInterest() {
+
+    const principal = parseFloat(
+      document.getElementById("principal").value
+    );
+
+    const rate = parseFloat(
+      document.getElementById("rate").value
+    );
+
+    const time = parseFloat(
+      document.getElementById("time").value
+    );
+
+    const frequency = parseInt(
+      document.getElementById("frequency").value
+    );
+
+    const resultBox = document.getElementById("result");
+
+    if (
+      isNaN(principal) ||
+      isNaN(rate) ||
+      isNaN(time) ||
+      principal < 0 ||
+      rate < 0 ||
+      time < 0
+    ) {
+      resultBox.innerHTML =
+        "Please enter valid values.";
+      return;
+    }
+
+    // A = P(1 + r/n)^(nt)
+    const amount =
+      principal *
+      Math.pow(
+        1 + (rate / 100) / frequency,
+        frequency * time
+      );
+
+    const interest = amount - principal;
+
+    resultBox.innerHTML = `
+      Principal: ₹${principal.toFixed(2)}<br>
+      Interest Rate: ${rate}%<br>
+      Time: ${time} year(s)<br>
+      Compound Interest: ₹${interest.toFixed(2)}<br>
+      <strong>Total Amount: ₹${amount.toFixed(2)}</strong>
+    `;
+  }
+</script>
+
+</body>
+</html>
