@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Tip Calculator - ToolSathi</title>
+  <meta name="description" content="Free online Tip Calculator. Calculate tip amount, total bill and split the bill between people with ToolSathi.">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #222;
+    }
+
+    header {
+      background: #2563eb;
+      color: white;
+      text-align: center;
+      padding: 25px 15px;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+    }
+
+    header p {
+      margin: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 35px auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 7px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: #2563eb;
+      color: white;
+      font-size: 17px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .result {
+      margin-top: 20px;
+      padding: 18px;
+      background: #eef4ff;
+      border-radius: 8px;
+      line-height: 1.8;
+      font-size: 17px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #666;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>ToolSathi</h1>
+  <p>Free Online Tip Calculator</p>
+</header>
+
+<div class="container">
+  <div class="card">
+
+    <h2>Tip Calculator</h2>
+
+    <label for="bill">Bill Amount (₹)</label>
+    <input
+      type="number"
+      id="bill"
+      placeholder="Example: 1000"
+    >
+
+    <label for="tip">Tip Percentage (%)</label>
+    <input
+      type="number"
+      id="tip"
+      placeholder="Example: 10"
+      value="10"
+    >
+
+    <label for="people">Number of People</label>
+    <input
+      type="number"
+      id="people"
+      placeholder="Example: 2"
+      value="1"
+      min="1"
+    >
+
+    <button onclick="calculateTip()">
+      Calculate Tip
+    </button>
+
+    <div class="result" id="result">
+      Result will appear here
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  © 2026 ToolSathi
+</footer>
+
+<script>
+  function calculateTip() {
+
+    const bill = parseFloat(
+      document.getElementById("bill").value
+    );
+
+    const tipPercent = parseFloat(
+      document.getElementById("tip").value
+    );
+
+    const people = parseInt(
+      document.getElementById("people").value
+    );
+
+    const resultBox = document.getElementById("result");
+
+    if (
+      isNaN(bill) ||
+      isNaN(tipPercent) ||
+      isNaN(people) ||
+      bill < 0 ||
+      tipPercent < 0 ||
+      people < 1
+    ) {
+      resultBox.innerHTML =
+        "Please enter valid values.";
+      return;
+    }
+
+    const tipAmount = (bill * tipPercent) / 100;
+    const totalBill = bill + tipAmount;
+    const perPerson = totalBill / people;
+
+    resultBox.innerHTML = `
+      Bill Amount: ₹${bill.toFixed(2)}<br>
+      Tip Amount: ₹${tipAmount.toFixed(2)}<br>
+      <strong>Total Bill: ₹${totalBill.toFixed(2)}</strong><br>
+      People: ${people}<br>
+      <strong>Per Person: ₹${perPerson.toFixed(2)}</strong>
+    `;
+  }
+</script>
+
+</body>
+</html>
