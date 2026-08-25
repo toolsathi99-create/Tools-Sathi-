@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Goal SIP Calculator - Free Investment Calculator | ToolSathi</title>
+
+<meta name="description"
+content="Free Goal SIP Calculator. Calculate the monthly SIP required to reach your target amount based on investment period and expected return.">
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f4f7fb;
+  color:#222;
+}
+
+header{
+  background:#2563eb;
+  color:white;
+  text-align:center;
+  padding:28px 15px;
+}
+
+header h1{margin:0 0 8px}
+header p{margin:0}
+
+.container{
+  max-width:850px;
+  margin:30px auto;
+  padding:15px;
+}
+
+.card{
+  background:white;
+  padding:25px;
+  border-radius:15px;
+  box-shadow:0 4px 15px rgba(0,0,0,.08);
+  margin-bottom:20px;
+}
+
+h2{
+  text-align:center;
+  margin-top:0;
+}
+
+.info{
+  background:#eef4ff;
+  padding:14px;
+  border-radius:9px;
+  margin-bottom:20px;
+  font-size:14px;
+  line-height:1.5;
+}
+
+.input-group{
+  margin-bottom:18px;
+}
+
+label{
+  display:block;
+  font-weight:bold;
+  margin-bottom:8px;
+}
+
+input{
+  width:100%;
+  padding:14px;
+  border:1px solid #ccc;
+  border-radius:8px;
+  font-size:16px;
+}
+
+button{
+  width:100%;
+  padding:14px;
+  border:0;
+  border-radius:8px;
+  background:#2563eb;
+  color:white;
+  font-size:17px;
+  cursor:pointer;
+  margin-top:5px;
+}
+
+button:hover{
+  background:#1d4ed8;
+}
+
+.clear{
+  background:#555;
+  margin-top:12px;
+}
+
+.clear:hover{
+  background:#333;
+}
+
+.result{
+  display:none;
+}
+
+.result-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-top:20px;
+}
+
+.result-box{
+  background:#eef4ff;
+  padding:18px;
+  border-radius:10px;
+  text-align:center;
+}
+
+.result-box strong{
+  display:block;
+  font-size:22px;
+  color:#2563eb;
+  margin-bottom:7px;
+}
+
+.chart{
+  margin-top:25px;
+}
+
+.bar{
+  height:22px;
+  background:#e5e7eb;
+  border-radius:20px;
+  overflow:hidden;
+  margin:10px 0 18px;
+}
+
+.bar-fill{
+  height:100%;
+  background:#2563eb;
+}
+
+.copy{
+  background:#16a34a;
+  margin-top:15px;
+}
+
+.copy:hover{
+  background:#15803d;
+}
+
+.note{
+  margin-top:18px;
+  color:#666;
+  font-size:13px;
+  line-height:1.5;
+  text-align:center;
+}
+
+footer{
+  text-align:center;
+  padding:25px;
+  color:#666;
+}
+
+@media(max-width:600px){
+  .container{padding:10px}
+  .card{padding:18px}
+  .result-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>ToolSathi</h1>
+<p>Free Goal SIP Calculator</p>
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<h2>🎯 Goal SIP Calculator</h2>
+
+<div class="info">
+Enter your target amount, investment period and expected
+annual return to estimate the monthly SIP required to reach
+your financial goal.
+</div>
+
+<div class="input-group">
+<label for="goal">Target Amount (₹)</label>
+<input
+type="number"
+id="goal"
+placeholder="Example: 1000000"
+min="1"
+>
+</div>
+
+<div class="input-group">
+<label for="years">Investment Period (Years)</label>
+<input
+type="number"
+id="years"
+placeholder="Example: 10"
+min="1"
+max="100"
+>
+</div>
+
+<div class="input-group">
+<label for="returnRate">Expected Annual Return (%)</label>
+<input
+type="number"
+id="returnRate"
+placeholder="Example: 12"
+min="0"
+max="100"
+step="0.1"
+>
+</div>
+
+<button onclick="calculateGoalSIP()">
+Calculate Required SIP
+</button>
+
+<button
+class="clear"
+onclick="clearTool()">
+Clear
+</button>
+
+</div>
+
+
+<div
+class="card result"
+id="resultCard">
+
+<h2>Your Goal SIP Plan</h2>
+
+<div class="result-grid">
+
+<div class="result-box">
+<strong id="monthlySIP">₹0</strong>
+Monthly SIP
+</div>
+
+<div class="result-box">
+<strong id="invested">₹0</strong>
+Total Investment
+</div>
+
+<div class="result-box">
+<strong id="returns">₹0</strong>
+Estimated Returns
+</div>
+
+</div>
+
+
+<div class="result-grid">
+
+<div class="result-box">
+<strong id="target">₹0</strong>
+Target Amount
+</div>
+
+<div class="result-box">
+<strong id="duration">0</strong>
+Years
+</div>
+
+<div class="result-box">
+<strong id="rate">0%</strong>
+Expected Return
+</div>
+
+</div>
+
+
+<div class="chart">
+
+<h3>Investment vs Estimated Returns</h3>
+
+<div>
+Investment
+<div class="bar">
+<div
+class="bar-fill"
+id="investmentBar">
+</div>
+</div>
+</div>
+
+<div>
+Estimated Returns
+<div class="bar">
+<div
+class="bar-fill"
+id="returnBar">
+</div>
+</div>
+</div>
+
+</div>
+
+
+<button
+class="copy"
+onclick="copyResult()">
+📋 Copy Result
+</button>
+
+<div class="note">
+This calculator provides an estimate based on the return
+rate entered by the user. Actual investment returns can
+vary and are not guaranteed.
+</div>
+
+</div>
+
+</div>
+
+<footer>
+© 2026 ToolSathi
+</footer>
+
+
+<script>
+
+function formatINR(value){
+
+return new Intl.NumberFormat(
+'en-IN',
+{
+style:'currency',
+currency:'INR',
+maximumFractionDigits:0
+}
+).format(value);
+
+}
+
+
+function calculateGoalSIP(){
+
+const goal =
+parseFloat(
+document.getElementById('goal').value
+);
+
+const years =
+parseFloat(
+document.getElementById('years').value
+);
+
+const annualReturn =
+parseFloat(
+document.getElementById('returnRate').value
+);
+
+
+if(
+!goal ||
+goal<=0 ||
+!years ||
+years<=0 ||
+annualReturn<0
+){
+
+alert(
+'Please enter valid values.'
+);
+
+return;
+}
+
+
+const months =
+years*12;
+
+const monthlyRate =
+annualReturn/100/12;
+
+let sip;
+
+
+if(monthlyRate===0){
+
+sip =
+goal/months;
+
+}else{
+
+sip =
+goal*monthlyRate/
+(
+Math.pow(
+1+monthlyRate,
+months
+)-1
+);
+
+}
+
+
+sip = Math.ceil(sip);
+
+const totalInvestment =
+sip*months;
+
+const estimatedReturns =
+Math.max(
+0,
+goal-totalInvestment
+);
+
+
+document.getElementById(
+'monthlySIP'
+).textContent =
+formatINR(sip);
+
+
+document.getElementById(
+'invested'
+).textContent =
+formatINR(totalInvestment);
+
+
+document.getElementById(
+'returns'
+).textContent =
+formatINR(estimatedReturns);
+
+
+document.getElementById(
+'target'
+).textContent =
+formatINR(goal);
+
+
+document.getElementById(
+'duration'
+).textContent =
+years;
+
+
+document.getElementById(
+'rate'
+).textContent =
+annualReturn+'%';
+
+
+const maxValue =
+Math.max(
+totalInvestment,
+estimatedReturns,
+1
+);
+
+
+document.getElementById(
+'investmentBar'
+).style.width =
+(
+totalInvestment/maxValue*100
+)+'%';
+
+
+document.getElementById(
+'returnBar'
+).style.width =
+(
+estimatedReturns/maxValue*100
+)+'%';
+
+
+document.getElementById(
+'resultCard'
+).style.display =
+'block';
+
+
+document.getElementById(
+'resultCard'
+).scrollIntoView({
+behavior:'smooth'
+});
+
+}
+
+
+function copyResult(){
+
+const text =
+'Goal SIP Calculator Result\n\n' +
+'Target Amount: ' +
+document.getElementById('target').textContent +
+'\nMonthly SIP: ' +
+document.getElementById('monthlySIP').textContent +
+'\nTotal Investment: ' +
+document.getElementById('invested').textContent +
+'\nEstimated Returns: ' +
+document.getElementById('returns').textContent +
+'\nInvestment Period: ' +
+document.getElementById('duration').textContent +
+' years\nExpected Return: ' +
+document.getElementById('rate').textContent;
+
+
+navigator.clipboard
+.writeText(text)
+.then(function(){
+
+alert(
+'Result copied successfully!'
+);
+
+})
+.catch(function(){
+
+alert(
+'Copy failed. Please copy manually.'
+);
+
+});
+
+}
+
+
+function clearTool(){
+
+document.getElementById(
+'goal'
+).value='';
+
+document.getElementById(
+'years'
+).value='';
+
+document.getElementById(
+'returnRate'
+).value='';
+
+document.getElementById(
+'resultCard'
+).style.display='none';
+
+}
+
+</script>
+
+</body>
+</html>
