@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Discount Calculator - ToolSathi</title>
+  <meta name="description" content="Free online Discount Calculator. Calculate discount amount and final price quickly with ToolSathi.">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #222;
+    }
+
+    header {
+      background: #2563eb;
+      color: white;
+      text-align: center;
+      padding: 25px 15px;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+    }
+
+    header p {
+      margin: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 35px auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 7px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: #2563eb;
+      color: white;
+      font-size: 17px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .result {
+      margin-top: 20px;
+      padding: 18px;
+      background: #eef4ff;
+      border-radius: 8px;
+      line-height: 1.8;
+      font-size: 17px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #666;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>ToolSathi</h1>
+  <p>Free Online Discount Calculator</p>
+</header>
+
+<div class="container">
+  <div class="card">
+
+    <h2>Discount Calculator</h2>
+
+    <label for="price">Original Price</label>
+    <input type="number" id="price" placeholder="Example: 1000">
+
+    <label for="discount">Discount (%)</label>
+    <input type="number" id="discount" placeholder="Example: 20">
+
+    <button onclick="calculateDiscount()">Calculate Discount</button>
+
+    <div class="result" id="result">
+      Result will appear here
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  © 2026 ToolSathi
+</footer>
+
+<script>
+  function calculateDiscount() {
+    const price = parseFloat(document.getElementById("price").value);
+    const discount = parseFloat(document.getElementById("discount").value);
+    const resultBox = document.getElementById("result");
+
+    if (
+      isNaN(price) ||
+      isNaN(discount) ||
+      price < 0 ||
+      discount < 0 ||
+      discount > 100
+    ) {
+      resultBox.innerHTML =
+        "Please enter a valid price and discount (0–100%).";
+      return;
+    }
+
+    const discountAmount = (price * discount) / 100;
+    const finalPrice = price - discountAmount;
+
+    resultBox.innerHTML = `
+      Original Price: ₹${price.toFixed(2)}<br>
+      Discount Amount: ₹${discountAmount.toFixed(2)}<br>
+      <strong>Final Price: ₹${finalPrice.toFixed(2)}</strong>
+    `;
+  }
+</script>
+
+</body>
+</html>
