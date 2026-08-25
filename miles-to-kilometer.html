@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Miles to Kilometer Converter - ToolSathi</title>
+  <meta name="description" content="Free online Miles to Kilometer Converter. Convert miles to kilometers quickly and accurately with ToolSathi.">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #222;
+    }
+
+    header {
+      background: #2563eb;
+      color: white;
+      text-align: center;
+      padding: 25px 15px;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+    }
+
+    header p {
+      margin: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 35px auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    .formula {
+      background: #f1f5f9;
+      padding: 12px;
+      border-radius: 8px;
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 15px;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 7px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: #2563eb;
+      color: white;
+      font-size: 17px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .result {
+      margin-top: 20px;
+      padding: 18px;
+      background: #eef4ff;
+      border-radius: 8px;
+      line-height: 1.8;
+      font-size: 18px;
+      text-align: center;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #666;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>ToolSathi</h1>
+  <p>Free Online Miles to Kilometer Converter</p>
+</header>
+
+<div class="container">
+  <div class="card">
+
+    <h2>Miles to Kilometer</h2>
+
+    <div class="formula">
+      1 Mile = 1.609344 Kilometers
+    </div>
+
+    <label for="miles">Enter Miles</label>
+
+    <input
+      type="number"
+      id="miles"
+      placeholder="Example: 10"
+      step="any"
+      min="0"
+    >
+
+    <button onclick="convertMilesToKm()">
+      Convert to Kilometers
+    </button>
+
+    <div class="result" id="result">
+      Result will appear here
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  © 2026 ToolSathi
+</footer>
+
+<script>
+  function convertMilesToKm() {
+
+    const miles = parseFloat(
+      document.getElementById("miles").value
+    );
+
+    const resultBox =
+      document.getElementById("result");
+
+    if (!Number.isFinite(miles) || miles < 0) {
+      resultBox.innerHTML =
+        "Please enter a valid miles value.";
+      return;
+    }
+
+    const kilometers = miles * 1.609344;
+
+    resultBox.innerHTML = `
+      ${miles} Miles =
+      <strong>${kilometers.toFixed(6)} Kilometers</strong>
+    `;
+  }
+</script>
+
+</body>
+</html>
