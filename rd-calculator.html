@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>RD Calculator - Recurring Deposit Calculator | ToolSathi</title>
+
+  <meta name="description"
+        content="Free RD Calculator for India. Calculate recurring deposit maturity amount, total investment and estimated interest easily with ToolSathi.">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #222;
+    }
+
+    header {
+      background: #2563eb;
+      color: white;
+      text-align: center;
+      padding: 25px 15px;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+    }
+
+    header p {
+      margin: 0;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 30px auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    .info {
+      background: #eef4ff;
+      padding: 14px;
+      border-radius: 9px;
+      margin-bottom: 20px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .input-group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      margin-top: 5px;
+      border: none;
+      border-radius: 8px;
+      background: #2563eb;
+      color: white;
+      font-size: 17px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .clear {
+      background: #555;
+      margin-top: 12px;
+    }
+
+    .result {
+      margin-top: 25px;
+      padding: 20px;
+      background: #eef4ff;
+      border-radius: 10px;
+    }
+
+    .result h3 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 12px 0;
+      border-bottom: 1px solid #d5deeb;
+    }
+
+    .row:last-child {
+      border-bottom: none;
+    }
+
+    .highlight {
+      color: #2563eb;
+      font-size: 22px;
+    }
+
+    .note {
+      margin-top: 18px;
+      color: #666;
+      font-size: 13px;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #666;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>ToolSathi</h1>
+  <p>Free Online RD Calculator</p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+
+    <h2>🏦 RD Calculator</h2>
+
+    <div class="info">
+      Calculate your estimated Recurring Deposit maturity amount,
+      total investment and interest earned.
+    </div>
+
+    <div class="input-group">
+      <label for="monthly">
+        Monthly Deposit (₹)
+      </label>
+
+      <input
+        type="number"
+        id="monthly"
+        placeholder="Example: 5000"
+        min="1"
+        step="1"
+      >
+    </div>
+
+    <div class="input-group">
+      <label for="rate">
+        Annual Interest Rate (%)
+      </label>
+
+      <input
+        type="number"
+        id="rate"
+        placeholder="Example: 7"
+        min="0"
+        step="0.01"
+      >
+    </div>
+
+    <div class="input-group">
+      <label for="years">
+        RD Period (Years)
+      </label>
+
+      <input
+        type="number"
+        id="years"
+        placeholder="Example: 5"
+        min="0.01"
+        step="0.01"
+      >
+    </div>
+
+    <button onclick="calculateRD()">
+      Calculate RD
+    </button>
+
+    <button
+      class="clear"
+      onclick="clearFields()"
+    >
+      Clear
+    </button>
+
+    <div class="result">
+
+      <h3>RD Result</h3>
+
+      <div class="row">
+        <span>Monthly Deposit</span>
+        <strong id="monthlyResult">₹0</strong>
+      </div>
+
+      <div class="row">
+        <span>Total Investment</span>
+        <strong id="investmentResult">₹0</strong>
+      </div>
+
+      <div class="row">
+        <span>Estimated Interest</span>
+        <strong id="interestResult">₹0</strong>
+      </div>
+
+      <div class="row">
+        <span>Maturity Amount</span>
+        <strong
+          class="highlight"
+          id="maturityResult"
+        >
+          ₹0
+        </strong>
+      </div>
+
+    </div>
+
+    <div class="note">
+      This calculator provides an estimate. Actual RD maturity
+      may differ depending on the bank, interest rate and
+      applicable compounding rules.
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+  © 2026 ToolSathi
+</footer>
+
+<script>
+
+  function formatRupees(value) {
+    return "₹" +
+      Math.round(value).toLocaleString("en-IN");
+  }
+
+
+  function calculateRD() {
+
+    const monthly =
+      Number(
+        document.getElementById("monthly").value
+      );
+
+    const annualRate =
+      Number(
+        document.getElementById("rate").value
+      );
+
+    const years =
+      Number(
+        document.getElementById("years").value
+      );
+
+
+    if (
+      !monthly ||
+      monthly <= 0 ||
+      annualRate < 0 ||
+      !years ||
+      years <= 0
+    ) {
+
+      alert(
+        "Please enter valid RD details."
+      );
+
+      return;
+    }
+
+
+    const months =
+      Math.round(years * 12);
+
+    const monthlyRate =
+      annualRate / 100 / 12;
+
+
+    /*
+      Approximate monthly-compounding RD calculation.
+
+      Each monthly deposit earns interest for
+      the remaining period.
+    */
+
+    let maturity = 0;
+
+    for (
+      let month = 1;
+      month <= months;
+      month++
+    ) {
+
+      const remainingMonths =
+        months - month + 1;
+
+      maturity +=
+        monthly *
+        Math.pow(
+          1 + monthlyRate,
+          remainingMonths
+        );
+    }
+
+
+    const totalInvestment =
+      monthly * months;
+
+    const interest =
+      Math.max(
+        0,
+        maturity - totalInvestment
+      );
+
+
+    document.getElementById(
+      "monthlyResult"
+    ).textContent =
+      formatRupees(monthly);
+
+
+    document.getElementById(
+      "investmentResult"
+    ).textContent =
+      formatRupees(totalInvestment);
+
+
+    document.getElementById(
+      "interestResult"
+    ).textContent =
+      formatRupees(interest);
+
+
+    document.getElementById(
+      "maturityResult"
+    ).textContent =
+      formatRupees(maturity);
+  }
+
+
+  function clearFields() {
+
+    document.getElementById("monthly").value = "";
+
+    document.getElementById("rate").value = "";
+
+    document.getElementById("years").value = "";
+
+
+    document.getElementById(
+      "monthlyResult"
+    ).textContent = "₹0";
+
+    document.getElementById(
+      "investmentResult"
+    ).textContent = "₹0";
+
+    document.getElementById(
+      "interestResult"
+    ).textContent = "₹0";
+
+    document.getElementById(
+      "maturityResult"
+    ).textContent = "₹0";
+  }
+
+</script>
+
+</body>
+</html>
