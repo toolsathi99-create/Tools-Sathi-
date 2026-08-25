@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Simple Interest Calculator - ToolSathi</title>
+  <meta name="description" content="Free online Simple Interest Calculator. Calculate simple interest and total amount quickly with ToolSathi.">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #222;
+    }
+
+    header {
+      background: #2563eb;
+      color: white;
+      text-align: center;
+      padding: 25px 15px;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+    }
+
+    header p {
+      margin: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 35px auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 7px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: #2563eb;
+      color: white;
+      font-size: 17px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .result {
+      margin-top: 20px;
+      padding: 18px;
+      background: #eef4ff;
+      border-radius: 8px;
+      line-height: 1.8;
+      font-size: 17px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #666;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>ToolSathi</h1>
+  <p>Free Online Simple Interest Calculator</p>
+</header>
+
+<div class="container">
+  <div class="card">
+
+    <h2>Simple Interest Calculator</h2>
+
+    <label for="principal">Principal Amount (₹)</label>
+    <input
+      type="number"
+      id="principal"
+      placeholder="Example: 10000"
+    >
+
+    <label for="rate">Interest Rate (% per year)</label>
+    <input
+      type="number"
+      id="rate"
+      placeholder="Example: 5"
+    >
+
+    <label for="time">Time (Years)</label>
+    <input
+      type="number"
+      id="time"
+      placeholder="Example: 2"
+    >
+
+    <button onclick="calculateInterest()">
+      Calculate Interest
+    </button>
+
+    <div class="result" id="result">
+      Result will appear here
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  © 2026 ToolSathi
+</footer>
+
+<script>
+  function calculateInterest() {
+
+    const principal = parseFloat(
+      document.getElementById("principal").value
+    );
+
+    const rate = parseFloat(
+      document.getElementById("rate").value
+    );
+
+    const time = parseFloat(
+      document.getElementById("time").value
+    );
+
+    const resultBox = document.getElementById("result");
+
+    if (
+      isNaN(principal) ||
+      isNaN(rate) ||
+      isNaN(time) ||
+      principal < 0 ||
+      rate < 0 ||
+      time < 0
+    ) {
+      resultBox.innerHTML =
+        "Please enter valid values.";
+      return;
+    }
+
+    // Simple Interest = (P × R × T) / 100
+    const interest = (principal * rate * time) / 100;
+
+    const totalAmount = principal + interest;
+
+    resultBox.innerHTML = `
+      Principal: ₹${principal.toFixed(2)}<br>
+      Interest Rate: ${rate}%<br>
+      Time: ${time} year(s)<br>
+      Simple Interest: ₹${interest.toFixed(2)}<br>
+      <strong>Total Amount: ₹${totalAmount.toFixed(2)}</strong>
+    `;
+  }
+</script>
+
+</body>
+</html>
