@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Leap Year Checker - ToolSathi</title>
+
+  <meta
+    name="description"
+    content="Free online Leap Year Checker. Check whether any year is a leap year quickly and accurately with ToolSathi."
+  >
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #222;
+    }
+
+    header {
+      background: #2563eb;
+      color: white;
+      text-align: center;
+      padding: 25px 15px;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+    }
+
+    header p {
+      margin: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 35px auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    .info {
+      background: #f1f5f9;
+      padding: 12px;
+      border-radius: 8px;
+      text-align: center;
+      margin-bottom: 20px;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 18px;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: #2563eb;
+      color: white;
+      font-size: 17px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .clear {
+      background: #555;
+    }
+
+    .clear:hover {
+      background: #333;
+    }
+
+    .result {
+      margin-top: 20px;
+      padding: 22px;
+      background: #eef4ff;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .result strong {
+      display: block;
+      font-size: 28px;
+      color: #2563eb;
+      margin-bottom: 5px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #666;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>ToolSathi</h1>
+  <p>Free Online Leap Year Checker</p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+
+    <h2>Leap Year Checker</h2>
+
+    <div class="info">
+      A leap year is divisible by 4, except century years
+      that are not divisible by 400.
+    </div>
+
+    <label for="yearInput">
+      Enter Year
+    </label>
+
+    <input
+      type="number"
+      id="yearInput"
+      placeholder="Example: 2024"
+      min="1"
+      step="1"
+      onkeydown="handleEnter(event)"
+    >
+
+    <button onclick="checkLeapYear()">
+      Check Year
+    </button>
+
+    <button class="clear" onclick="clearYear()">
+      Clear
+    </button>
+
+    <div class="result" id="result">
+      Enter a year to check.
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+  © 2026 ToolSathi
+</footer>
+
+<script>
+
+  function checkLeapYear() {
+
+    const input =
+      document.getElementById("yearInput").value;
+
+    const result =
+      document.getElementById("result");
+
+    if (input === "") {
+
+      result.innerHTML =
+        "Please enter a year.";
+
+      return;
+    }
+
+    const year = Number(input);
+
+    if (!Number.isInteger(year) || year < 1) {
+
+      result.innerHTML =
+        "Please enter a valid positive whole year.";
+
+      return;
+    }
+
+    /*
+      Leap year rule:
+      1. Divisible by 400 → leap year
+      2. Divisible by 100 → not a leap year
+      3. Divisible by 4 → leap year
+      4. Otherwise → not a leap year
+    */
+
+    const isLeap =
+      year % 400 === 0 ||
+      (year % 4 === 0 && year % 100 !== 0);
+
+    if (isLeap) {
+
+      result.innerHTML = `
+        <strong>${year} is a Leap Year ✅</strong>
+        This year has 366 days.
+      `;
+
+    } else {
+
+      result.innerHTML = `
+        <strong>${year} is not a Leap Year ❌</strong>
+        This year has 365 days.
+      `;
+    }
+  }
+
+
+  function handleEnter(event) {
+
+    if (event.key === "Enter") {
+      checkLeapYear();
+    }
+  }
+
+
+  function clearYear() {
+
+    document.getElementById("yearInput").value = "";
+
+    document.getElementById("result").innerHTML =
+      "Enter a year to check.";
+  }
+
+</script>
+
+</body>
+</html>
