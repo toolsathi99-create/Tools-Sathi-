@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Length Converter - ToolSathi</title>
+  <meta name="description" content="Free online Length Converter. Convert meters, kilometers, centimeters, millimeters, feet, inches, yards and miles easily with ToolSathi.">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #222;
+    }
+
+    header {
+      background: #2563eb;
+      color: white;
+      text-align: center;
+      padding: 25px 15px;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+    }
+
+    header p {
+      margin: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 35px auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 7px;
+      font-weight: bold;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      background: white;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: #2563eb;
+      color: white;
+      font-size: 17px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .result {
+      margin-top: 20px;
+      padding: 18px;
+      background: #eef4ff;
+      border-radius: 8px;
+      line-height: 1.8;
+      font-size: 17px;
+      text-align: center;
+      word-break: break-word;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #666;
+    }
+
+    @media (max-width: 500px) {
+      .row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>ToolSathi</h1>
+  <p>Free Online Length Converter</p>
+</header>
+
+<div class="container">
+  <div class="card">
+
+    <h2>Length Converter</h2>
+
+    <label for="value">Enter Value</label>
+    <input
+      type="number"
+      id="value"
+      placeholder="Example: 10"
+      step="any"
+    >
+
+    <div class="row">
+
+      <div>
+        <label for="fromUnit">From</label>
+        <select id="fromUnit">
+          <option value="meter">Meter</option>
+          <option value="kilometer">Kilometer</option>
+          <option value="centimeter">Centimeter</option>
+          <option value="millimeter">Millimeter</option>
+          <option value="mile">Mile</option>
+          <option value="yard">Yard</option>
+          <option value="foot">Foot</option>
+          <option value="inch">Inch</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="toUnit">To</label>
+        <select id="toUnit">
+          <option value="meter">Meter</option>
+          <option value="kilometer">Kilometer</option>
+          <option value="centimeter">Centimeter</option>
+          <option value="millimeter">Millimeter</option>
+          <option value="mile">Mile</option>
+          <option value="yard">Yard</option>
+          <option value="foot">Foot</option>
+          <option value="inch">Inch</option>
+        </select>
+      </div>
+
+    </div>
+
+    <button onclick="convertLength()">
+      Convert
+    </button>
+
+    <div class="result" id="result">
+      Result will appear here
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  © 2026 ToolSathi
+</footer>
+
+<script>
+  // All conversion factors are based on meters.
+  const units = {
+    meter: 1,
+    kilometer: 1000,
+    centimeter: 0.01,
+    millimeter: 0.001,
+    mile: 1609.344,
+    yard: 0.9144,
+    foot: 0.3048,
+    inch: 0.0254
+  };
+
+  const unitNames = {
+    meter: "Meter",
+    kilometer: "Kilometer",
+    centimeter: "Centimeter",
+    millimeter: "Millimeter",
+    mile: "Mile",
+    yard: "Yard",
+    foot: "Foot",
+    inch: "Inch"
+  };
+
+  function convertLength() {
+
+    const value = parseFloat(
+      document.getElementById("value").value
+    );
+
+    const fromUnit =
+      document.getElementById("fromUnit").value;
+
+    const toUnit =
+      document.getElementById("toUnit").value;
+
+    const resultBox =
+      document.getElementById("result");
+
+    if (!Number.isFinite(value)) {
+      resultBox.innerHTML =
+        "Please enter a valid number.";
+      return;
+    }
+
+    // Convert input to meters first.
+    const meters = value * units[fromUnit];
+
+    // Convert meters to the selected target unit.
+    const result = meters / units[toUnit];
+
+    resultBox.innerHTML = `
+      ${value} ${unitNames[fromUnit]} =
+      <strong>${result.toLocaleString(undefined, {
+        maximumFractionDigits: 10
+      })} ${unitNames[toUnit]}</strong>
+    `;
+  }
+</script>
+
+</body>
+</html>
