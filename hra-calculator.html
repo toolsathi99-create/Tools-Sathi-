@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>HRA Calculator - ToolSathi</title>
+
+  <meta
+    name="description"
+    content="Free HRA Calculator for India. Calculate HRA exemption and taxable HRA based on salary, rent, HRA received and city type."
+  >
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #222;
+    }
+
+    header {
+      background: #2563eb;
+      color: white;
+      text-align: center;
+      padding: 25px 15px;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+    }
+
+    header p {
+      margin: 0;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 30px auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    .info {
+      background: #eef4ff;
+      padding: 14px;
+      border-radius: 9px;
+      margin-bottom: 20px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .input-group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      background: white;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      margin-top: 5px;
+      border: none;
+      border-radius: 8px;
+      background: #2563eb;
+      color: white;
+      font-size: 17px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .clear {
+      background: #555;
+      margin-top: 12px;
+    }
+
+    .clear:hover {
+      background: #333;
+    }
+
+    .result {
+      margin-top: 25px;
+      padding: 20px;
+      background: #eef4ff;
+      border-radius: 10px;
+    }
+
+    .result h3 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 12px 0;
+      border-bottom: 1px solid #d5deeb;
+    }
+
+    .row:last-child {
+      border-bottom: none;
+    }
+
+    .highlight {
+      color: #2563eb;
+      font-size: 21px;
+    }
+
+    .note {
+      margin-top: 18px;
+      color: #666;
+      font-size: 13px;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #666;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>ToolSathi</h1>
+  <p>Free Online HRA Calculator</p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+
+    <h2>🏠 HRA Calculator</h2>
+
+    <div class="info">
+      Enter your salary, HRA received and rent paid to
+      estimate HRA exemption and taxable HRA.
+    </div>
+
+    <div class="input-group">
+      <label for="basic">
+        Annual Basic Salary (₹)
+      </label>
+
+      <input
+        type="number"
+        id="basic"
+        placeholder="Example: 600000"
+        min="0"
+        step="1"
+      >
+    </div>
+
+    <div class="input-group">
+      <label for="da">
+        Annual DA forming part of retirement benefits (₹)
+      </label>
+
+      <input
+        type="number"
+        id="da"
+        placeholder="Example: 0"
+        min="0"
+        step="1"
+      >
+    </div>
+
+    <div class="input-group">
+      <label for="hra">
+        Annual HRA Received (₹)
+      </label>
+
+      <input
+        type="number"
+        id="hra"
+        placeholder="Example: 240000"
+        min="0"
+        step="1"
+      >
+    </div>
+
+    <div class="input-group">
+      <label for="rent">
+        Annual Rent Paid (₹)
+      </label>
+
+      <input
+        type="number"
+        id="rent"
+        placeholder="Example: 180000"
+        min="0"
+        step="1"
+      >
+    </div>
+
+    <div class="input-group">
+      <label for="city">
+        City Type
+      </label>
+
+      <select id="city">
+        <option value="metro">
+          Metro City - 50%
+        </option>
+
+        <option value="nonmetro">
+          Non-Metro City - 40%
+        </option>
+      </select>
+    </div>
+
+    <button onclick="calculateHRA()">
+      Calculate HRA
+    </button>
+
+    <button
+      class="clear"
+      onclick="clearFields()"
+    >
+      Clear
+    </button>
+
+    <div class="result">
+
+      <h3>HRA Result</h3>
+
+      <div class="row">
+        <span>Salary for HRA Calculation</span>
+        <strong id="salaryBase">₹0</strong>
+      </div>
+
+      <div class="row">
+        <span>Actual HRA Received</span>
+        <strong id="actualHra">₹0</strong>
+      </div>
+
+      <div class="row">
+        <span>Rent Paid - 10% of Salary</span>
+        <strong id="rentMinus">₹0</strong>
+      </div>
+
+      <div class="row">
+        <span>50% / 40% of Salary</span>
+        <strong id="cityLimit">₹0</strong>
+      </div>
+
+      <div class="row">
+        <span>HRA Exemption</span>
+        <strong
+          class="highlight"
+          id="exemption"
+        >
+          ₹0
+        </strong>
+      </div>
+
+      <div class="row">
+        <span>Taxable HRA</span>
+        <strong
+          class="highlight"
+          id="taxable"
+        >
+          ₹0
+        </strong>
+      </div>
+
+    </div>
+
+    <div class="note">
+      This calculator provides an estimate using the standard
+      HRA exemption formula. Actual tax treatment can depend
+      on your individual circumstances and applicable rules.
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+  © 2026 ToolSathi
+</footer>
+
+<script>
+
+  function formatRupees(value) {
+    return "₹" +
+      Math.round(value).toLocaleString("en-IN");
+  }
+
+
+  function calculateHRA() {
+
+    const basic =
+      Number(
+        document.getElementById("basic").value
+      ) || 0;
+
+    const da =
+      Number(
+        document.getElementById("da").value
+      ) || 0;
+
+    const hra =
+      Number(
+        document.getElementById("hra").value
+      ) || 0;
+
+    const rent =
+      Number(
+        document.getElementById("rent").value
+      ) || 0;
+
+    const city =
+      document.getElementById("city").value;
+
+
+    if (
+      basic <= 0 ||
+      hra < 0 ||
+      rent < 0 ||
+      da < 0
+    ) {
+
+      alert(
+        "Please enter valid salary, HRA and rent details."
+      );
+
+      return;
+    }
+
+
+    /*
+      Salary for HRA calculation:
+      Basic + eligible DA
+    */
+
+    const salaryBase =
+      basic + da;
+
+
+    /*
+      1. Actual HRA received
+    */
+
+    const condition1 =
+      hra;
+
+
+    /*
+      2. Rent paid minus 10% of salary
+    */
+
+    const condition2 =
+      Math.max(
+        0,
+        rent - salaryBase * 0.10
+      );
+
+
+    /*
+      3. 50% of salary for metro
+         40% for non-metro
+    */
+
+    const percentage =
+      city === "metro"
+        ? 0.50
+        : 0.40;
+
+
+    const condition3 =
+      salaryBase * percentage;
+
+
+    /*
+      Exemption is the minimum of
+      the three conditions.
+    */
+
+    const exemption =
+      Math.min(
+        condition1,
+        condition2,
+        condition3
+      );
+
+
+    const taxableHRA =
+      Math.max(
+        0,
+        hra - exemption
+      );
+
+
+    document.getElementById("salaryBase").textContent =
+      formatRupees(salaryBase);
+
+    document.getElementById("actualHra").textContent =
+      formatRupees(condition1);
+
+    document.getElementById("rentMinus").textContent =
+      formatRupees(condition2);
+
+    document.getElementById("cityLimit").textContent =
+      formatRupees(condition3);
+
+    document.getElementById("exemption").textContent =
+      formatRupees(exemption);
+
+    document.getElementById("taxable").textContent =
+      formatRupees(taxableHRA);
+  }
+
+
+  function clearFields() {
+
+    document.getElementById("basic").value = "";
+
+    document.getElementById("da").value = "";
+
+    document.getElementById("hra").value = "";
+
+    document.getElementById("rent").value = "";
+
+    document.getElementById("city").value =
+      "metro";
+
+
+    document.getElementById("salaryBase").textContent =
+      "₹0";
+
+    document.getElementById("actualHra").textContent =
+      "₹0";
+
+    document.getElementById("rentMinus").textContent =
+      "₹0";
+
+    document.getElementById("cityLimit").textContent =
+      "₹0";
+
+    document.getElementById("exemption").textContent =
+      "₹0";
+
+    document.getElementById("taxable").textContent =
+      "₹0";
+  }
+
+</script>
+
+</body>
+</html>
