@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Inflation Calculator - Free Investment Calculator | ToolSathi</title>
+
+<meta name="description"
+content="Free Inflation Calculator. Calculate future costs and purchasing power based on inflation rate and number of years.">
+
+<style>
+*{box-sizing:border-box}
+
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:#f4f7fb;
+  color:#222;
+}
+
+header{
+  background:#2563eb;
+  color:white;
+  text-align:center;
+  padding:28px 15px;
+}
+
+header h1{margin:0 0 8px}
+header p{margin:0}
+
+.container{
+  max-width:850px;
+  margin:30px auto;
+  padding:15px;
+}
+
+.card{
+  background:white;
+  padding:25px;
+  border-radius:15px;
+  box-shadow:0 4px 15px rgba(0,0,0,.08);
+  margin-bottom:20px;
+}
+
+h2{
+  text-align:center;
+  margin-top:0;
+}
+
+.info{
+  background:#eef4ff;
+  padding:14px;
+  border-radius:9px;
+  margin-bottom:20px;
+  font-size:14px;
+  line-height:1.5;
+}
+
+.input-group{
+  margin-bottom:18px;
+}
+
+label{
+  display:block;
+  font-weight:bold;
+  margin-bottom:8px;
+}
+
+input{
+  width:100%;
+  padding:14px;
+  border:1px solid #ccc;
+  border-radius:8px;
+  font-size:16px;
+}
+
+button{
+  width:100%;
+  padding:14px;
+  border:0;
+  border-radius:8px;
+  background:#2563eb;
+  color:white;
+  font-size:17px;
+  cursor:pointer;
+  margin-top:5px;
+}
+
+button:hover{
+  background:#1d4ed8;
+}
+
+.clear{
+  background:#555;
+  margin-top:12px;
+}
+
+.clear:hover{
+  background:#333;
+}
+
+.result{
+  display:none;
+}
+
+.result-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+  margin-top:20px;
+}
+
+.result-box{
+  background:#eef4ff;
+  padding:18px;
+  border-radius:10px;
+  text-align:center;
+}
+
+.result-box strong{
+  display:block;
+  font-size:21px;
+  color:#2563eb;
+  margin-bottom:7px;
+}
+
+.year-table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:20px;
+}
+
+.year-table th,
+.year-table td{
+  padding:10px;
+  border:1px solid #ddd;
+  text-align:center;
+}
+
+.year-table th{
+  background:#eef4ff;
+}
+
+.copy{
+  background:#16a34a;
+  margin-top:15px;
+}
+
+.copy:hover{
+  background:#15803d;
+}
+
+.note{
+  margin-top:18px;
+  color:#666;
+  font-size:13px;
+  line-height:1.5;
+  text-align:center;
+}
+
+footer{
+  text-align:center;
+  padding:25px;
+  color:#666;
+}
+
+@media(max-width:600px){
+  .container{padding:10px}
+  .card{padding:18px}
+  .result-grid{grid-template-columns:1fr}
+
+  .year-table{
+    font-size:13px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>ToolSathi</h1>
+  <p>Free Inflation Calculator</p>
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<h2>📈 Inflation Calculator</h2>
+
+<div class="info">
+  Calculate how inflation can affect the future cost of
+  goods and the purchasing power of your money.
+</div>
+
+<div class="input-group">
+<label for="amount">Current Amount (₹)</label>
+
+<input
+  type="number"
+  id="amount"
+  placeholder="Example: 100000"
+  min="0"
+  step="0.01"
+>
+</div>
+
+<div class="input-group">
+<label for="inflation">Annual Inflation Rate (%)</label>
+
+<input
+  type="number"
+  id="inflation"
+  placeholder="Example: 6"
+  min="0"
+  step="0.1"
+>
+</div>
+
+<div class="input-group">
+<label for="years">Number of Years</label>
+
+<input
+  type="number"
+  id="years"
+  placeholder="Example: 10"
+  min="1"
+  max="100"
+  step="1"
+>
+</div>
+
+<button onclick="calculateInflation()">
+  Calculate Inflation
+</button>
+
+<button class="clear" onclick="clearTool()">
+  Clear
+</button>
+
+</div>
+
+
+<div class="card result" id="resultCard">
+
+<h2>Inflation Result</h2>
+
+<div class="result-grid">
+
+<div class="result-box">
+<strong id="futureCost">₹0</strong>
+Future Cost
+</div>
+
+<div class="result-box">
+<strong id="purchasingPower">₹0</strong>
+Purchasing Power
+</div>
+
+<div class="result-box">
+<strong id="increase">₹0</strong>
+Increase in Cost
+</div>
+
+<div class="result-box">
+<strong id="rateDisplay">0%</strong>
+Inflation Rate
+</div>
+
+</div>
+
+<h3>Year-by-Year Projection</h3>
+
+<table class="year-table">
+<thead>
+<tr>
+<th>Year</th>
+<th>Estimated Cost</th>
+<th>Purchasing Power</th>
+</tr>
+</thead>
+
+<tbody id="projectionBody"></tbody>
+</table>
+
+<button class="copy" onclick="copyResult()">
+  📋 Copy Result
+</button>
+
+<div class="note">
+  This calculator provides an estimate based on the inflation
+  rate entered. Actual inflation can vary over time.
+</div>
+
+</div>
+
+</div>
+
+<footer>
+© 2026 ToolSathi
+</footer>
+
+
+<script>
+
+function formatINR(value){
+
+  return new Intl.NumberFormat(
+    'en-IN',
+    {
+      style:'currency',
+      currency:'INR',
+      maximumFractionDigits:0
+    }
+  ).format(value);
+
+}
+
+
+function calculateInflation(){
+
+  const amount =
+    parseFloat(
+      document.getElementById('amount').value
+    );
+
+  const inflation =
+    parseFloat(
+      document.getElementById('inflation').value
+    );
+
+  const years =
+    parseInt(
+      document.getElementById('years').value
+    );
+
+
+  if(
+    !amount ||
+    amount <= 0 ||
+    inflation < 0 ||
+    !years ||
+    years <= 0
+  ){
+
+    alert('Please enter valid values.');
+
+    return;
+  }
+
+
+  const rate =
+    inflation / 100;
+
+
+  const futureCost =
+    amount *
+    Math.pow(
+      1 + rate,
+      years
+    );
+
+
+  const purchasingPower =
+    amount /
+    Math.pow(
+      1 + rate,
+      years
+    );
+
+
+  const increase =
+    futureCost - amount;
+
+
+  document.getElementById(
+    'futureCost'
+  ).textContent =
+    formatINR(futureCost);
+
+
+  document.getElementById(
+    'purchasingPower'
+  ).textContent =
+    formatINR(purchasingPower);
+
+
+  document.getElementById(
+    'increase'
+  ).textContent =
+    formatINR(increase);
+
+
+  document.getElementById(
+    'rateDisplay'
+  ).textContent =
+    inflation + '%';
+
+
+  const body =
+    document.getElementById(
+      'projectionBody'
+    );
+
+  body.innerHTML = '';
+
+
+  for(let year = 1; year <= years; year++){
+
+    const cost =
+      amount *
+      Math.pow(
+        1 + rate,
+        year
+      );
+
+    const power =
+      amount /
+      Math.pow(
+        1 + rate,
+        year
+      );
+
+
+    const row =
+      document.createElement('tr');
+
+
+    row.innerHTML =
+      '<td>' +
+      year +
+      '</td>' +
+
+      '<td>' +
+      formatINR(cost) +
+      '</td>' +
+
+      '<td>' +
+      formatINR(power) +
+      '</td>';
+
+
+    body.appendChild(row);
+  }
+
+
+  document.getElementById(
+    'resultCard'
+  ).style.display =
+    'block';
+
+
+  document.getElementById(
+    'resultCard'
+  ).scrollIntoView({
+    behavior:'smooth'
+  });
+
+}
+
+
+function copyResult(){
+
+  const text =
+    'Inflation Calculator Result\n\n' +
+
+    'Current Amount: ' +
+    document.getElementById('amount').value +
+
+    '\nInflation Rate: ' +
+    document.getElementById('rateDisplay').textContent +
+
+    '\nYears: ' +
+    document.getElementById('years').value +
+
+    '\nFuture Cost: ' +
+    document.getElementById('futureCost').textContent +
+
+    '\nPurchasing Power: ' +
+    document.getElementById('purchasingPower').textContent +
+
+    '\nIncrease in Cost: ' +
+    document.getElementById('increase').textContent;
+
+
+  navigator.clipboard
+    .writeText(text)
+    .then(function(){
+
+      alert('Result copied successfully!');
+
+    })
+    .catch(function(){
+
+      alert('Copy failed. Please copy manually.');
+
+    });
+
+}
+
+
+function clearTool(){
+
+  document.getElementById(
+    'amount'
+  ).value = '';
+
+  document.getElementById(
+    'inflation'
+  ).value = '';
+
+  document.getElementById(
+    'years'
+  ).value = '';
+
+  document.getElementById(
+    'resultCard'
+  ).style.display = 'none';
+
+  document.getElementById(
+    'projectionBody'
+  ).innerHTML = '';
+
+}
+
+</script>
+
+</body>
+</html>
