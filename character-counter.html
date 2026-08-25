@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Character Counter - ToolSathi</title>
+
+  <meta
+    name="description"
+    content="Free online Character Counter. Count characters with and without spaces in your text using ToolSathi."
+  >
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #222;
+    }
+
+    header {
+      background: #2563eb;
+      color: white;
+      text-align: center;
+      padding: 25px 15px;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+    }
+
+    header p {
+      margin: 0;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 35px auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 250px;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      resize: vertical;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .stat {
+      background: #eef4ff;
+      padding: 18px 8px;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 24px;
+      color: #2563eb;
+    }
+
+    .stat span {
+      font-size: 13px;
+      color: #555;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 13px;
+      border: none;
+      border-radius: 8px;
+      background: #2563eb;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #666;
+    }
+
+    @media (max-width: 500px) {
+      .stats {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>ToolSathi</h1>
+  <p>Free Online Character Counter</p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+
+    <h2>Character Counter</h2>
+
+    <textarea
+      id="textInput"
+      placeholder="Type or paste your text here..."
+      oninput="countCharacters()"
+    ></textarea>
+
+    <div class="stats">
+
+      <div class="stat">
+        <strong id="totalCharacters">0</strong>
+        <span>Total Characters</span>
+      </div>
+
+      <div class="stat">
+        <strong id="noSpaceCharacters">0</strong>
+        <span>Without Spaces</span>
+      </div>
+
+      <div class="stat">
+        <strong id="spaces">0</strong>
+        <span>Spaces</span>
+      </div>
+
+    </div>
+
+    <button onclick="clearText()">
+      Clear Text
+    </button>
+
+  </div>
+
+</div>
+
+<footer>
+  © 2026 ToolSathi
+</footer>
+
+<script>
+
+  function countCharacters() {
+
+    const text =
+      document.getElementById("textInput").value;
+
+    // Total characters including spaces.
+    const total = text.length;
+
+    // Characters excluding spaces and line breaks.
+    const withoutSpaces =
+      text.replace(/\s/g, "").length;
+
+    // Count whitespace characters.
+    const spaceCount =
+      (text.match(/\s/g) || []).length;
+
+    document.getElementById("totalCharacters")
+      .textContent = total;
+
+    document.getElementById("noSpaceCharacters")
+      .textContent = withoutSpaces;
+
+    document.getElementById("spaces")
+      .textContent = spaceCount;
+  }
+
+
+  function clearText() {
+
+    document.getElementById("textInput").value = "";
+
+    countCharacters();
+  }
+
+</script>
+
+</body>
+</html>
