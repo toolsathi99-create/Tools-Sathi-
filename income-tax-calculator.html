@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Income Tax Calculator 2026-27 - ToolSathi</title>
+
+  <meta
+    name="description"
+    content="Free Income Tax Calculator for India AY 2026-27. Compare Old and New Tax Regime, calculate taxable income, tax, rebate and 4% cess."
+  >
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #222;
+    }
+
+    header {
+      background: #2563eb;
+      color: white;
+      text-align: center;
+      padding: 25px 15px;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+    }
+
+    header p {
+      margin: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 30px auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    .info {
+      background: #eef4ff;
+      padding: 14px;
+      border-radius: 9px;
+      margin-bottom: 20px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .input-group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      background: white;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      margin-top: 5px;
+      border: none;
+      border-radius: 8px;
+      background: #2563eb;
+      color: white;
+      font-size: 17px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .clear {
+      background: #555;
+      margin-top: 12px;
+    }
+
+    .clear:hover {
+      background: #333;
+    }
+
+    .results {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+      margin-top: 25px;
+    }
+
+    .result-box {
+      background: #eef4ff;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .result-box h3 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid #d5deeb;
+    }
+
+    .row:last-child {
+      border-bottom: none;
+    }
+
+    .total {
+      color: #2563eb;
+      font-size: 20px;
+    }
+
+    .saving {
+      margin-top: 20px;
+      padding: 16px;
+      background: #f1f5f9;
+      border-radius: 10px;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    .note {
+      margin-top: 20px;
+      color: #666;
+      font-size: 13px;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #666;
+    }
+
+    @media (max-width: 650px) {
+      .results {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>ToolSathi</h1>
+  <p>Income Tax Calculator 2026-27</p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+
+    <h2>🇮🇳 Income Tax Calculator</h2>
+
+    <div class="info">
+      Compare India's Old and New Tax Regimes for
+      Assessment Year 2026-27.
+    </div>
+
+    <div class="input-group">
+      <label for="income">
+        Annual Gross Income (₹)
+      </label>
+
+      <input
+        type="number"
+        id="income"
+        placeholder="Example: 1200000"
+        min="0"
+        step="1"
+      >
+    </div>
+
+    <div class="input-group">
+      <label for="deductions">
+        Old Regime Deductions (₹)
+      </label>
+
+      <input
+        type="number"
+        id="deductions"
+        placeholder="Example: 150000"
+        min="0"
+        step="1"
+      >
+    </div>
+
+    <div class="input-group">
+      <label for="age">
+        Age
+      </label>
+
+      <select id="age">
+        <option value="below60">Below 60 years</option>
+        <option value="60to79">60 to 79 years</option>
+        <option value="80plus">80 years or above</option>
+      </select>
+    </div>
+
+    <button onclick="calculateTax()">
+      Calculate Income Tax
+    </button>
+
+    <button
+      class="clear"
+      onclick="clearFields()"
+    >
+      Clear
+    </button>
+
+    <div class="results">
+
+      <div class="result-box">
+
+        <h3>New Tax Regime</h3>
+
+        <div class="row">
+          <span>Taxable Income</span>
+          <strong id="newTaxable">₹0</strong>
+        </div>
+
+        <div class="row">
+          <span>Income Tax</span>
+          <strong id="newTax">₹0</strong>
+        </div>
+
+        <div class="row">
+          <span>Rebate</span>
+          <strong id="newRebate">₹0</strong>
+        </div>
+
+        <div class="row">
+          <span>4% Cess</span>
+          <strong id="newCess">₹0</strong>
+        </div>
+
+        <div class="row">
+          <span>Total Tax</span>
+          <strong
+            class="total"
+            id="newTotal"
+          >
+            ₹0
+          </strong>
+        </div>
+
+      </div>
+
+      <div class="result-box">
+
+        <h3>Old Tax Regime</h3>
+
+        <div class="row">
+          <span>Taxable Income</span>
+          <strong id="oldTaxable">₹0</strong>
+        </div>
+
+        <div class="row">
+          <span>Income Tax</span>
+          <strong id="oldTax">₹0</strong>
+        </div>
+
+        <div class="row">
+          <span>Rebate</span>
+          <strong id="oldRebate">₹0</strong>
+        </div>
+
+        <div class="row">
+          <span>4% Cess</span>
+          <strong id="oldCess">₹0</strong>
+        </div>
+
+        <div class="row">
+          <span>Total Tax</span>
+          <strong
+            class="total"
+            id="oldTotal"
+          >
+            ₹0
+          </strong>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div
+      class="saving"
+      id="comparison"
+    >
+      Enter your income to compare both regimes.
+    </div>
+
+    <div class="note">
+      This calculator is an estimate for individual taxpayers.
+      Tax rules, deductions, special-rate income and surcharge
+      can affect actual tax liability.
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+  © 2026 ToolSathi
+</footer>
+
+<script>
+
+  function formatRupees(value) {
+    return "₹" +
+      Math.round(value).toLocaleString("en-IN");
+  }
+
+
+  /*
+    New Regime slabs AY 2026-27
+
+    0 - 4L       = 0%
+    4 - 8L       = 5%
+    8 - 12L      = 10%
+    12 - 16L     = 15%
+    16 - 20L     = 20%
+    20 - 24L     = 25%
+    Above 24L    = 30%
+  */
+
+  function calculateNewTax(income) {
+
+    let tax = 0;
+
+    if (income <= 400000) {
+      tax = 0;
+
+    } else if (income <= 800000) {
+      tax =
+        (income - 400000) * 0.05;
+
+    } else if (income <= 1200000) {
+      tax =
+        400000 * 0.05 +
+        (income - 800000) * 0.10;
+
+    } else if (income <= 1600000) {
+      tax =
+        400000 * 0.05 +
+        400000 * 0.10 +
+        (income - 1200000) * 0.15;
+
+    } else if (income <= 2000000) {
+      tax =
+        400000 * 0.05 +
+        400000 * 0.10 +
+        400000 * 0.15 +
+        (income - 1600000) * 0.20;
+
+    } else if (income <= 2400000) {
+      tax =
+        400000 * 0.05 +
+        400000 * 0.10 +
+        400000 * 0.15 +
+        400000 * 0.20 +
+        (income - 2000000) * 0.25;
+
+    } else {
+      tax =
+        400000 * 0.05 +
+        400000 * 0.10 +
+        400000 * 0.15 +
+        400000 * 0.20 +
+        400000 * 0.25 +
+        (income - 2400000) * 0.30;
+    }
+
+    return tax;
+  }
+
+
+  /*
+    Old Regime slabs
+
+    Below 60:
+    0 - 2.5L       = 0%
+    2.5 - 5L       = 5%
+    5 - 10L        = 20%
+    Above 10L      = 30%
+
+    60-79:
+    0 - 3L         = 0%
+    3 - 5L         = 5%
+    5 - 10L        = 20%
+    Above 10L      = 30%
+
+    80+:
+    0 - 5L         = 0%
+    5 - 10L        = 20%
+    Above 10L      = 30%
+  */
+
+  function calculateOldTax(income, age) {
+
+    let tax = 0;
+
+    if (age === "below60") {
+
+      if (income <= 250000) {
+        tax = 0;
+
+      } else if (income <= 500000) {
+        tax =
+          (income - 250000) * 0.05;
+
+      } else if (income <= 1000000) {
+        tax =
+          250000 * 0.05 +
+          (income - 500000) * 0.20;
+
+      } else {
+        tax =
+          250000 * 0.05 +
+          500000 * 0.20 +
+          (income - 1000000) * 0.30;
+      }
+
+    } else if (age === "60to79") {
+
+      if (income <= 300000) {
+        tax = 0;
+
+      } else if (income <= 500000) {
+        tax =
+          (income - 300000) * 0.05;
+
+      } else if (income <= 1000000) {
+        tax =
+          200000 * 0.05 +
+          (income - 500000) * 0.20;
+
+      } else {
+        tax =
+          200000 * 0.05 +
+          500000 * 0.20 +
+          (income - 1000000) * 0.30;
+      }
+
+    } else {
+
+      if (income <= 500000) {
+        tax = 0;
+
+      } else if (income <= 1000000) {
+        tax =
+          (income - 500000) * 0.20;
+
+      } else {
+        tax =
+          500000 * 0.20 +
+          (income - 1000000) * 0.30;
+      }
+    }
+
+    return tax;
+  }
+
+
+  function calculateTax() {
+
+    const grossIncome =
+      Number(
+        document.getElementById("income").value
+      );
+
+    const deductions =
+      Number(
+        document.getElementById("deductions").value
+      ) || 0;
+
+    const age =
+      document.getElementById("age").value;
+
+
+    if (
+      !grossIncome ||
+      grossIncome < 0
+    ) {
+
+      alert(
+        "Please enter a valid annual income."
+      );
+
+      return;
+    }
+
+
+    /*
+      For this simplified calculator,
+      deductions are applied to Old Regime.
+
+      New regime uses the gross income as
+      taxable income in this basic version.
+    */
+
+    const newTaxable =
+      Math.max(0, grossIncome);
+
+    const oldTaxable =
+      Math.max(
+        0,
+        grossIncome - deductions
+      );
+
+
+    let newTax =
+      calculateNewTax(newTaxable);
+
+    let oldTax =
+      calculateOldTax(
+        oldTaxable,
+        age
+      );
+
+
+    /*
+      Section 87A rebate
+
+      New regime:
+      Up to ₹12 lakh taxable income
+      Maximum rebate ₹60,000.
+
+      Old regime:
+      Up to ₹5 lakh taxable income
+      Maximum rebate ₹12,500.
+    */
+
+    let newRebate = 0;
+
+    if (newTaxable <= 1200000) {
+      newRebate =
+        Math.min(60000, newTax);
+    }
+
+
+    let oldRebate = 0;
+
+    if (oldTaxable <= 500000) {
+      oldRebate =
+        Math.min(12500, oldTax);
+    }
+
+
+    newTax =
+      Math.max(
+        0,
+        newTax - newRebate
+      );
+
+    oldTax =
+      Math.max(
+        0,
+        oldTax - oldRebate
+      );
+
+
+    /*
+      4% Health & Education Cess
+    */
+
+    const newCess =
+      newTax * 0.04;
+
+    const oldCess =
+      oldTax * 0.04;
+
+
+    const newTotal =
+      newTax + newCess;
+
+    const oldTotal =
+      oldTax + oldCess;
+
+
+    document.getElementById("newTaxable").textContent =
+      formatRupees(newTaxable);
+
+    document.getElementById("newTax").textContent =
+      formatRupees(newTax + newRebate);
+
+    document.getElementById("newRebate").textContent =
+      formatRupees(newRebate);
+
+    document.getElementById("newCess").textContent =
+      formatRupees(newCess);
+
+    document.getElementById("newTotal").textContent =
+      formatRupees(newTotal);
+
+
+    document.getElementById("oldTaxable").textContent =
+      formatRupees(oldTaxable);
+
+    document.getElementById("oldTax").textContent =
+      formatRupees(oldTax + oldRebate);
+
+    document.getElementById("oldRebate").textContent =
+      formatRupees(oldRebate);
+
+    document.getElementById("oldCess").textContent =
+      formatRupees(oldCess);
+
+    document.getElementById("oldTotal").textContent =
+      formatRupees(oldTotal);
+
+
+    const difference =
+      Math.abs(newTotal - oldTotal);
+
+
+    if (newTotal < oldTotal) {
+
+      document.getElementById("comparison").textContent =
+        "New Tax Regime saves approximately " +
+        formatRupees(difference) +
+        " compared with Old Regime.";
+
+    } else if (oldTotal < newTotal) {
+
+      document.getElementById("comparison").textContent =
+        "Old Tax Regime saves approximately " +
+        formatRupees(difference) +
+        " compared with New Regime.";
+
+    } else {
+
+      document.getElementById("comparison").textContent =
+        "Both regimes result in approximately the same tax.";
+    }
+  }
+
+
+  function clearFields() {
+
+    document.getElementById("income").value = "";
+
+    document.getElementById("deductions").value = "";
+
+    document.getElementById("age").value =
+      "below60";
+
+
+    document.getElementById("newTaxable").textContent =
+      "₹0";
+
+    document.getElementById("newTax").textContent =
+      "₹0";
+
+    document.getElementById("newRebate").textContent =
+      "₹0";
+
+    document.getElementById("newCess").textContent =
+      "₹0";
+
+    document.getElementById("newTotal").textContent =
+      "₹0";
+
+
+    document.getElementById("oldTaxable").textContent =
+      "₹0";
+
+    document.getElementById("oldTax").textContent =
+      "₹0";
+
+    document.getElementById("oldRebate").textContent =
+      "₹0";
+
+    document.getElementById("oldCess").textContent =
+      "₹0";
+
+    document.getElementById("oldTotal").textContent =
+      "₹0";
+
+
+    document.getElementById("comparison").textContent =
+      "Enter your income to compare both regimes.";
+  }
+
+</script>
+
+</body>
+</html>
