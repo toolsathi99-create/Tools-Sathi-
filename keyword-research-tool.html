@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Keyword Research Tool - Free SEO Keyword Generator | ToolSathi</title>
+
+  <meta
+    name="description"
+    content="Free Keyword Research Tool. Generate long-tail, question, comparison, buying and India-focused SEO keyword ideas instantly."
+  >
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #222;
+    }
+
+    header {
+      background: #2563eb;
+      color: white;
+      text-align: center;
+      padding: 28px 15px;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+      font-size: 30px;
+    }
+
+    header p {
+      margin: 0;
+    }
+
+    .container {
+      max-width: 850px;
+      margin: 30px auto;
+      padding: 15px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    .info {
+      background: #eef4ff;
+      padding: 14px;
+      border-radius: 9px;
+      margin-bottom: 20px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .input-group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      background: white;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: #2563eb;
+      color: white;
+      font-size: 17px;
+      cursor: pointer;
+      margin-top: 5px;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .secondary {
+      background: #555;
+      margin-top: 12px;
+    }
+
+    .secondary:hover {
+      background: #333;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 20px 0;
+    }
+
+    .stat {
+      background: #eef4ff;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 22px;
+      color: #2563eb;
+      margin-bottom: 5px;
+    }
+
+    .keyword-section {
+      margin-top: 25px;
+    }
+
+    .keyword-section h3 {
+      margin-bottom: 10px;
+    }
+
+    .keyword-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .keyword-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding: 12px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+    }
+
+    .keyword-text {
+      word-break: break-word;
+      line-height: 1.4;
+    }
+
+    .copy-btn {
+      width: auto;
+      min-width: 75px;
+      padding: 8px 12px;
+      margin: 0;
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+
+    .export {
+      background: #16a34a;
+      margin-top: 20px;
+    }
+
+    .export:hover {
+      background: #15803d;
+    }
+
+    .empty {
+      text-align: center;
+      color: #666;
+      padding: 25px;
+    }
+
+    .note {
+      margin-top: 18px;
+      color: #666;
+      font-size: 13px;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #666;
+    }
+
+    @media (max-width: 600px) {
+
+      .container {
+        padding: 10px;
+      }
+
+      .card {
+        padding: 18px;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .keyword-item {
+        align-items: flex-start;
+      }
+
+      header h1 {
+        font-size: 25px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>ToolSathi</h1>
+  <p>Free Keyword Research & SEO Keyword Generator</p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+
+    <h2>🔎 Keyword Research Tool</h2>
+
+    <div class="info">
+      Enter a topic or seed keyword to generate long-tail,
+      question, comparison, commercial and India-focused
+      keyword ideas.
+    </div>
+
+    <div class="input-group">
+      <label for="seed">
+        Enter Seed Keyword
+      </label>
+
+      <input
+        type="text"
+        id="seed"
+        placeholder="Example: digital marketing"
+        autocomplete="off"
+      >
+    </div>
+
+    <div class="input-group">
+      <label for="location">
+        Target Location
+      </label>
+
+      <select id="location">
+        <option value="India">India</option>
+        <option value="Delhi">Delhi</option>
+        <option value="Mumbai">Mumbai</option>
+        <option value="Lucknow">Lucknow</option>
+        <option value="Bangalore">Bangalore</option>
+        <option value="Hyderabad">Hyderabad</option>
+        <option value="Kolkata">Kolkata</option>
+        <option value="Chennai">Chennai</option>
+      </select>
+    </div>
+
+    <button onclick="generateKeywords()">
+      Generate Keywords
+    </button>
+
+    <button
+      class="secondary"
+      onclick="clearTool()"
+    >
+      Clear
+    </button>
+
+  </div>
+
+
+  <div
+    class="card"
+    id="resultsCard"
+    style="display:none;"
+  >
+
+    <h2>Keyword Ideas</h2>
+
+    <div class="stats">
+
+      <div class="stat">
+        <strong id="totalCount">0</strong>
+        Total
+      </div>
+
+      <div class="stat">
+        <strong id="questionCount">0</strong>
+        Questions
+      </div>
+
+      <div class="stat">
+        <strong id="commercialCount">0</strong>
+        Commercial
+      </div>
+
+    </div>
+
+
+    <div class="keyword-section">
+
+      <h3>🎯 Long-Tail Keywords</h3>
+
+      <div
+        class="keyword-list"
+        id="longTailList"
+      ></div>
+
+    </div>
+
+
+    <div class="keyword-section">
+
+      <h3>❓ Question Keywords</h3>
+
+      <div
+        class="keyword-list"
+        id="questionList"
+      ></div>
+
+    </div>
+
+
+    <div class="keyword-section">
+
+      <h3>🛒 Commercial Keywords</h3>
+
+      <div
+        class="keyword-list"
+        id="commercialList"
+      ></div>
+
+    </div>
+
+
+    <div class="keyword-section">
+
+      <h3>⚖️ Comparison Keywords</h3>
+
+      <div
+        class="keyword-list"
+        id="comparisonList"
+      ></div>
+
+    </div>
+
+
+    <div class="keyword-section">
+
+      <h3>🇮🇳 India / Local Keywords</h3>
+
+      <div
+        class="keyword-list"
+        id="localList"
+      ></div>
+
+    </div>
+
+
+    <button
+      class="export"
+      onclick="downloadCSV()"
+    >
+      📥 Download Keywords CSV
+    </button>
+
+    <div class="note">
+      Keyword ideas are generated from search-intent patterns.
+      This tool does not claim to provide exact Google search
+      volume or keyword difficulty.
+    </div>
+
+  </div>
+
+</div>
+
+
+<footer>
+  © 2026 ToolSathi
+</footer>
+
+
+<script>
+
+  let allKeywords = [];
+
+
+  function cleanKeyword(text) {
+
+    return text
+      .replace(/\s+/g, " ")
+      .trim();
+  }
+
+
+  function unique(array) {
+
+    return [...new Set(
+      array.map(item => cleanKeyword(item))
+    )];
+
+  }
+
+
+  function generateKeywords() {
+
+    const seed =
+      document
+        .getElementById("seed")
+        .value
+        .trim();
+
+    const location =
+      document
+        .getElementById("location")
+        .value;
+
+
+    if (!seed) {
+
+      alert(
+        "Please enter a keyword or topic."
+      );
+
+      return;
+    }
+
+
+    const longTail = [];
+    const questions = [];
+    const commercial = [];
+    const comparison = [];
+    const local = [];
+
+
+    /*
+      LONG-TAIL
+    */
+
+    const longTailTemplates = [
+
+      "best " + seed,
+
+      "best " + seed + " for beginners",
+
+      "best " + seed + " in India",
+
+      seed + " for beginners",
+
+      seed + " guide",
+
+      seed + " tutorial",
+
+      seed + " explained",
+
+      seed + " step by step",
+
+      seed + " online",
+
+      seed + " free",
+
+      seed + " calculator",
+
+      seed + " tool",
+
+      seed + " app",
+
+      seed + " website",
+
+      seed + " tips",
+
+      seed + " examples",
+
+      seed + " benefits",
+
+      seed + " meaning",
+
+      seed + " how to use",
+
+      seed + " near me"
+
+    ];
+
+
+    longTail.push(
+      ...longTailTemplates
+    );
+
+
+    /*
+      QUESTIONS
+    */
+
+    const questionWords = [
+
+      "what is",
+
+      "how to use",
+
+      "how does",
+
+      "how can I",
+
+      "why is",
+
+      "when to use",
+
+      "where to find",
+
+      "which is the best",
+
+      "is " + seed + " worth it",
+
+      "can I use"
+
+    ];
+
+
+    questionWords.forEach(
+      prefix => {
+
+        if (
+          prefix === "is " + seed + " worth it"
+        ) {
+
+          questions.push(
+            prefix + "?"
+          );
+
+        } else {
+
+          questions.push(
+            prefix + " " + seed + "?"
+          );
+
+        }
+
+      }
+    );
+
+
+    /*
+      COMMERCIAL
+    */
+
+    commercial.push(
+
+      "best " + seed,
+
+      "best " + seed + " online",
+
+      "cheap " + seed,
+
+      "affordable " + seed,
+
+      "premium " + seed,
+
+      seed + " price",
+
+      seed + " cost",
+
+      seed + " reviews",
+
+      seed + " comparison",
+
+      seed + " alternatives",
+
+      seed + " deals",
+
+      seed + " offers",
+
+      "buy " + seed,
+
+      seed + " for small business",
+
+      seed + " for students"
+
+    );
+
+
+    /*
+      COMPARISON
+    */
+
+    comparison.push(
+
+      seed + " vs",
+
+      seed + " vs alternative",
+
+      seed + " comparison",
+
+      seed + " alternatives",
+
+      "best alternative to " + seed,
+
+      seed + " or",
+
+      seed + " vs free tool",
+
+      "free vs paid " + seed,
+
+      seed + " features comparison",
+
+      seed + " price comparison"
+
+    );
+
+
+    /*
+      INDIA / LOCAL
+    */
+
+    local.push(
+
+      seed + " in India",
+
+      seed + " India",
+
+      "best " + seed + " in India",
+
+      "free " + seed + " India",
+
+      seed + " online India",
+
+      seed + " near me",
+
+      seed + " in " + location,
+
+      "best " + seed + " in " + location,
+
+      seed + " price in India",
+
+      seed + " cost in India",
+
+      seed + " for Indian users",
+
+      seed + " Hindi",
+
+      seed + " in Hindi"
+
+    );
+
+
+    const uniqueLongTail =
+      unique(longTail);
+
+    const uniqueQuestions =
+      unique(questions);
+
+    const uniqueCommercial =
+      unique(commercial);
+
+    const uniqueComparison =
+      unique(comparison);
+
+    const uniqueLocal =
+      unique(local);
+
+
+    allKeywords = [
+
+      ...uniqueLongTail,
+
+      ...uniqueQuestions,
+
+      ...uniqueCommercial,
+
+      ...uniqueComparison,
+
+      ...uniqueLocal
+
+    ];
+
+
+    document.getElementById(
+      "resultsCard"
+    ).style.display = "block";
+
+
+    document.getElementById(
+      "totalCount"
+    ).textContent =
+      allKeywords.length;
+
+
+    document.getElementById(
+      "questionCount"
+    ).textContent =
+      uniqueQuestions.length;
+
+
+    document.getElementById(
+      "commercialCount"
+    ).textContent =
+      uniqueCommercial.length;
+
+
+    renderList(
+      "longTailList",
+      uniqueLongTail
+    );
+
+
+    renderList(
+      "questionList",
+      uniqueQuestions
+    );
+
+
+    renderList(
+      "commercialList",
+      uniqueCommercial
+    );
+
+
+    renderList(
+      "comparisonList",
+      uniqueComparison
+    );
+
+
+    renderList(
+      "localList",
+      uniqueLocal
+    );
+
+
+    document.getElementById(
+      "resultsCard"
+    ).scrollIntoView({
+      behavior: "smooth"
+    });
+  }
+
+
+  function renderList(
+    elementId,
+    keywords
+  ) {
+
+    const container =
+      document.getElementById(
+        elementId
+      );
+
+
+    container.innerHTML = "";
+
+
+    if (!keywords.length) {
+
+      container.innerHTML =
+        '<div class="empty">No keywords found.</div>';
+
+      return;
+    }
+
+
+    keywords.forEach(
+      keyword => {
+
+        const row =
+          document.createElement("div");
+
+        row.className =
+          "keyword-item";
+
+
+        const text =
+          document.createElement("div");
+
+        text.className =
+          "keyword-text";
+
+        text.textContent =
+          keyword;
+
+
+        const button =
+          document.createElement("button");
+
+        button.className =
+          "copy-btn";
+
+        button.textContent =
+          "Copy";
+
+
+        button.onclick =
+          function() {
+
+            copyKeyword(
+              keyword,
+              button
+            );
+
+          };
+
+
+        row.appendChild(text);
+
+        row.appendChild(button);
+
+        container.appendChild(row);
+
+      }
+    );
+  }
+
+
+  function copyKeyword(
+    keyword,
+    button
+  ) {
+
+    navigator.clipboard
+      .writeText(keyword)
+      .then(
+        function() {
+
+          const oldText =
+            button.textContent;
+
+          button.textContent =
+            "Copied!";
+
+
+          setTimeout(
+            function() {
+
+              button.textContent =
+                oldText;
+
+            },
+            1200
+          );
+
+        }
+      )
+      .catch(
+        function() {
+
+          alert(
+            "Copy failed. Please copy the keyword manually."
+          );
+
+        }
+      );
+  }
+
+
+  function downloadCSV() {
+
+    if (!allKeywords.length) {
+
+      alert(
+        "Generate keywords first."
+      );
+
+      return;
+    }
+
+
+    let csv =
+      "Keyword\n";
+
+
+    allKeywords.forEach(
+      keyword => {
+
+        csv +=
+          '"' +
+          keyword.replace(
+            /"/g,
+            '""'
+          ) +
+          '"\n';
+
+      }
+    );
+
+
+    const blob =
+      new Blob(
+        [csv],
+        {
+          type: "text/csv;charset=utf-8;"
+        }
+      );
+
+
+    const url =
+      URL.createObjectURL(blob);
+
+
+    const link =
+      document.createElement("a");
+
+
+    link.href = url;
+
+    link.download =
+      "keyword-research-results.csv";
+
+
+    document.body.appendChild(link);
+
+    link.click();
+
+    document.body.removeChild(link);
+
+    URL.revokeObjectURL(url);
+  }
+
+
+  function clearTool() {
+
+    document.getElementById(
+      "seed"
+    ).value = "";
+
+
+    document.getElementById(
+      "location"
+    ).value = "India";
+
+
+    document.getElementById(
+      "resultsCard"
+    ).style.display = "none";
+
+
+    allKeywords = [];
+
+
+    document.getElementById(
+      "longTailList"
+    ).innerHTML = "";
+
+    document.getElementById(
+      "questionList"
+    ).innerHTML = "";
+
+    document.getElementById(
+      "commercialList"
+    ).innerHTML = "";
+
+    document.getElementById(
+      "comparisonList"
+    ).innerHTML = "";
+
+    document.getElementById(
+      "localList"
+    ).innerHTML = "";
+  }
+
+
+  /*
+    Press Enter to generate keywords.
+  */
+
+  document
+    .getElementById("seed")
+    .addEventListener(
+      "keydown",
+      function(event) {
+
+        if (
+          event.key === "Enter"
+        ) {
+
+          generateKeywords();
+
+        }
+
+      }
+    );
+
+</script>
+
+</body>
+  </html>
