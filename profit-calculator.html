@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Profit Calculator - ToolSathi</title>
+  <meta name="description" content="Free online Profit Calculator. Calculate profit, loss, profit percentage and loss percentage easily with ToolSathi.">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #222;
+    }
+
+    header {
+      background: #2563eb;
+      color: white;
+      text-align: center;
+      padding: 25px 15px;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+    }
+
+    header p {
+      margin: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 35px auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 7px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: #2563eb;
+      color: white;
+      font-size: 17px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .result {
+      margin-top: 20px;
+      padding: 18px;
+      background: #eef4ff;
+      border-radius: 8px;
+      line-height: 1.8;
+      font-size: 17px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #666;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>ToolSathi</h1>
+  <p>Free Online Profit Calculator</p>
+</header>
+
+<div class="container">
+  <div class="card">
+
+    <h2>Profit Calculator</h2>
+
+    <label for="costPrice">Cost Price (₹)</label>
+    <input type="number" id="costPrice" placeholder="Example: 500">
+
+    <label for="sellingPrice">Selling Price (₹)</label>
+    <input type="number" id="sellingPrice" placeholder="Example: 650">
+
+    <button onclick="calculateProfit()">Calculate</button>
+
+    <div class="result" id="result">
+      Result will appear here
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  © 2026 ToolSathi
+</footer>
+
+<script>
+  function calculateProfit() {
+    const costPrice = parseFloat(
+      document.getElementById("costPrice").value
+    );
+
+    const sellingPrice = parseFloat(
+      document.getElementById("sellingPrice").value
+    );
+
+    const resultBox = document.getElementById("result");
+
+    if (
+      isNaN(costPrice) ||
+      isNaN(sellingPrice) ||
+      costPrice <= 0 ||
+      sellingPrice < 0
+    ) {
+      resultBox.innerHTML = "Please enter valid prices.";
+      return;
+    }
+
+    if (sellingPrice > costPrice) {
+      const profit = sellingPrice - costPrice;
+      const profitPercent = (profit / costPrice) * 100;
+
+      resultBox.innerHTML = `
+        Cost Price: ₹${costPrice.toFixed(2)}<br>
+        Selling Price: ₹${sellingPrice.toFixed(2)}<br>
+        Profit: ₹${profit.toFixed(2)}<br>
+        Profit Percentage: ${profitPercent.toFixed(2)}%
+      `;
+
+    } else if (sellingPrice < costPrice) {
+      const loss = costPrice - sellingPrice;
+      const lossPercent = (loss / costPrice) * 100;
+
+      resultBox.innerHTML = `
+        Cost Price: ₹${costPrice.toFixed(2)}<br>
+        Selling Price: ₹${sellingPrice.toFixed(2)}<br>
+        Loss: ₹${loss.toFixed(2)}<br>
+        Loss Percentage: ${lossPercent.toFixed(2)}%
+      `;
+
+    } else {
+      resultBox.innerHTML = `
+        Cost Price: ₹${costPrice.toFixed(2)}<br>
+        Selling Price: ₹${sellingPrice.toFixed(2)}<br>
+        <strong>No Profit, No Loss</strong>
+      `;
+    }
+  }
+</script>
+
+</body>
+</html>
