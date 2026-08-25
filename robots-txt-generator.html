@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Robots.txt Generator - Free SEO Tool | ToolSathi</title>
+
+  <meta name="description"
+    content="Free Robots.txt Generator. Create a robots.txt file for your website with Googlebot, sitemap and crawler settings.">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #222;
+    }
+
+    header {
+      background: #2563eb;
+      color: white;
+      text-align: center;
+      padding: 28px 15px;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+    }
+
+    header p {
+      margin: 0;
+    }
+
+    .container {
+      max-width: 850px;
+      margin: 30px auto;
+      padding: 15px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    .info {
+      background: #eef4ff;
+      padding: 14px;
+      border-radius: 9px;
+      margin-bottom: 20px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .input-group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      background: white;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: #2563eb;
+      color: white;
+      font-size: 17px;
+      cursor: pointer;
+      margin-top: 5px;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .clear {
+      background: #555;
+      margin-top: 12px;
+    }
+
+    .clear:hover {
+      background: #333;
+    }
+
+    .code-box {
+      background: #111827;
+      color: #e5e7eb;
+      padding: 18px;
+      border-radius: 10px;
+      min-height: 220px;
+      white-space: pre-wrap;
+      overflow-x: auto;
+      font-family: monospace;
+      line-height: 1.6;
+    }
+
+    .copy {
+      background: #16a34a;
+      margin-top: 12px;
+    }
+
+    .copy:hover {
+      background: #15803d;
+    }
+
+    .download {
+      background: #7c3aed;
+      margin-top: 12px;
+    }
+
+    .download:hover {
+      background: #6d28d9;
+    }
+
+    .note {
+      margin-top: 18px;
+      color: #666;
+      font-size: 13px;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #666;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 10px;
+      }
+
+      .card {
+        padding: 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>ToolSathi</h1>
+  <p>Free Robots.txt Generator</p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+
+    <h2>🤖 Robots.txt Generator</h2>
+
+    <div class="info">
+      Create a basic robots.txt file for your website.
+      Choose crawler access, add sitemap URL and optionally
+      specify folders that should not be crawled.
+    </div>
+
+    <div class="input-group">
+      <label for="bot">
+        Search Engine Crawler
+      </label>
+
+      <select id="bot">
+        <option value="*">All Crawlers (*)</option>
+        <option value="Googlebot">Googlebot</option>
+        <option value="Bingbot">Bingbot</option>
+      </select>
+    </div>
+
+    <div class="input-group">
+      <label for="access">
+        Crawler Access
+      </label>
+
+      <select id="access">
+        <option value="allow">Allow All Pages</option>
+        <option value="block">Block All Pages</option>
+      </select>
+    </div>
+
+    <div class="input-group">
+      <label for="disallow">
+        Disallow Paths
+      </label>
+
+      <input
+        type="text"
+        id="disallow"
+        placeholder="Example: /admin/, /private/"
+      >
+    </div>
+
+    <div class="input-group">
+      <label for="sitemap">
+        Sitemap URL
+      </label>
+
+      <input
+        type="url"
+        id="sitemap"
+        placeholder="https://example.com/sitemap.xml"
+      >
+    </div>
+
+    <button onclick="generateRobots()">
+      Generate robots.txt
+    </button>
+
+    <button
+      class="clear"
+      onclick="clearTool()"
+    >
+      Clear
+    </button>
+
+  </div>
+
+
+  <div
+    class="card"
+    id="outputCard"
+    style="display:none;"
+  >
+
+    <h2>Your robots.txt</h2>
+
+    <div
+      class="code-box"
+      id="output"
+    ></div>
+
+    <button
+      class="copy"
+      onclick="copyRobots()"
+    >
+      📋 Copy robots.txt
+    </button>
+
+    <button
+      class="download"
+      onclick="downloadRobots()"
+    >
+      📥 Download robots.txt
+    </button>
+
+    <div class="note">
+      Put the generated file at the root of your website,
+      such as https://example.com/robots.txt. Check your
+      crawler rules carefully before publishing.
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+  © 2026 ToolSathi
+</footer>
+
+
+<script>
+
+  function generateRobots() {
+
+    const bot =
+      document.getElementById("bot").value;
+
+    const access =
+      document.getElementById("access").value;
+
+    const disallow =
+      document.getElementById("disallow").value.trim();
+
+    const sitemap =
+      document.getElementById("sitemap").value.trim();
+
+
+    let output = "";
+
+    output +=
+      "User-agent: " + bot + "\n";
+
+
+    if (access === "block") {
+
+      output +=
+        "Disallow: /\n";
+
+    } else {
+
+      output +=
+        "Disallow:\n";
+
+    }
+
+
+    if (disallow) {
+
+      const paths =
+        disallow
+          .split(",")
+          .map(path => path.trim())
+          .filter(path => path !== "");
+
+
+      paths.forEach(path => {
+
+        if (!path.startsWith("/")) {
+          path = "/" + path;
+        }
+
+        output +=
+          "Disallow: " + path + "\n";
+
+      });
+    }
+
+
+    if (sitemap) {
+
+      output += "\n";
+
+      output +=
+        "Sitemap: " + sitemap + "\n";
+    }
+
+
+    document.getElementById(
+      "output"
+    ).textContent = output;
+
+
+    document.getElementById(
+      "outputCard"
+    ).style.display = "block";
+
+
+    document.getElementById(
+      "outputCard"
+    ).scrollIntoView({
+      behavior: "smooth"
+    });
+  }
+
+
+  function copyRobots() {
+
+    const text =
+      document.getElementById(
+        "output"
+      ).textContent;
+
+
+    navigator.clipboard
+      .writeText(text)
+      .then(function() {
+
+        alert(
+          "robots.txt copied successfully!"
+        );
+
+      })
+      .catch(function() {
+
+        alert(
+          "Copy failed. Please copy the text manually."
+        );
+
+      });
+  }
+
+
+  function downloadRobots() {
+
+    const text =
+      document.getElementById(
+        "output"
+      ).textContent;
+
+
+    if (!text) {
+
+      alert(
+        "Generate robots.txt first."
+      );
+
+      return;
+    }
+
+
+    const blob =
+      new Blob(
+        [text],
+        {
+          type: "text/plain;charset=utf-8"
+        }
+      );
+
+
+    const url =
+      URL.createObjectURL(blob);
+
+
+    const link =
+      document.createElement("a");
+
+
+    link.href = url;
+
+    link.download =
+      "robots.txt";
+
+
+    document.body.appendChild(link);
+
+    link.click();
+
+    document.body.removeChild(link);
+
+    URL.revokeObjectURL(url);
+  }
+
+
+  function clearTool() {
+
+    document.getElementById(
+      "bot"
+    ).value = "*";
+
+    document.getElementById(
+      "access"
+    ).value = "allow";
+
+    document.getElementById(
+      "disallow"
+    ).value = "";
+
+    document.getElementById(
+      "sitemap"
+    ).value = "";
+
+
+    document.getElementById(
+      "output"
+    ).textContent = "";
+
+
+    document.getElementById(
+      "outputCard"
+    ).style.display = "none";
+  }
+
+</script>
+
+</body>
+</html>
