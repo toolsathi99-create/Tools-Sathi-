@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Line Counter - ToolSathi</title>
+
+  <meta
+    name="description"
+    content="Free online Line Counter. Count lines in your text quickly and accurately with ToolSathi."
+  >
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #222;
+    }
+
+    header {
+      background: #2563eb;
+      color: white;
+      text-align: center;
+      padding: 25px 15px;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+    }
+
+    header p {
+      margin: 0;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 35px auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 250px;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      resize: vertical;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .stat {
+      background: #eef4ff;
+      padding: 18px;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 30px;
+      color: #2563eb;
+      margin-bottom: 5px;
+    }
+
+    .stat span {
+      color: #555;
+      font-size: 14px;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 13px;
+      border: none;
+      border-radius: 8px;
+      background: #2563eb;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #666;
+    }
+
+    @media (max-width: 500px) {
+      .stats {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>ToolSathi</h1>
+  <p>Free Online Line Counter</p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+
+    <h2>Line Counter</h2>
+
+    <textarea
+      id="textInput"
+      placeholder="Type or paste your text here..."
+      oninput="countLines()"
+    ></textarea>
+
+    <div class="stats">
+
+      <div class="stat">
+        <strong id="totalLines">0</strong>
+        <span>Total Lines</span>
+      </div>
+
+      <div class="stat">
+        <strong id="nonEmptyLines">0</strong>
+        <span>Non-Empty Lines</span>
+      </div>
+
+    </div>
+
+    <button onclick="clearText()">
+      Clear Text
+    </button>
+
+  </div>
+
+</div>
+
+<footer>
+  © 2026 ToolSathi
+</footer>
+
+<script>
+
+  function countLines() {
+
+    const text =
+      document.getElementById("textInput").value;
+
+    if (text === "") {
+      document.getElementById("totalLines").textContent = "0";
+      document.getElementById("nonEmptyLines").textContent = "0";
+      return;
+    }
+
+    // Split text at line breaks.
+    const lines = text.split(/\r?\n/);
+
+    // Total number of lines.
+    const total = lines.length;
+
+    // Count only lines that contain something.
+    const nonEmpty = lines.filter(function(line) {
+      return line.trim() !== "";
+    }).length;
+
+    document.getElementById("totalLines").textContent = total;
+
+    document.getElementById("nonEmptyLines").textContent =
+      nonEmpty;
+  }
+
+
+  function clearText() {
+
+    document.getElementById("textInput").value = "";
+
+    document.getElementById("totalLines").textContent = "0";
+
+    document.getElementById("nonEmptyLines").textContent = "0";
+  }
+
+</script>
+
+</body>
+</html>
