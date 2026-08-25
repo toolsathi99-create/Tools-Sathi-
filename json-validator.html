@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>JSON Validator - ToolSathi</title>
+
+  <meta
+    name="description"
+    content="Free online JSON Validator. Check whether your JSON data is valid or invalid quickly with ToolSathi."
+  >
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #222;
+    }
+
+    header {
+      background: #2563eb;
+      color: white;
+      text-align: center;
+      padding: 25px 15px;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+    }
+
+    header p {
+      margin: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 35px auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    .info {
+      background: #f1f5f9;
+      padding: 12px;
+      border-radius: 8px;
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 280px;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-family: monospace;
+      font-size: 15px;
+      line-height: 1.6;
+      resize: vertical;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 15px;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: #2563eb;
+      color: white;
+      font-size: 17px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .clear {
+      background: #555;
+    }
+
+    .clear:hover {
+      background: #333;
+    }
+
+    .result {
+      margin-top: 20px;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .valid {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .invalid {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .result strong {
+      display: block;
+      font-size: 25px;
+      margin-bottom: 5px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #666;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>ToolSathi</h1>
+  <p>Free Online JSON Validator</p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+
+    <h2>JSON Validator</h2>
+
+    <div class="info">
+      Paste your JSON below to check whether it is valid.
+    </div>
+
+    <textarea
+      id="jsonInput"
+      placeholder='Example:
+{
+  "name": "ToolSathi",
+  "tools": 100
+}'
+    ></textarea>
+
+    <button onclick="validateJSON()">
+      Validate JSON
+    </button>
+
+    <button
+      class="clear"
+      onclick="clearFields()"
+    >
+      Clear
+    </button>
+
+    <div
+      id="result"
+      class="result"
+    >
+      Enter JSON to validate.
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+  © 2026 ToolSathi
+</footer>
+
+<script>
+
+  function validateJSON() {
+
+    const input =
+      document.getElementById("jsonInput").value.trim();
+
+    const result =
+      document.getElementById("result");
+
+    if (input === "") {
+
+      result.className = "result";
+
+      result.innerHTML =
+        "Please enter JSON data.";
+
+      return;
+    }
+
+    try {
+
+      JSON.parse(input);
+
+      result.className =
+        "result valid";
+
+      result.innerHTML = `
+        <strong>Valid JSON ✅</strong>
+        Your JSON data is correctly formatted.
+      `;
+
+    } catch (error) {
+
+      result.className =
+        "result invalid";
+
+      result.innerHTML = `
+        <strong>Invalid JSON ❌</strong>
+        ${escapeHTML(error.message)}
+      `;
+    }
+  }
+
+
+  function escapeHTML(text) {
+
+    return text
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+
+  function clearFields() {
+
+    document.getElementById("jsonInput").value = "";
+
+    const result =
+      document.getElementById("result");
+
+    result.className = "result";
+
+    result.innerHTML =
+      "Enter JSON to validate.";
+  }
+
+</script>
+
+</body>
+</html>
