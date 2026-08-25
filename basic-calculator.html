@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Basic Calculator - ToolSathi</title>
+  <meta name="description" content="Free online Basic Calculator by ToolSathi. Perform addition, subtraction, multiplication and division quickly.">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #222;
+    }
+
+    header {
+      background: #2563eb;
+      color: white;
+      text-align: center;
+      padding: 25px 15px;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+    }
+
+    header p {
+      margin: 0;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: 35px auto;
+      padding: 20px;
+    }
+
+    .calculator {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    #display {
+      width: 100%;
+      padding: 15px;
+      font-size: 28px;
+      text-align: right;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    button {
+      padding: 18px 10px;
+      font-size: 20px;
+      border: none;
+      border-radius: 8px;
+      background: #e5e7eb;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #d1d5db;
+    }
+
+    .operator {
+      background: #2563eb;
+      color: white;
+    }
+
+    .operator:hover {
+      background: #1d4ed8;
+    }
+
+    .clear {
+      background: #dc2626;
+      color: white;
+    }
+
+    .clear:hover {
+      background: #b91c1c;
+    }
+
+    .equals {
+      background: #16a34a;
+      color: white;
+    }
+
+    .equals:hover {
+      background: #15803d;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #666;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>ToolSathi</h1>
+  <p>Free Online Basic Calculator</p>
+</header>
+
+<div class="container">
+  <div class="calculator">
+
+    <input type="text" id="display" value="0" readonly>
+
+    <div class="buttons">
+
+      <button class="clear" onclick="clearDisplay()">C</button>
+      <button onclick="deleteLast()">⌫</button>
+      <button onclick="addValue('%')">%</button>
+      <button class="operator" onclick="addValue('/')">÷</button>
+
+      <button onclick="addValue('7')">7</button>
+      <button onclick="addValue('8')">8</button>
+      <button onclick="addValue('9')">9</button>
+      <button class="operator" onclick="addValue('*')">×</button>
+
+      <button onclick="addValue('4')">4</button>
+      <button onclick="addValue('5')">5</button>
+      <button onclick="addValue('6')">6</button>
+      <button class="operator" onclick="addValue('-')">−</button>
+
+      <button onclick="addValue('1')">1</button>
+      <button onclick="addValue('2')">2</button>
+      <button onclick="addValue('3')">3</button>
+      <button class="operator" onclick="addValue('+')">+</button>
+
+      <button onclick="addValue('0')">0</button>
+      <button onclick="addValue('.')">.</button>
+      <button class="equals" onclick="calculate()">=</button>
+
+    </div>
+  </div>
+</div>
+
+<footer>
+  © 2026 ToolSathi
+</footer>
+
+<script>
+  const display = document.getElementById("display");
+
+  function addValue(value) {
+    if (display.value === "0" || display.value === "Error") {
+      display.value = value;
+    } else {
+      display.value += value;
+    }
+  }
+
+  function clearDisplay() {
+    display.value = "0";
+  }
+
+  function deleteLast() {
+    if (display.value.length > 1) {
+      display.value = display.value.slice(0, -1);
+    } else {
+      display.value = "0";
+    }
+  }
+
+  function calculate() {
+    try {
+      let expression = display.value;
+
+      if (!/^[0-9+\-*/%.() ]+$/.test(expression)) {
+        display.value = "Error";
+        return;
+      }
+
+      let result = Function('"use strict"; return (' + expression + ')')();
+
+      if (!isFinite(result)) {
+        display.value = "Error";
+        return;
+      }
+
+      display.value = result;
+    } catch {
+      display.value = "Error";
+    }
+  }
+</script>
+
+</body>
+</html>
