@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Date Difference Calculator - ToolSathi</title>
+
+  <meta
+    name="description"
+    content="Free online Date Difference Calculator. Calculate the difference between two dates in days, weeks, months and years with ToolSathi."
+  >
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #222;
+    }
+
+    header {
+      background: #2563eb;
+      color: white;
+      text-align: center;
+      padding: 25px 15px;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+    }
+
+    header p {
+      margin: 0;
+    }
+
+    .container {
+      max-width: 650px;
+      margin: 35px auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    .date-box {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 7px;
+    }
+
+    input[type="date"] {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 10px;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: #2563eb;
+      color: white;
+      font-size: 17px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .clear {
+      background: #555;
+    }
+
+    .clear:hover {
+      background: #333;
+    }
+
+    .result {
+      margin-top: 20px;
+      padding: 20px;
+      background: #eef4ff;
+      border-radius: 10px;
+      text-align: center;
+      line-height: 1.8;
+    }
+
+    .result strong {
+      color: #2563eb;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #666;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>ToolSathi</h1>
+  <p>Free Online Date Difference Calculator</p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+
+    <h2>Date Difference Calculator</h2>
+
+    <div class="date-box">
+      <label for="startDate">Start Date</label>
+
+      <input
+        type="date"
+        id="startDate"
+      >
+    </div>
+
+    <div class="date-box">
+      <label for="endDate">End Date</label>
+
+      <input
+        type="date"
+        id="endDate"
+      >
+    </div>
+
+    <button onclick="calculateDifference()">
+      Calculate Difference
+    </button>
+
+    <button class="clear" onclick="clearDates()">
+      Clear
+    </button>
+
+    <div class="result" id="result">
+      Select two dates to calculate the difference.
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+  © 2026 ToolSathi
+</footer>
+
+<script>
+
+  function calculateDifference() {
+
+    const startValue =
+      document.getElementById("startDate").value;
+
+    const endValue =
+      document.getElementById("endDate").value;
+
+    const result =
+      document.getElementById("result");
+
+    if (!startValue || !endValue) {
+
+      result.innerHTML =
+        "Please select both dates.";
+
+      return;
+    }
+
+    /*
+      Using UTC prevents daylight-saving-time
+      changes from affecting the day calculation.
+    */
+
+    const start = new Date(startValue + "T00:00:00Z");
+    const end = new Date(endValue + "T00:00:00Z");
+
+    if (end < start) {
+
+      result.innerHTML =
+        "End date must be on or after the start date.";
+
+      return;
+    }
+
+    const millisecondsPerDay =
+      1000 * 60 * 60 * 24;
+
+    const difference =
+      Math.round(
+        (end - start) / millisecondsPerDay
+      );
+
+    const weeks =
+      Math.floor(difference / 7);
+
+    const remainingDays =
+      difference % 7;
+
+    const years =
+      Math.floor(difference / 365);
+
+    const months =
+      Math.floor(difference / 30);
+
+    result.innerHTML = `
+      <strong>${difference} Days</strong><br>
+      ${weeks} Weeks and ${remainingDays} Days<br>
+      Approximately ${months} Months<br>
+      Approximately ${years} Years
+    `;
+  }
+
+
+  function clearDates() {
+
+    document.getElementById("startDate").value = "";
+
+    document.getElementById("endDate").value = "";
+
+    document.getElementById("result").innerHTML =
+      "Select two dates to calculate the difference.";
+  }
+
+</script>
+
+</body>
+</html>
