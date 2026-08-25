@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Decimal to Hex Converter - ToolSathi</title>
+
+  <meta
+    name="description"
+    content="Free online Decimal to Hex Converter. Convert decimal numbers to hexadecimal quickly and easily with ToolSathi."
+  >
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #222;
+    }
+
+    header {
+      background: #2563eb;
+      color: white;
+      text-align: center;
+      padding: 25px 15px;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+    }
+
+    header p {
+      margin: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 35px auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    .info {
+      background: #f1f5f9;
+      padding: 12px;
+      border-radius: 8px;
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 18px;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: #2563eb;
+      color: white;
+      font-size: 17px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .clear {
+      background: #555;
+    }
+
+    .clear:hover {
+      background: #333;
+    }
+
+    .result {
+      margin-top: 20px;
+      padding: 20px;
+      background: #eef4ff;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .result strong {
+      display: block;
+      font-size: 32px;
+      color: #2563eb;
+      word-break: break-all;
+      margin-top: 8px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #666;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>ToolSathi</h1>
+  <p>Free Online Decimal to Hex Converter</p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+
+    <h2>Decimal to Hexadecimal</h2>
+
+    <div class="info">
+      Enter a whole decimal number to convert it into hexadecimal.
+    </div>
+
+    <label for="decimalInput">
+      Decimal Number
+    </label>
+
+    <input
+      type="number"
+      id="decimalInput"
+      placeholder="Example: 255"
+      step="1"
+      onkeydown="handleEnter(event)"
+    >
+
+    <button onclick="convertToHex()">
+      Convert to Hex
+    </button>
+
+    <button class="clear" onclick="clearFields()">
+      Clear
+    </button>
+
+    <div class="result" id="result">
+      Hexadecimal result will appear here.
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+  © 2026 ToolSathi
+</footer>
+
+<script>
+
+  function convertToHex() {
+
+    const input =
+      document.getElementById("decimalInput").value;
+
+    const result =
+      document.getElementById("result");
+
+    if (input === "") {
+
+      result.innerHTML =
+        "Please enter a decimal number.";
+
+      return;
+    }
+
+    const number = Number(input);
+
+    if (!Number.isSafeInteger(number)) {
+
+      result.innerHTML =
+        "Please enter a valid whole number within the safe range.";
+
+      return;
+    }
+
+    const hex =
+      number.toString(16).toUpperCase();
+
+    result.innerHTML = `
+      Decimal: ${number}
+      <strong>${hex}</strong>
+      Hexadecimal
+    `;
+  }
+
+
+  function handleEnter(event) {
+
+    if (event.key === "Enter") {
+      convertToHex();
+    }
+  }
+
+
+  function clearFields() {
+
+    document.getElementById("decimalInput").value = "";
+
+    document.getElementById("result").innerHTML =
+      "Hexadecimal result will appear here.";
+  }
+
+</script>
+
+</body>
+</html>￼Enter
