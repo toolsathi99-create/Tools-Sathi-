@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Percentage Increase Calculator - ToolSathi</title>
+  <meta name="description" content="Free online Percentage Increase Calculator. Calculate percentage increase and new value quickly with ToolSathi.">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #222;
+    }
+
+    header {
+      background: #2563eb;
+      color: white;
+      text-align: center;
+      padding: 25px 15px;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+    }
+
+    header p {
+      margin: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 35px auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 7px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: #2563eb;
+      color: white;
+      font-size: 17px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .result {
+      margin-top: 20px;
+      padding: 18px;
+      background: #eef4ff;
+      border-radius: 8px;
+      line-height: 1.8;
+      font-size: 17px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #666;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>ToolSathi</h1>
+  <p>Free Online Percentage Increase Calculator</p>
+</header>
+
+<div class="container">
+  <div class="card">
+
+    <h2>Percentage Increase Calculator</h2>
+
+    <label for="oldValue">Original Value</label>
+    <input
+      type="number"
+      id="oldValue"
+      placeholder="Example: 100"
+    >
+
+    <label for="newValue">New Value</label>
+    <input
+      type="number"
+      id="newValue"
+      placeholder="Example: 125"
+    >
+
+    <button onclick="calculateIncrease()">
+      Calculate Increase
+    </button>
+
+    <div class="result" id="result">
+      Result will appear here
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  © 2026 ToolSathi
+</footer>
+
+<script>
+  function calculateIncrease() {
+
+    const oldValue = parseFloat(
+      document.getElementById("oldValue").value
+    );
+
+    const newValue = parseFloat(
+      document.getElementById("newValue").value
+    );
+
+    const resultBox = document.getElementById("result");
+
+    if (
+      isNaN(oldValue) ||
+      isNaN(newValue) ||
+      oldValue <= 0
+    ) {
+      resultBox.innerHTML =
+        "Please enter valid values. Original value must be greater than 0.";
+      return;
+    }
+
+    const difference = newValue - oldValue;
+    const percentage = (difference / oldValue) * 100;
+
+    if (difference < 0) {
+      resultBox.innerHTML = `
+        Original Value: ${oldValue}<br>
+        New Value: ${newValue}<br>
+        <strong>The value decreased by ${Math.abs(percentage).toFixed(2)}%</strong>
+      `;
+      return;
+    }
+
+    resultBox.innerHTML = `
+      Original Value: ${oldValue}<br>
+      New Value: ${newValue}<br>
+      Increase: ${difference.toFixed(2)}<br>
+      <strong>Percentage Increase: ${percentage.toFixed(2)}%</strong>
+    `;
+  }
+</script>
+
+</body>
+</html>
