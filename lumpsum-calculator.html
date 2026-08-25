@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Lumpsum Calculator - ToolSathi</title>
+
+  <meta
+    name="description"
+    content="Free online Lumpsum Calculator. Calculate estimated investment returns, invested amount and future value easily with ToolSathi."
+  >
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #222;
+    }
+
+    header {
+      background: #2563eb;
+      color: white;
+      text-align: center;
+      padding: 25px 15px;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+    }
+
+    header p {
+      margin: 0;
+    }
+
+    .container {
+      max-width: 650px;
+      margin: 35px auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    .info {
+      background: #f1f5f9;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      font-size: 14px;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .input-group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      margin-top: 5px;
+      border: none;
+      border-radius: 8px;
+      background: #2563eb;
+      color: white;
+      font-size: 17px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .clear {
+      background: #555;
+      margin-top: 12px;
+    }
+
+    .clear:hover {
+      background: #333;
+    }
+
+    .result {
+      margin-top: 22px;
+      padding: 20px;
+      background: #eef4ff;
+      border-radius: 10px;
+    }
+
+    .result h3 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    .result-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 12px 0;
+      border-bottom: 1px solid #dbe4f0;
+    }
+
+    .result-row:last-child {
+      border-bottom: none;
+    }
+
+    .total {
+      font-size: 23px;
+      color: #2563eb;
+    }
+
+    .note {
+      margin-top: 18px;
+      text-align: center;
+      color: #666;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #666;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>ToolSathi</h1>
+  <p>Free Online Lumpsum Calculator</p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+
+    <h2>Lumpsum Calculator</h2>
+
+    <div class="info">
+      Calculate the estimated future value of a one-time investment.
+    </div>
+
+    <div class="input-group">
+      <label for="investment">
+        Initial Investment (₹)
+      </label>
+
+      <input
+        type="number"
+        id="investment"
+        placeholder="Example: 100000"
+        min="1"
+        step="1"
+      >
+    </div>
+
+    <div class="input-group">
+      <label for="rate">
+        Expected Annual Return (%)
+      </label>
+
+      <input
+        type="number"
+        id="rate"
+        placeholder="Example: 12"
+        min="0"
+        step="0.01"
+      >
+    </div>
+
+    <div class="input-group">
+      <label for="years">
+        Investment Period (Years)
+      </label>
+
+      <input
+        type="number"
+        id="years"
+        placeholder="Example: 10"
+        min="1"
+        step="1"
+      >
+    </div>
+
+    <button onclick="calculateLumpsum()">
+      Calculate Lumpsum
+    </button>
+
+    <button
+      class="clear"
+      onclick="clearFields()"
+    >
+      Clear
+    </button>
+
+    <div class="result">
+
+      <h3>Investment Result</h3>
+
+      <div class="result-row">
+        <span>Invested Amount</span>
+        <strong id="invested">₹0</strong>
+      </div>
+
+      <div class="result-row">
+        <span>Estimated Returns</span>
+        <strong id="returns">₹0</strong>
+      </div>
+
+      <div class="result-row">
+        <span>Future Value</span>
+        <strong class="total" id="futureValue">₹0</strong>
+      </div>
+
+    </div>
+
+    <div class="note">
+      This is an estimated calculation based on the expected annual return.
+      Actual investment returns can vary.
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+  © 2026 ToolSathi
+</footer>
+
+<script>
+
+  function formatRupees(value) {
+    return "₹" + Math.round(value).toLocaleString("en-IN");
+  }
+
+
+  function calculateLumpsum() {
+
+    const investment =
+      Number(
+        document.getElementById("investment").value
+      );
+
+    const annualRate =
+      Number(
+        document.getElementById("rate").value
+      );
+
+    const years =
+      Number(
+        document.getElementById("years").value
+      );
+
+
+    if (
+      !investment ||
+      investment <= 0 ||
+      annualRate < 0 ||
+      !years ||
+      years <= 0
+    ) {
+
+      alert(
+        "Please enter valid investment details."
+      );
+
+      return;
+    }
+
+
+    const rate =
+      annualRate / 100;
+
+
+    const futureValue =
+      investment *
+      Math.pow(1 + rate, years);
+
+
+    const estimatedReturns =
+      futureValue - investment;
+
+
+    document.getElementById("invested").textContent =
+      formatRupees(investment);
+
+    document.getElementById("returns").textContent =
+      formatRupees(estimatedReturns);
+
+    document.getElementById("futureValue").textContent =
+      formatRupees(futureValue);
+  }
+
+
+  function clearFields() {
+
+    document.getElementById("investment").value = "";
+
+    document.getElementById("rate").value = "";
+
+    document.getElementById("years").value = "";
+
+    document.getElementById("invested").textContent =
+      "₹0";
+
+    document.getElementById("returns").textContent =
+      "₹0";
+
+    document.getElementById("futureValue").textContent =
+      "₹0";
+  }
+
+</script>
+
+</body>
+</html>
