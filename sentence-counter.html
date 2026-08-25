@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Sentence Counter - ToolSathi</title>
+
+  <meta
+    name="description"
+    content="Free online Sentence Counter. Count sentences in your text quickly and easily with ToolSathi."
+  >
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #222;
+    }
+
+    header {
+      background: #2563eb;
+      color: white;
+      text-align: center;
+      padding: 25px 15px;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+    }
+
+    header p {
+      margin: 0;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 35px auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 250px;
+      padding: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+      resize: vertical;
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+    }
+
+    .result {
+      margin-top: 20px;
+      padding: 20px;
+      background: #eef4ff;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    .result strong {
+      display: block;
+      font-size: 36px;
+      color: #2563eb;
+      margin-bottom: 5px;
+    }
+
+    .result span {
+      color: #555;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 13px;
+      border: none;
+      border-radius: 8px;
+      background: #2563eb;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #666;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>ToolSathi</h1>
+  <p>Free Online Sentence Counter</p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+
+    <h2>Sentence Counter</h2>
+
+    <textarea
+      id="textInput"
+      placeholder="Type or paste your text here..."
+      oninput="countSentences()"
+    ></textarea>
+
+    <div class="result">
+      <strong id="sentenceCount">0</strong>
+      <span>Sentences</span>
+    </div>
+
+    <button onclick="clearText()">
+      Clear Text
+    </button>
+
+  </div>
+
+</div>
+
+<footer>
+  © 2026 ToolSathi
+</footer>
+
+<script>
+
+  function countSentences() {
+
+    const text =
+      document.getElementById("textInput").value.trim();
+
+    if (text === "") {
+      document.getElementById("sentenceCount").textContent = "0";
+      return;
+    }
+
+    /*
+      A sentence is counted when it ends with:
+      .  !  ?
+      
+      This also handles multiple punctuation marks,
+      such as "Really?!"
+    */
+
+    const matches = text.match(/[^.!?]+[.!?]+(?=\s|$)/g);
+
+    let count = matches ? matches.length : 0;
+
+    /*
+      If there is text without ending punctuation,
+      count it as one sentence as long as it contains text.
+    */
+
+    const cleaned = text.replace(/[.!?]+/g, "").trim();
+
+    if (cleaned !== "" && count === 0) {
+      count = 1;
+    }
+
+    document.getElementById("sentenceCount").textContent = count;
+  }
+
+
+  function clearText() {
+
+    document.getElementById("textInput").value = "";
+
+    document.getElementById("sentenceCount").textContent = "0";
+  }
+
+</script>
+
+</body>
+</html>
