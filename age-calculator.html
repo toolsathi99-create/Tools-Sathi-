@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Age Calculator - ToolSathi</title>
+
+  <meta
+    name="description"
+    content="Free online Age Calculator. Calculate your exact age in years, months and days with ToolSathi."
+  >
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #222;
+    }
+
+    header {
+      background: #2563eb;
+      color: white;
+      text-align: center;
+      padding: 25px 15px;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+    }
+
+    header p {
+      margin: 0;
+    }
+
+    .container {
+      max-width: 650px;
+      margin: 35px auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    .input-group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 8px;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      background: #2563eb;
+      color: white;
+      font-size: 17px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .clear {
+      background: #555;
+      margin-top: 12px;
+    }
+
+    .clear:hover {
+      background: #333;
+    }
+
+    .result {
+      margin-top: 20px;
+      padding: 20px;
+      background: #eef4ff;
+      border-radius: 10px;
+      text-align: center;
+      line-height: 1.8;
+    }
+
+    .result strong {
+      display: block;
+      font-size: 26px;
+      color: #2563eb;
+      margin-bottom: 8px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #666;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>ToolSathi</h1>
+  <p>Free Online Age Calculator</p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+
+    <h2>Age Calculator</h2>
+
+    <div class="input-group">
+      <label for="birthDate">
+        Date of Birth
+      </label>
+
+      <input
+        type="date"
+        id="birthDate"
+      >
+    </div>
+
+    <div class="input-group">
+      <label for="todayDate">
+        Calculate Age On
+      </label>
+
+      <input
+        type="date"
+        id="todayDate"
+      >
+    </div>
+
+    <button onclick="calculateAge()">
+      Calculate Age
+    </button>
+
+    <button
+      class="clear"
+      onclick="clearFields()"
+    >
+      Clear
+    </button>
+
+    <div class="result" id="result">
+      Enter your dates to calculate age.
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+  © 2026 ToolSathi
+</footer>
+
+<script>
+
+  // Set today's date automatically
+  const today = new Date();
+
+  const todayString =
+    today.getFullYear() + "-" +
+    String(today.getMonth() + 1).padStart(2, "0") + "-" +
+    String(today.getDate()).padStart(2, "0");
+
+  document.getElementById("todayDate").value =
+    todayString;
+
+
+  function calculateAge() {
+
+    const birthValue =
+      document.getElementById("birthDate").value;
+
+    const todayValue =
+      document.getElementById("todayDate").value;
+
+    const result =
+      document.getElementById("result");
+
+    if (!birthValue || !todayValue) {
+
+      result.innerHTML =
+        "Please enter both dates.";
+
+      return;
+    }
+
+    const birth =
+      new Date(birthValue + "T00:00:00");
+
+    const end =
+      new Date(todayValue + "T00:00:00");
+
+    if (birth > end) {
+
+      result.innerHTML =
+        "Date of birth cannot be after the calculation date.";
+
+      return;
+    }
+
+    let years =
+      end.getFullYear() - birth.getFullYear();
+
+    let months =
+      end.getMonth() - birth.getMonth();
+
+    let days =
+      end.getDate() - birth.getDate();
+
+
+    if (days < 0) {
+
+      months--;
+
+      const previousMonth =
+        new Date(
+          end.getFullYear(),
+          end.getMonth(),
+          0
+        );
+
+      days +=
+        previousMonth.getDate();
+    }
+
+
+    if (months < 0) {
+
+      years--;
+      months += 12;
+    }
+
+
+    // Total days
+    const millisecondsPerDay =
+      1000 * 60 * 60 * 24;
+
+    const totalDays =
+      Math.floor(
+        (end - birth) /
+        millisecondsPerDay
+      );
+
+
+    result.innerHTML = `
+      <strong>${years} Years, ${months} Months, ${days} Days</strong>
+      Total days: ${totalDays.toLocaleString("en-IN")}
+    `;
+  }
+
+
+  function clearFields() {
+
+    document.getElementById("birthDate").value = "";
+
+    document.getElementById("todayDate").value =
+      todayString;
+
+    document.getElementById("result").innerHTML =
+      "Enter your dates to calculate age.";
+  }
+
+</script>
+
+</body>
+</html>
