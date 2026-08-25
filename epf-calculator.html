@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>EPF Calculator - ToolSathi</title>
+
+  <meta
+    name="description"
+    content="Free EPF Calculator for India. Calculate employee contribution, employer contribution, estimated EPF interest and maturity amount."
+  >
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #222;
+    }
+
+    header {
+      background: #2563eb;
+      color: white;
+      text-align: center;
+      padding: 25px 15px;
+    }
+
+    header h1 {
+      margin: 0 0 8px;
+    }
+
+    header p {
+      margin: 0;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 30px auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    h2 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    .info {
+      background: #eef4ff;
+      padding: 14px;
+      border-radius: 9px;
+      margin-bottom: 20px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .input-group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      margin-top: 5px;
+      border: none;
+      border-radius: 8px;
+      background: #2563eb;
+      color: white;
+      font-size: 17px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .clear {
+      background: #555;
+      margin-top: 12px;
+    }
+
+    .result {
+      margin-top: 25px;
+      padding: 20px;
+      background: #eef4ff;
+      border-radius: 10px;
+    }
+
+    .result h3 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 11px 0;
+      border-bottom: 1px solid #d5deeb;
+    }
+
+    .row:last-child {
+      border-bottom: none;
+    }
+
+    .highlight {
+      color: #2563eb;
+      font-size: 21px;
+    }
+
+    .note {
+      margin-top: 18px;
+      color: #666;
+      font-size: 13px;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px;
+      color: #666;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>ToolSathi</h1>
+  <p>Free Online EPF Calculator</p>
+</header>
+
+<div class="container">
+
+  <div class="card">
+
+    <h2>💼 EPF Calculator</h2>
+
+    <div class="info">
+      Calculate estimated employee contribution,
+      employer contribution, interest and EPF balance.
+    </div>
+
+    <div class="input-group">
+      <label for="basic">
+        Monthly Basic Salary (₹)
+      </label>
+
+      <input
+        type="number"
+        id="basic"
+        placeholder="Example: 30000"
+        min="0"
+      >
+    </div>
+
+    <div class="input-group">
+      <label for="employeeRate">
+        Employee Contribution (%)
+      </label>
+
+      <input
+        type="number"
+        id="employeeRate"
+        value="12"
+        min="0"
+        max="100"
+        step="0.01"
+      >
+    </div>
+
+    <div class="input-group">
+      <label for="employerRate">
+        Employer Contribution (%)
+      </label>
+
+      <input
+        type="number"
+        id="employerRate"
+        value="12"
+        min="0"
+        max="100"
+        step="0.01"
+      >
+    </div>
+
+    <div class="input-group">
+      <label for="interest">
+        Annual EPF Interest Rate (%)
+      </label>
+
+      <input
+        type="number"
+        id="interest"
+        value="8.25"
+        min="0"
+        step="0.01"
+      >
+    </div>
+
+    <div class="input-group">
+      <label for="years">
+        Investment Period (Years)
+      </label>
+
+      <input
+        type="number"
+        id="years"
+        placeholder="Example: 20"
+        min="1"
+        max="50"
+      >
+    </div>
+
+    <button onclick="calculateEPF()">
+      Calculate EPF
+    </button>
+
+    <button
+      class="clear"
+      onclick="clearFields()"
+    >
+      Clear
+    </button>
+
+    <div class="result">
+
+      <h3>EPF Result</h3>
+
+      <div class="row">
+        <span>Monthly Employee Contribution</span>
+        <strong id="employeeMonthly">₹0</strong>
+      </div>
+
+      <div class="row">
+        <span>Monthly Employer Contribution</span>
+        <strong id="employerMonthly">₹0</strong>
+      </div>
+
+      <div class="row">
+        <span>Total Monthly Contribution</span>
+        <strong id="monthlyTotal">₹0</strong>
+      </div>
+
+      <div class="row">
+        <span>Total Contribution</span>
+        <strong id="contributionTotal">₹0</strong>
+      </div>
+
+      <div class="row">
+        <span>Estimated Interest</span>
+        <strong id="interestTotal">₹0</strong>
+      </div>
+
+      <div class="row">
+        <span>Estimated EPF Balance</span>
+        <strong
+          class="highlight"
+          id="maturity"
+        >
+          ₹0
+        </strong>
+      </div>
+
+    </div>
+
+    <div class="note">
+      This is an estimate using monthly contributions and
+      annual compounding. Actual EPF calculations may differ
+      because of EPFO rules, contribution limits and monthly
+      interest calculations.
+    </div>
+
+  </div>
+
+</div>
+
+<footer>
+  © 2026 ToolSathi
+</footer>
+
+<script>
+
+  function formatRupees(value) {
+    return "₹" +
+      Math.round(value).toLocaleString("en-IN");
+  }
+
+
+  function calculateEPF() {
+
+    const basic =
+      Number(
+        document.getElementById("basic").value
+      );
+
+    const employeeRate =
+      Number(
+        document.getElementById("employeeRate").value
+      );
+
+    const employerRate =
+      Number(
+        document.getElementById("employerRate").value
+      );
+
+    const annualRate =
+      Number(
+        document.getElementById("interest").value
+      );
+
+    const years =
+      Number(
+        document.getElementById("years").value
+      );
+
+
+    if (
+      !basic ||
+      basic <= 0 ||
+      employeeRate < 0 ||
+      employerRate < 0 ||
+      annualRate < 0 ||
+      !years ||
+      years <= 0
+    ) {
+
+      alert(
+        "Please enter valid EPF details."
+      );
+
+      return;
+    }
+
+
+    const employeeMonthly =
+      basic * employeeRate / 100;
+
+    const employerMonthly =
+      basic * employerRate / 100;
+
+    const monthlyContribution =
+      employeeMonthly +
+      employerMonthly;
+
+
+    /*
+      Monthly contribution + monthly
+      compounding approximation.
+    */
+
+    const monthlyRate =
+      annualRate / 100 / 12;
+
+    const months =
+      years * 12;
+
+
+    let balance = 0;
+
+
+    for (
+      let month = 1;
+      month <= months;
+      month++
+    ) {
+
+      balance += monthlyContribution;
+
+      balance =
+        balance *
+        (1 + monthlyRate);
+    }
+
+
+    const totalContribution =
+      monthlyContribution * months;
+
+    const estimatedInterest =
+      balance - totalContribution;
+
+
+    document.getElementById(
+      "employeeMonthly"
+    ).textContent =
+      formatRupees(employeeMonthly);
+
+
+    document.getElementById(
+      "employerMonthly"
+    ).textContent =
+      formatRupees(employerMonthly);
+
+
+    document.getElementById(
+      "monthlyTotal"
+    ).textContent =
+      formatRupees(monthlyContribution);
+
+
+    document.getElementById(
+      "contributionTotal"
+    ).textContent =
+      formatRupees(totalContribution);
+
+
+    document.getElementById(
+      "interestTotal"
+    ).textContent =
+      formatRupees(estimatedInterest);
+
+
+    document.getElementById(
+      "maturity"
+    ).textContent =
+      formatRupees(balance);
+  }
+
+
+  function clearFields() {
+
+    document.getElementById("basic").value = "";
+
+    document.getElementById("employeeRate").value =
+      "12";
+
+    document.getElementById("employerRate").value =
+      "12";
+
+    document.getElementById("interest").value =
+      "8.25";
+
+    document.getElementById("years").value = "";
+
+
+    document.getElementById(
+      "employeeMonthly"
+    ).textContent = "₹0";
+
+    document.getElementById(
+      "employerMonthly"
+    ).textContent = "₹0";
+
+    document.getElementById(
+      "monthlyTotal"
+    ).textContent = "₹0";
+
+    document.getElementById(
+      "contributionTotal"
+    ).textContent = "₹0";
+
+    document.getElementById(
+      "interestTotal"
+    ).textContent = "₹0";
+
+    document.getElementById(
+      "maturity"
+    ).textContent = "₹0";
+  }
+
+</script>
+
+</body>
+</html>
