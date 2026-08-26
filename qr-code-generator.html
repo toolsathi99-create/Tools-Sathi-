@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>QR Code Generator Online - Free QR Code Maker</title>
+
+<meta name="description" content="Create QR codes online for free. Generate QR codes for URLs, text, phone numbers, email addresses and more.">
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f7fb;
+    color: #222;
+}
+
+.container {
+    max-width: 850px;
+    margin: auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 25px;
+}
+
+.card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.08);
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+textarea {
+    width: 100%;
+    min-height: 150px;
+    padding: 13px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    font-size: 15px;
+    resize: vertical;
+}
+
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+button {
+    border: 0;
+    border-radius: 7px;
+    padding: 11px 18px;
+    background: #2563eb;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: .9;
+}
+
+.secondary {
+    background: #555;
+}
+
+.danger {
+    background: #dc2626;
+}
+
+#qrContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 280px;
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: white;
+}
+
+#qrCode img,
+#qrCode canvas {
+    max-width: 100%;
+}
+
+.message {
+    margin-top: 12px;
+    padding: 10px;
+    border-radius: 7px;
+    display: none;
+}
+
+.success {
+    display: block;
+    background: #dcfce7;
+    color: #166534;
+}
+
+.error {
+    display: block;
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+footer {
+    text-align: center;
+    margin-top: 25px;
+    color: #777;
+    font-size: 14px;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 12px;
+    }
+
+    button {
+        width: 100%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>QR Code Generator</h1>
+
+<p class="subtitle">
+Create QR codes for URLs, text, phone numbers and more.
+</p>
+
+<div class="card">
+
+<label for="qrText">Enter Text or URL</label>
+
+<textarea
+    id="qrText"
+    placeholder="https://example.com"
+></textarea>
+
+<div class="buttons">
+
+<button onclick="generateQR()">
+Generate QR Code
+</button>
+
+<button class="secondary" onclick="downloadQR()">
+Download QR Code
+</button>
+
+<button class="danger" onclick="clearQR()">
+Clear
+</button>
+
+</div>
+
+<div id="qrContainer">
+    <div id="qrCode"></div>
+</div>
+
+<div id="message" class="message"></div>
+
+</div>
+
+<footer>
+© 2026 Tools-Sathi — Free Online Tools
+</footer>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<script>
+
+function generateQR() {
+
+    const text = document.getElementById("qrText").value.trim();
+    const qrCode = document.getElementById("qrCode");
+
+    if (!text) {
+        showMessage("Please enter text or a URL.", "error");
+        return;
+    }
+
+    qrCode.innerHTML = "";
+
+    new QRCode(qrCode, {
+        text: text,
+        width: 220,
+        height: 220,
+        colorDark: "#000000",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H
+    });
+
+    showMessage(
+        "✓ QR code generated successfully.",
+        "success"
+    );
+}
+
+function downloadQR() {
+
+    const qrCode = document.querySelector("#qrCode canvas");
+
+    if (!qrCode) {
+        showMessage(
+            "Please generate a QR code first.",
+            "error"
+        );
+        return;
+    }
+
+    const link = document.createElement("a");
+
+    link.download = "tools-sathi-qr-code.png";
+    link.href = qrCode.toDataURL("image/png");
+
+    link.click();
+
+    showMessage(
+        "✓ QR code downloaded.",
+        "success"
+    );
+}
+
+function clearQR() {
+
+    document.getElementById("qrText").value = "";
+    document.getElementById("qrCode").innerHTML = "";
+
+    const message = document.getElementById("message");
+
+    message.textContent = "";
+    message.className = "message";
+}
+
+function showMessage(text, type) {
+
+    const message = document.getElementById("message");
+
+    message.textContent = text;
+    message.className = "message " + type;
+}
+
+</script>
+
+</body>
+</html>
