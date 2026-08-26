@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>VAT Calculator - Free Online VAT Calculator</title>
+
+<meta name="description" content="Calculate VAT online for free. Add or remove VAT from a price and calculate net price, VAT amount and gross price instantly.">
+
+<meta name="keywords" content="VAT calculator, VAT calculation, VAT calculator online, add VAT, remove VAT, VAT percentage calculator">
+
+<style>
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    padding:20px;
+    font-family:Arial,sans-serif;
+    background:#f4f7fb;
+    color:#222;
+}
+
+.container{
+    max-width:650px;
+    margin:auto;
+    background:#fff;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 3px 15px rgba(0,0,0,.1);
+}
+
+h1{
+    text-align:center;
+    margin-top:0;
+}
+
+p{
+    color:#555;
+    line-height:1.6;
+}
+
+label{
+    display:block;
+    margin-top:18px;
+    font-weight:bold;
+}
+
+input,select{
+    width:100%;
+    padding:12px;
+    margin-top:7px;
+    border:1px solid #ccc;
+    border-radius:7px;
+    font-size:16px;
+}
+
+button{
+    width:100%;
+    padding:13px;
+    margin-top:20px;
+    border:0;
+    border-radius:7px;
+    background:#2563eb;
+    color:#fff;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button:hover{
+    opacity:.9;
+}
+
+.result{
+    margin-top:20px;
+    padding:18px;
+    background:#eef5ff;
+    border-radius:8px;
+    line-height:1.9;
+}
+
+.error{
+    color:#c00;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>VAT Calculator</h1>
+
+<p>
+Calculate VAT quickly by adding VAT to a price or removing VAT from a
+VAT-inclusive price.
+</p>
+
+<label for="amount">Amount</label>
+<input type="number" id="amount" placeholder="Enter amount" min="0" step="any">
+
+<label for="vatRate">VAT Rate (%)</label>
+<input type="number" id="vatRate" value="20" min="0" step="any">
+
+<label for="operation">Calculation</label>
+<select id="operation">
+    <option value="add">Add VAT</option>
+    <option value="remove">Remove VAT</option>
+</select>
+
+<button onclick="calculateVAT()">Calculate VAT</button>
+
+<div class="result" id="result">
+Your result will appear here.
+</div>
+
+</div>
+
+<script>
+
+function formatNumber(number){
+    return number.toLocaleString(undefined,{
+        minimumFractionDigits:2,
+        maximumFractionDigits:2
+    });
+}
+
+function calculateVAT(){
+
+    const amount=parseFloat(document.getElementById("amount").value);
+    const vatRate=parseFloat(document.getElementById("vatRate").value);
+    const operation=document.getElementById("operation").value;
+
+    const result=document.getElementById("result");
+
+    if(isNaN(amount) || amount < 0){
+        result.innerHTML='<span class="error">Please enter a valid amount.</span>';
+        return;
+    }
+
+    if(isNaN(vatRate) || vatRate < 0){
+        result.innerHTML='<span class="error">Please enter a valid VAT rate.</span>';
+        return;
+    }
+
+    let net;
+    let vat;
+    let gross;
+
+    if(operation==="add"){
+
+        net=amount;
+        vat=net*(vatRate/100);
+        gross=net+vat;
+
+    }else{
+
+        gross=amount;
+        net=gross/(1+(vatRate/100));
+        vat=gross-net;
+
+    }
+
+    result.innerHTML=
+        "<strong>Net Price:</strong> "+formatNumber(net)+
+        "<br><strong>VAT Amount:</strong> "+formatNumber(vat)+
+        "<br><strong>VAT Rate:</strong> "+formatNumber(vatRate)+"%"+
+        "<br><strong>Gross Price:</strong> "+formatNumber(gross);
+
+}
+
+</script>
+
+</body>
+  </html>
