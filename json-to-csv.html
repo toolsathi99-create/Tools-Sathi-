@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>JSON to CSV Converter Online - Free</title>
+<meta name="description" content="Convert JSON to CSV online for free. Transform JSON data into downloadable CSV format instantly.">
+
+<style>
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f5f7fb;
+    color:#222;
+}
+
+.container{
+    max-width:950px;
+    margin:auto;
+    padding:20px;
+}
+
+h1{
+    text-align:center;
+    margin-bottom:8px;
+}
+
+.subtitle{
+    text-align:center;
+    color:#666;
+    margin-bottom:25px;
+}
+
+.card{
+    background:#fff;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+}
+
+label{
+    display:block;
+    font-weight:bold;
+    margin:15px 0 8px;
+}
+
+textarea{
+    width:100%;
+    min-height:280px;
+    padding:14px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-family:monospace;
+    font-size:14px;
+    resize:vertical;
+}
+
+.buttons{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin:15px 0;
+}
+
+button{
+    border:0;
+    border-radius:7px;
+    padding:11px 18px;
+    background:#2563eb;
+    color:#fff;
+    font-size:15px;
+    cursor:pointer;
+}
+
+button:hover{
+    opacity:.9;
+}
+
+.secondary{
+    background:#555;
+}
+
+.danger{
+    background:#dc2626;
+}
+
+.message{
+    margin-top:12px;
+    padding:10px;
+    border-radius:7px;
+    display:none;
+}
+
+.success{
+    display:block;
+    background:#dcfce7;
+    color:#166534;
+}
+
+.error{
+    display:block;
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+footer{
+    text-align:center;
+    margin-top:25px;
+    color:#777;
+    font-size:14px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>JSON to CSV Converter</h1>
+
+<p class="subtitle">
+Convert JSON data into CSV format online for free.
+</p>
+
+<div class="card">
+
+<label for="jsonInput">JSON Input</label>
+
+<textarea id="jsonInput"
+placeholder='[
+  {"name":"John","age":25,"city":"Lucknow"},
+  {"name":"Ali","age":22,"city":"Delhi"}
+]'></textarea>
+
+<div class="buttons">
+
+<button onclick="convertJSON()">
+Convert to CSV
+</button>
+
+<button class="secondary" onclick="copyCSV()">
+Copy CSV
+</button>
+
+<button class="danger" onclick="clearAll()">
+Clear
+</button>
+
+</div>
+
+<label for="csvOutput">CSV Output</label>
+
+<textarea id="csvOutput"
+readonly
+placeholder="CSV output will appear here..."></textarea>
+
+<div id="message" class="message"></div>
+
+</div>
+
+<footer>
+© 2026 Tools-Sathi — Free Online Tools
+</footer>
+
+</div>
+
+<script>
+
+function escapeCSV(value){
+
+    if(value === null || value === undefined){
+        return "";
+    }
+
+    if(typeof value === "object"){
+        value = JSON.stringify(value);
+    }
+
+    value = String(value);
+
+    if(
+        value.includes(",") ||
+        value.includes('"') ||
+        value.includes("\n") ||
+        value.includes("\r")
+    ){
+        return '"' + value.replace(/"/g,'""') + '"';
+    }
+
+    return value;
+}
+
+function convertJSON(){
+
+    const input =
+        document.getElementById("jsonInput").value.trim();
+
+    if(!input){
+        showMessage(
+            "Please enter JSON data first.",
+            "error"
+        );
+        return;
+    }
+
+    try{
+
+        const data = JSON.parse(input);
+
+        if(!Array.isArray(data)){
+            throw new Error(
+                "JSON must contain an array of objects."
+            );
+        }
+
+        if(data.length === 0){
+            throw new Error(
+                "JSON array is empty."
+            );
+        }
+
+        const keys = [];
+
+        data.forEach(function(item){
+
+            if(
+                typeof item !== "object" ||
+                item === null ||
+                Array.isArray(item)
+            ){
+                throw new Error(
+                    "Every item must be an object."
+                );
+            }
+
+            Object.keys(item).forEach(function(key){
+
+                if(!keys.includes(key)){
+                    keys.push(key);
+                }
+            });
+        });
+
+        if(keys.length === 0){
+            throw new Error(
+                "No object properties found."
+            );
+        }
+
+        const rows = [];
+
+        rows.push(
+            keys.map(escapeCSV).join(",")
+        );
+
+        data.forEach(function(item){
+
+            const row =
+                keys.map(function(key){
+
+                    return escapeCSV(item[key]);
+
+                }).join(",");
+
+            rows.push(row);
+        });
+
+        document.getElementById("csvOutput").value =
+            rows.join("\n");
+
+        showMessage(
+            "✓ JSON converted to CSV successfully.",
+            "success"
+        );
+
+    }catch(error){
+
+        showMessage(
+            "✗ " + error.message,
+            "error"
+        );
+    }
+}
+
+function copyCSV(){
+
+    const output =
+        document.getElementById("csvOutput");
+
+    if(!output.value.trim()){
+
+        showMessage(
+            "Please convert JSON first.",
+            "error"
+        );
+
+        return;
+    }
+
+    navigator.clipboard.writeText(output.value)
+        .then(function(){
+
+            showMessage(
+                "✓ CSV copied to clipboard.",
+                "success"
+            );
+
+        })
+        .catch(function(){
+
+            output.select();
+            document.execCommand("copy");
+
+            showMessage(
+                "✓ CSV copied to clipboard.",
+                "success"
+            );
+        });
+}
+
+function clearAll(){
+
+    document.getElementById("jsonInput").value = "";
+    document.getElementById("csvOutput").value = "";
+
+    const message =
+        document.getElementById("message");
+
+    message.textContent = "";
+    message.className = "message";
+}
+
+function showMessage(text,type){
+
+    const message =
+        document.getElementById("message");
+
+    message.textContent = text;
+    message.className =
+        "message " + type;
+}
+
+</script>
+
+</body>
+</html>
