@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Time Zone Converter - Free Online Tool</title>
+<meta name="description" content="Convert time between different time zones with this free online Time Zone Converter. Quickly compare times around the world.">
+<meta name="keywords" content="time zone converter, timezone converter, time difference calculator, world clock, UTC converter">
+<style>
+body{font-family:Arial,sans-serif;background:#f4f7fb;margin:0;padding:20px;color:#222}
+.container{max-width:650px;margin:auto;background:#fff;padding:25px;border-radius:12px;box-shadow:0 3px 15px rgba(0,0,0,.1)}
+h1{text-align:center}
+label{display:block;margin-top:15px;font-weight:bold}
+input,select,button{width:100%;padding:12px;margin-top:7px;border:1px solid #ccc;border-radius:7px;box-sizing:border-box;font-size:16px}
+button{margin-top:20px;cursor:pointer;background:#2563eb;color:white;border:0}
+button:hover{opacity:.9}
+.result{margin-top:20px;padding:15px;background:#eef5ff;border-radius:8px;text-align:center;font-size:18px}
+</style>
+</head>
+<body>
+
+<div class="container">
+<h1>Time Zone Converter</h1>
+<p>Convert a date and time between different time zones instantly.</p>
+
+<label for="dateTime">Date & Time</label>
+<input type="datetime-local" id="dateTime">
+
+<label for="fromZone">From Time Zone</label>
+<select id="fromZone">
+<option value="Asia/Kolkata">India (IST)</option>
+<option value="UTC">UTC</option>
+<option value="America/New_York">New York (ET)</option>
+<option value="America/Los_Angeles">Los Angeles (PT)</option>
+<option value="Europe/London">London</option>
+<option value="Europe/Paris">Paris</option>
+<option value="Asia/Dubai">Dubai</option>
+<option value="Asia/Singapore">Singapore</option>
+<option value="Asia/Tokyo">Tokyo</option>
+<option value="Australia/Sydney">Sydney</option>
+</select>
+
+<label for="toZone">To Time Zone</label>
+<select id="toZone">
+<option value="America/New_York">New York (ET)</option>
+<option value="Asia/Kolkata">India (IST)</option>
+<option value="UTC">UTC</option>
+<option value="America/Los_Angeles">Los Angeles (PT)</option>
+<option value="Europe/London">London</option>
+<option value="Europe/Paris">Paris</option>
+<option value="Asia/Dubai">Dubai</option>
+<option value="Asia/Singapore">Singapore</option>
+<option value="Asia/Tokyo">Tokyo</option>
+<option value="Australia/Sydney">Sydney</option>
+</select>
+
+<button onclick="convertTime()">Convert Time</button>
+
+<div class="result" id="result">
+Converted time will appear here.
+</div>
+</div>
+
+<script>
+function convertTime(){
+    const input=document.getElementById("dateTime").value;
+    const from=document.getElementById("fromZone").value;
+    const to=document.getElementById("toZone").value;
+
+    if(!input){
+        document.getElementById("result").textContent="Please select a date and time.";
+        return;
+    }
+
+    const [date,time]=input.split("T");
+    const [y,m,d]=date.split("-").map(Number);
+    const [h,min]=time.split(":").map(Number);
+
+    const parts=new Intl.DateTimeFormat("en-US",{
+        timeZone:from,
+        year:"numeric",
+        month:"2-digit",
+        day:"2-digit",
+        hour:"2-digit",
+        minute:"2-digit",
+        hourCycle:"h23"
+    }).formatToParts(new Date(Date.UTC(y,m-1,d,h,min)));
+
+    const get=type=>parts.find(p=>p.type===type)?.value;
+
+    const approx=new Date(
+        `${get("year")}-${get("month")}-${get("day")}T${get("hour")}:${get("minute")}:00Z`
+    );
+
+    const converted=new Intl.DateTimeFormat("en-US",{
+        timeZone:to,
+        dateStyle:"full",
+        timeStyle:"short"
+    }).format(approx);
+
+    document.getElementById("result").innerHTML=
+        "<strong>Converted Time:</strong><br>"+converted;
+}
+</script>
+
+</body>
+  </html>
