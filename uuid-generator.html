@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>UUID Generator Online - Free UUID v4 Generator</title>
+
+<meta name="description" content="Generate random UUID v4 identifiers online for free. Create single or multiple UUIDs instantly and copy them with one click.">
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f5f7fb;
+    color: #222;
+}
+
+.container {
+    max-width: 850px;
+    margin: auto;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 25px;
+}
+
+.card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.08);
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    font-size: 16px;
+}
+
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+button {
+    border: 0;
+    border-radius: 7px;
+    padding: 11px 18px;
+    background: #2563eb;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: .9;
+}
+
+.secondary {
+    background: #555;
+}
+
+.danger {
+    background: #dc2626;
+}
+
+#output {
+    width: 100%;
+    min-height: 230px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: #fafafa;
+    font-family: monospace;
+    font-size: 15px;
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+.message {
+    margin-top: 12px;
+    padding: 10px;
+    border-radius: 7px;
+    display: none;
+}
+
+.success {
+    display: block;
+    background: #dcfce7;
+    color: #166534;
+}
+
+.error {
+    display: block;
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+footer {
+    text-align: center;
+    margin-top: 25px;
+    color: #777;
+    font-size: 14px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>UUID Generator</h1>
+
+<p class="subtitle">
+Generate random UUID v4 identifiers online for free.
+</p>
+
+<div class="card">
+
+<label for="quantity">Number of UUIDs</label>
+
+<input
+    type="number"
+    id="quantity"
+    value="1"
+    min="1"
+    max="100"
+>
+
+<div class="buttons">
+
+<button onclick="generateUUIDs()">
+Generate UUID
+</button>
+
+<button class="secondary" onclick="copyUUIDs()">
+Copy
+</button>
+
+<button class="danger" onclick="clearUUIDs()">
+Clear
+</button>
+
+</div>
+
+<div id="output"></div>
+
+<div id="message" class="message"></div>
+
+</div>
+
+<footer>
+© 2026 Tools-Sathi — Free Online Tools
+</footer>
+
+</div>
+
+<script>
+
+function createUUID() {
+
+    if (crypto.randomUUID) {
+        return crypto.randomUUID();
+    }
+
+    const bytes = new Uint8Array(16);
+    crypto.getRandomValues(bytes);
+
+    bytes[6] = (bytes[6] & 0x0f) | 0x40;
+    bytes[8] = (bytes[8] & 0x3f) | 0x80;
+
+    const hex = Array.from(bytes, b =>
+        b.toString(16).padStart(2, "0")
+    ).join("");
+
+    return (
+        hex.substring(0, 8) + "-" +
+        hex.substring(8, 12) + "-" +
+        hex.substring(12, 16) + "-" +
+        hex.substring(16, 20) + "-" +
+        hex.substring(20)
+    );
+}
+
+function generateUUIDs() {
+
+    const quantity = parseInt(
+        document.getElementById("quantity").value
+    );
+
+    if (isNaN(quantity) || quantity < 1 || quantity > 100) {
+        showMessage(
+            "Please enter a number between 1 and 100.",
+            "error"
+        );
+        return;
+    }
+
+    let results = [];
+
+    for (let i = 0; i < quantity; i++) {
+        results.push(createUUID());
+    }
+
+    document.getElementById("output").textContent =
+        results.join("\n");
+
+    showMessage(
+        "✓ " + quantity + " UUID generated successfully.",
+        "success"
+    );
+}
+
+function copyUUIDs() {
+
+    const output = document.getElementById("output");
+
+    if (!output.textContent.trim()) {
+        showMessage("Nothing to copy.", "error");
+        return;
+    }
+
+    navigator.clipboard.writeText(output.textContent)
+        .then(function() {
+            showMessage(
+                "✓ UUIDs copied to clipboard.",
+                "success"
+            );
+        })
+        .catch(function() {
+            showMessage(
+                "Copy failed. Please select and copy manually.",
+                "error"
+            );
+        });
+}
+
+function clearUUIDs() {
+
+    document.getElementById("output").textContent = "";
+
+    document.getElementById("quantity").value = "1";
+
+    const message = document.getElementById("message");
+
+    message.textContent = "";
+    message.className = "message";
+}
+
+function showMessage(text, type) {
+
+    const message = document.getElementById("message");
+
+    message.textContent = text;
+    message.className = "message " + type;
+}
+
+</script>
+
+</body>
+  </html>
