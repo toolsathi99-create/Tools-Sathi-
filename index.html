@@ -1,811 +1,1361 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tools-Sathi - Free Online Tools</title>
 
-  <title>ToolSathi - 100 Free Online Tools & Calculators</title>
+<meta name="description" content="Tools-Sathi offers free online calculators, converters, text tools, SEO tools, developer tools and useful everyday utilities.">
 
-  <meta
-    name="description"
-    content="ToolSathi provides 100 free online calculators, converters, text tools, date tools and useful everyday tools."
-  >
+<style>
+*{
+    box-sizing:border-box;
+}
 
-  <meta
-    name="keywords"
-    content="online tools, calculator, converter, percentage calculator, EMI calculator, unit converter, ToolSathi"
-  >
+body{
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f5f7fb;
+    color:#222;
+}
 
-  <link
-    rel="canonical"
-    href="https://toolsathi99-create.github.io/Tools-Sathi-/"
-  >
+header{
+    background:#2563eb;
+    color:white;
+    padding:28px 15px;
+    text-align:center;
+}
 
-  <style>
-    * {
-      box-sizing: border-box;
+header h1{
+    margin:0 0 8px;
+    font-size:32px;
+}
+
+header p{
+    margin:0;
+    font-size:16px;
+}
+
+.container{
+    max-width:1150px;
+    margin:auto;
+    padding:20px;
+}
+
+.search-box{
+    background:white;
+    padding:18px;
+    border-radius:12px;
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+    margin-bottom:20px;
+}
+
+#searchInput{
+    width:100%;
+    padding:14px 16px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:16px;
+    outline:none;
+}
+
+#searchInput:focus{
+    border-color:#2563eb;
+}
+
+.categories{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:14px;
+}
+
+.category-btn{
+    border:1px solid #ddd;
+    background:#fff;
+    padding:8px 14px;
+    border-radius:20px;
+    cursor:pointer;
+    font-size:14px;
+}
+
+.category-btn:hover,
+.category-btn.active{
+    background:#2563eb;
+    color:white;
+    border-color:#2563eb;
+}
+
+.tools-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:15px;
+}
+
+.tool-card{
+    background:white;
+    padding:18px;
+    border-radius:10px;
+    box-shadow:0 2px 8px rgba(0,0,0,.07);
+    transition:.2s;
+}
+
+.tool-card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 5px 15px rgba(0,0,0,.12);
+}
+
+.tool-card h3{
+    margin:0 0 8px;
+    font-size:18px;
+}
+
+.tool-card p{
+    margin:0 0 14px;
+    color:#666;
+    font-size:14px;
+    line-height:1.5;
+}
+
+.tool-card a{
+    display:inline-block;
+    background:#2563eb;
+    color:white;
+    text-decoration:none;
+    padding:9px 14px;
+    border-radius:6px;
+    font-size:14px;
+}
+
+.tool-card a:hover{
+    opacity:.9;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Tools-Sathi - Free Online Tools</title>
+
+<meta name="description" content="Tools-Sathi offers free online calculators, converters, text tools, SEO tools, developer tools and useful everyday utilities.">
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f5f7fb;
+    color:#222;
+}
+
+header{
+    background:#2563eb;
+    color:white;
+    padding:28px 15px;
+    text-align:center;
+}
+
+header h1{
+    margin:0 0 8px;
+    font-size:32px;
+}
+
+header p{
+    margin:0;
+    font-size:16px;
+}
+
+.container{
+    max-width:1150px;
+    margin:auto;
+    padding:20px;
+}
+
+.search-box{
+    background:white;
+    padding:18px;
+    border-radius:12px;
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+    margin-bottom:20px;
+}
+
+#searchInput{
+    width:100%;
+    padding:14px 16px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:16px;
+    outline:none;
+}
+
+#searchInput:focus{
+    border-color:#2563eb;
+}
+
+.categories{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:14px;
+}
+
+.category-btn{
+    border:1px solid #ddd;
+    background:#fff;
+    padding:8px 14px;
+    border-radius:20px;
+    cursor:pointer;
+    font-size:14px;
+}
+
+.category-btn:hover,
+.category-btn.active{
+    background:#2563eb;
+    color:white;
+    border-color:#2563eb;
+}
+
+.tools-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:15px;
+}
+
+.tool-card{
+    background:white;
+    padding:18px;
+    border-radius:10px;
+    box-shadow:0 2px 8px rgba(0,0,0,.07);
+    transition:.2s;
+}
+
+.tool-card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 5px 15px rgba(0,0,0,.12);
+}
+
+.tool-card h3{
+    margin:0 0 8px;
+    font-size:18px;
+}
+
+.tool-card p{
+    margin:0 0 14px;
+    color:#666;
+    font-size:14px;
+    line-height:1.5;
+}
+
+.tool-card a{
+    display:inline-block;
+    background:#2563eb;
+    color:white;
+    text-decoration:none;
+    padding:9px 14px;
+    border-radius:6px;
+    font-size:14px;
+}
+
+.tool-card a:hover{
+    opacity:.9;
+}
+
+#noResults{
+    display:none;
+    text-align:center;
+    padding:40px 10px;
+    color:#666;
+}
+
+footer{
+    text-align:center;
+    padding:30px 15px;
+    margin-top:30px;
+    color:#777;
+}
+
+@media(max-width:600px){
+
+    header h1{
+        font-size:26px;
     }
 
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f4f7fb;
-      color: #222;
+    .container{
+        padding:12px;
     }
 
-    header {
-      background: #2563eb;
-      color: white;
-      text-align: center;
-      padding: 35px 15px;
+    .tools-grid{
+        grid-template-columns:1fr;
     }
-
-    header h1 {
-      margin: 0;
-      font-size: 38px;
-    }
-
-    header p {
-      margin: 10px 0 0;
-      font-size: 18px;
-    }
-
-    .container {
-      max-width: 1100px;
-      margin: auto;
-      padding: 25px 15px;
-    }
-
-    .hero {
-      text-align: center;
-      padding: 20px 0 30px;
-    }
-
-    .hero h2 {
-      font-size: 30px;
-      margin-bottom: 10px;
-    }
-
-    .hero p {
-      color: #555;
-      line-height: 1.6;
-    }
-
-    .search-box {
-      display: flex;
-      max-width: 700px;
-      margin: 25px auto;
-      gap: 10px;
-    }
-
-    .search-box input {
-      flex: 1;
-      padding: 14px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 16px;
-    }
-
-    .search-box button {
-      padding: 14px 20px;
-      border: none;
-      border-radius: 8px;
-      background: #2563eb;
-      color: white;
-      cursor: pointer;
-      font-size: 16px;
-    }
-
-    .categories {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin: 20px 0 30px;
-    }
-
-    .category-btn {
-      border: none;
-      background: white;
-      padding: 10px 16px;
-      border-radius: 20px;
-      cursor: pointer;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    }
-
-    .category-btn.active,
-    .category-btn:hover {
-      background: #2563eb;
-      color: white;
-    }
-
-    .tools-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 18px;
-    }
-
-    .tool-card {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.08);
-      transition: transform 0.2s;
-    }
-
-    .tool-card:hover {
-      transform: translateY(-3px);
-    }
-
-    .tool-card h3 {
-      margin-top: 0;
-      font-size: 19px;
-    }
-
-    .tool-card p {
-      color: #666;
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
-    .tool-card a {
-      display: block;
-      text-align: center;
-      margin-top: 15px;
-      padding: 11px;
-      background: #2563eb;
-      color: white;
-      text-decoration: none;
-      border-radius: 7px;
-    }
-
-    .tool-card a:hover {
-      background: #1d4ed8;
-    }
-
-    .about {
-      background: white;
-      margin-top: 40px;
-      padding: 25px;
-      border-radius: 12px;
-      line-height: 1.7;
-    }
-
-    .no-result {
-      display: none;
-      text-align: center;
-      padding: 30px;
-      color: #666;
-    }
-
-    footer {
-      margin-top: 40px;
-      background: #111827;
-      color: white;
-      text-align: center;
-      padding: 25px;
-    }
-
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 30px;
-      }
-
-      .search-box {
-        flex-direction: column;
-      }
-
-      .search-box button {
-        width: 100%;
-      }
-    }
-  </style>
+}
+</style>
 </head>
 
 <body>
 
 <header>
-  <h1>🛠️ ToolSathi</h1>
-  <p>100 Free Online Tools & Calculators</p>
+    <h1>Tools-Sathi</h1>
+    <p>Free Online Calculators, Converters, SEO & Utility Tools</p>
 </header>
 
 <div class="container">
 
-  <section class="hero">
-    <h2>Free Online Tools</h2>
+<div class="search-box">
 
-    <p>
-      Calculate, convert and solve everyday problems with
-      simple and free online tools.
-    </p>
+<input
+    type="search"
+    id="searchInput"
+    placeholder="Search tools..."
+    aria-label="Search tools"
+>
 
-    <div class="search-box">
-      <input
-        type="text"
-        id="searchInput"
-        placeholder="Search for a tool..."
-        onkeyup="searchTools()"
-      >
+<div class="categories">
 
-      <button onclick="searchTools()">
-        Search
-      </button>
-    </div>
-  </section>
+<button class="category-btn active" data-category="all">
+All
+</button>
 
-  <div class="categories">
-    <button class="category-btn active" onclick="filterTools('All', this)">
-      All
-    </button>
+<button class="category-btn" data-category="calculator">
+Calculators
+</button>
 
-    <button class="category-btn" onclick="filterTools('Calculator', this)">
-      Calculators
-    </button>
+<button class="category-btn" data-category="converter">
+Converters
+</button>
 
-    <button class="category-btn" onclick="filterTools('Converter', this)">
-      Converters
-    </button>
+<button class="category-btn" data-category="text">
+Text
+</button>
 
-    <button class="category-btn" onclick="filterTools('Text', this)">
-      Text Tools
-    </button>
+<button class="category-btn" data-category="developer">
+Developer
+</button>
 
-    <button class="category-btn" onclick="filterTools('Date', this)">
-      Date Tools
-    </button>
+<button class="category-btn" data-category="seo">
+SEO
+</button>
 
-    <button class="category-btn" onclick="filterTools('Utility', this)">
-      Utility
-    </button>
-  </div>
-
-  <div class="tools-grid" id="toolsGrid"></div>
-
-  <div class="no-result" id="noResult">
-    No tools found.
-  </div>
-
-  <section class="about">
-    <h2>About ToolSathi</h2>
-
-    <p>
-      ToolSathi is a free online tools website designed to provide
-      useful calculators, converters, text tools, date tools and
-      everyday utilities in one place.
-    </p>
-
-    <p>
-      All tools are simple to use and work directly in your browser.
-    </p>
-  </section>
+<button class="category-btn" data-category="date">
+Date & Time
+</button>
 
 </div>
 
+</div>
+
+<div class="tools-grid" id="toolsGrid">
+
+<!-- 1 -->
+<div class="tool-card" data-category="date" data-name="add days to date">
+<h3>Add Days to Date</h3>
+<p>Add or subtract days from any date.</p>
+<a href="add-days-to-date.html">Use Tool</a>
+</div>
+
+<!-- 2 -->
+<div class="tool-card" data-category="calculator" data-name="age calculator">
+<h3>Age Calculator</h3>
+<p>Calculate age from date of birth.</p>
+<a href="age-calculator.html">Use Tool</a>
+</div>
+
+<!-- 3 -->
+<div class="tool-card" data-category="calculator" data-name="average calculator">
+<h3>Average Calculator</h3>
+<p>Calculate the average of numbers.</p>
+<a href="average-calculator.html">Use Tool</a>
+</div>
+
+<!-- 4 -->
+<div class="tool-card" data-category="developer" data-name="base64 encoder">
+<h3>Base64 Encoder</h3>
+<p>Encode text into Base64 format.</p>
+<a href="base64-encoder.html">Use Tool</a>
+</div>
+
+<!-- 5 -->
+<div class="tool-card" data-category="calculator" data-name="basic calculator">
+<h3>Basic Calculator</h3>
+<p>Perform basic mathematical calculations.</p>
+<a href="basic-calculator.html">Use Tool</a>
+</div>
+
+<!-- 6 -->
+<div class="tool-card" data-category="converter" data-name="binary to decimal">
+<h3>Binary to Decimal</h3>
+<p>Convert binary numbers to decimal.</p>
+<a href="binary-to-decimal.html">Use Tool</a>
+</div>
+
+<!-- 7 -->
+<div class="tool-card" data-category="converter" data-name="binary to hex">
+<h3>Binary to Hex</h3>
+<p>Convert binary numbers to hexadecimal.</p>
+<a href="binary-to-hex.html">Use Tool</a>
+</div>
+
+<!-- 8 -->
+<div class="tool-card" data-category="calculator" data-name="bmi calculator">
+<h3>BMI Calculator</h3>
+<p>Calculate Body Mass Index.</p>
+<a href="bmi-calculator.html">Use Tool</a>
+</div>
+
+<!-- 9 -->
+<div class="tool-card" data-category="calculator" data-name="cagr calculator">
+<h3>CAGR Calculator</h3>
+<p>Calculate compound annual growth rate.</p>
+<a href="cagr-calculator.html">Use Tool</a>
+</div>
+
+<!-- 10 -->
+<div class="tool-card" data-category="seo" data-name="canonical url generator">
+<h3>Canonical URL Generator</h3>
+<p>Generate canonical URL tags.</p>
+<a href="canonical-url-generator.html">Use Tool</a>
+</div>
+
+<!-- 11 -->
+<div class="tool-card" data-category="calculator" data-name="cgpa to percentage">
+<h3>CGPA to Percentage</h3>
+<p>Convert CGPA into percentage.</p>
+<a href="cgpa-to-percentage.html">Use Tool</a>
+</div>
+
+<!-- 12 -->
+<div class="tool-card" data-category="text" data-name="character counter">
+<h3>Character Counter</h3>
+<p>Count characters in your text.</p>
+<a href="character-counter.html">Use Tool</a>
+</div>
+
+<!-- 13 -->
+<div class="tool-card" data-category="calculator" data-name="compound interest calculator">
+<h3>Compound Interest Calculator</h3>
+<p>Calculate compound interest easily.</p>
+<a href="compound-interest-calculator.html">Use Tool</a>
+</div>
+
+<!-- 14 -->
+<div class="tool-card" data-category="calculator" data-name="cube calculator">
+<h3>Cube Calculator</h3>
+<p>Calculate cube and cube root values.</p>
+<a href="cube-calculator.html">Use Tool</a>
+</div>
+
+<!-- 15 -->
+<div class="tool-card" data-category="date" data-name="date difference">
+<h3>Date Difference</h3>
+<p>Find the difference between two dates.</p>
+<a href="date-difference.html">Use Tool</a>
+</div>
+
+<!-- 16 -->
+<div class="tool-card" data-category="date" data-name="date to days calculator">
+<h3>Date to Days Calculator</h3>
+<p>Convert a date into day calculations.</p>
+<a href="date-to-days-calculator.html">Use Tool</a>
+</div>
+
+<!-- 17 -->
+<div class="tool-card" data-category="date" data-name="day of week">
+<h3>Day of Week</h3>
+<p>Find the weekday for any date.</p>
+<a href="day-of-week.html">Use Tool</a>
+</div>
+
+<!-- 18 -->
+<div class="tool-card" data-category="converter" data-name="decimal to binary">
+<h3>Decimal to Binary</h3>
+<p>Convert decimal numbers to binary.</p>
+<a href="decimal-to-binary.html">Use Tool</a>
+</div>
+
+<!-- 19 -->
+<div class="tool-card" data-category="converter" data-name="decimal to hex">
+<h3>Decimal to Hex</h3>
+<p>Convert decimal numbers to hexadecimal.</p>
+<a href="decimal-to-hex.html">Use Tool</a>
+</div>
+
+<!-- 20 -->
+<div class="tool-card" data-category="calculator" data-name="discount calculator">
+<h3>Discount Calculator</h3>
+<p>Calculate discounts and final prices.</p>
+<a href="discount-calculator.html">Use Tool</a>
+</div>
+
+<!-- 21 -->
+<div class="tool-card" data-category="calculator" data-name="emi calculator">
+<h3>EMI Calculator</h3>
+<p>Calculate monthly loan EMI.</p>
+<a href="emi-calculator.html">Use Tool</a>
+</div>
+
+<!-- 22 -->
+<div class="tool-card" data-category="calculator" data-name="epf calculator">
+<h3>EPF Calculator</h3>
+<p>Calculate employee provident fund values.</p>
+<a href="epf-calculator.html">Use Tool</a>
+</div>
+
+<!-- 23 -->
+<div class="tool-card" data-category="calculator" data-name="fd calculator">
+<h3>FD Calculator</h3>
+<p>Calculate fixed deposit maturity.</p>
+<a href="fd-calculator.html">Use Tool</a>
+</div>
+
+<!-- 24 -->
+<div class="tool-card" data-category="converter" data-name="feet to meters">
+<h3>Feet to Meters</h3>
+<p>Convert feet into meters.</p>
+<a href="feet-to-meters.html">Use Tool</a>
+</div>
+
+<!-- 25 -->
+<div class="tool-card" data-category="converter" data-name="gallons to liters">
+<h3>Gallons to Liters</h3>
+<p>Convert gallons into liters.</p>
+<a href="gallons-to-liters.html">Use Tool</a>
+</div>
+
+<!-- 26 -->
+<div class="tool-card" data-category="calculator" data-name="goal sip calculator">
+<h3>Goal SIP Calculator</h3>
+<p>Calculate SIP needed for a financial goal.</p>
+<a href="goal-sip-calculator.html">Use Tool</a>
+</div>
+
+<!-- 27 -->
+<div class="tool-card" data-category="calculator" data-name="gratuity calculator">
+<h3>Gratuity Calculator</h3>
+<p>Calculate gratuity amount.</p>
+<a href="gratuity-calculator.html">Use Tool</a>
+</div>
+
+<!-- 28 -->
+<div class="tool-card" data-category="calculator" data-name="gst calculator">
+<h3>GST Calculator</h3>
+<p>Calculate GST amount and price.</p>
+<a href="gst-calculator.html">Use Tool</a>
+</div>
+
+<!-- 29 -->
+<div class="tool-card" data-category="calculator" data-name="hra calculator">
+<h3>HRA Calculator</h3>
+<p>Calculate HRA and exemptions.</p>
+<a href="hra-calculator.html">Use Tool</a>
+</div>
+
+<!-- 30 -->
+<div class="tool-card" data-category="developer" data-name="html entity encoder decoder">
+<h3>HTML Entity Encoder Decoder</h3>
+<p>Encode and decode HTML entities.</p>
+<a href="html-entity-encoder-decoder.html">Use Tool</a>
+</div>
+
+<!-- 31 -->
+<div class="tool-card" data-category="developer" data-name="html minifier">
+<h3>HTML Minifier</h3>
+<p>Minify HTML code and reduce file size.</p>
+<a href="html-minifier.html">Use Tool</a>
+</div>
+
+<!-- 32 -->
+<div class="tool-card" data-category="calculator" data-name="income tax calculator">
+<h3>Income Tax Calculator</h3>
+<p>Calculate estimated income tax.</p>
+<a href="income-tax-calculator.html">Use Tool</a>
+</div>
+
+<!-- 33 -->
+<div class="tool-card" data-category="calculator" data-name="inflation calculator">
+<h3>Inflation Calculator</h3>
+<p>Calculate the effect of inflation.</p>
+<a href="inflation-calculator.html">Use Tool</a>
+</div>
+
+<!-- 34 -->
+<div class="tool-card" data-category="developer" data-name="javascript formatter">
+<h3>JavaScript Formatter</h3>
+<p>Format and beautify JavaScript code.</p>
+<a href="javascript-formatter.html">Use Tool</a>
+</div>
+
+<!-- 35 -->
+<div class="tool-card" data-category="developer" data-name="javascript minifier">
+<h3>JavaScript Minifier</h3>
+<p>Minify JavaScript code online.</p>
+<a href="javascript-minifier.html">Use Tool</a>
+</div>￼Enter}
+
+#noResults{
+    display:none;
+    text-align:center;
+    padding:40px 10px;
+    color:#666;
+}
+
+footer{
+    text-align:center;
+    padding:30px 15px;
+    margin-top:30px;
+    color:#777;
+}
+
+@media(max-width:600px){
+
+    header h1{
+        font-size:26px;
+    }
+
+    .container{
+        padding:12px;
+    }
+
+    .tools-grid{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Tools-Sathi</h1>
+    <p>Free Online Calculators, Converters, SEO & Utility Tools</p>
+</header>
+
+<div class="container">
+
+<div class="search-box">
+
+<input
+    type="search"
+    id="searchInput"
+    placeholder="Search tools..."
+    aria-label="Search tools"
+>
+
+<div class="categories">
+
+<button class="category-btn active" data-category="all">
+All
+</button>
+
+<button class="category-btn" data-category="calculator">
+Calculators
+</button>
+
+<button class="category-btn" data-category="converter">
+Converters
+</button>
+
+<button class="category-btn" data-category="text">
+Text
+</button>
+
+<button class="category-btn" data-category="developer">
+Developer
+</button>
+
+<button class="category-btn" data-category="seo">
+SEO
+</button>
+
+<button class="category-btn" data-category="date">
+Date & Time
+</button>
+
+</div>
+
+</div>
+
+<div class="tools-grid" id="toolsGrid">
+
+<!-- 1 -->
+<div class="tool-card" data-category="date" data-name="add days to date">
+<h3>Add Days to Date</h3>
+<p>Add or subtract days from any date.</p>
+<a href="add-days-to-date.html">Use Tool</a>
+</div>
+
+<!-- 2 -->
+<div class="tool-card" data-category="calculator" data-name="age calculator">
+<h3>Age Calculator</h3>
+<p>Calculate age from date of birth.</p>
+<a href="age-calculator.html">Use Tool</a>
+</div>
+
+<!-- 3 -->
+<div class="tool-card" data-category="calculator" data-name="average calculator">
+<h3>Average Calculator</h3>
+<p>Calculate the average of numbers.</p>
+<a href="average-calculator.html">Use Tool</a>
+</div>
+
+<!-- 4 -->
+<div class="tool-card" data-category="developer" data-name="base64 encoder">
+se64 Encoder</h3>
+<p>Encode text into Base64 format.</p>
+<a href="base64-encoder.html">Use Tool</a>
+</div>
+
+<!-- 5 -->
+<div class="tool-card" data-category="calculator" data-name="basic calculator">
+<h3>Basic Calculator</h3>
+<p>Perform basic mathematical calculations.</p>
+<a href="basic-calculator.html">Use Tool</a>
+</div>
+
+<!-- 6 -->
+<div class="tool-card" data-category="converter" data-name="binary to decimal">
+<h3>Binary to Decimal</h3>
+<p>Convert binary numbers to decimal.</p>
+<a href="binary-to-decimal.html">Use Tool</a>
+</div>
+
+<!-- 7 -->
+<div class="tool-card" data-category="converter" data-name="binary to hex">
+<h3>Binary to Hex</h3>
+<p>Convert binary numbers to hexadecimal.</p>
+<a href="binary-to-hex.html">Use Tool</a>
+</div>
+
+<!-- 8 -->
+<div class="tool-card" data-category="calculator" data-name="bmi calculator">
+<h3>BMI Calculator</h3>
+<p>Calculate Body Mass Index.</p>
+<a href="bmi-calculator.html">Use Tool</a>
+</div>
+
+<!-- 9 -->
+<div class="tool-card" data-category="calculator" data-name="cagr calculator">
+<h3>CAGR Calculator</h3>
+<p>Calculate compound annual growth rate.</p>
+<a href="cagr-calculator.html">Use Tool</a>
+</div>
+
+<!-- 10 -->
+<div class="tool-card" data-category="seo" data-name="canonical url generator">
+<h3>Canonical URL Generator</h3>
+<p>Generate canonical URL tags.</p>
+<a href="canonical-url-generator.html">Use Tool</a>
+</div>
+
+<!-- 11 -->
+<div class="tool-card" data-category="calculator" data-name="cgpa to percentage">
+<h3>CGPA to Percentage</h3>
+<p>Convert CGPA into percentage.</p>
+<a href="cgpa-to-percentage.html">Use Tool</a>
+</div>
+
+<!-- 12 -->
+<div class="tool-card" data-category="text" data-name="character counter">
+<h3>Character Counter</h3>
+<p>Count characters in your text.</p>
+<a href="character-counter.html">Use Tool</a>
+</div>
+
+<!-- 13 -->
+<div class="tool-card" data-category="calculator" data-name="compound interest calculator">
+<h3>Compound Interest Calculator</h3>
+<p>Calculate compound interest easily.</p>
+<a href="compound-interest-calculator.html">Use Tool</a>
+</div>
+
+<!-- 14 -->
+<div class="tool-card" data-category="calculator" data-name="cube calculator">
+<h3>Cube Calculator</h3>
+<p>Calculate cube and cube root values.</p>
+<a href="cube-calculator.html">Use Tool</a>
+</div>
+
+<!-- 15 -->
+<div class="tool-card" data-category="date" data-name="date difference">
+<h3>Date Difference</h3>
+<p>Find the difference between two dates.</p>
+<a href="date-difference.html">Use Tool</a>
+</div>
+
+<!-- 16 -->
+<div class="tool-card" data-category="date" data-name="date to days calculator">
+<h3>Date to Days Calculator</h3>
+<p>Convert a date into day calculations.</p>
+<a href="date-to-days-calculator.html">Use Tool</a>
+</div>
+
+<!-- 17 -->
+<div class="tool-card" data-category="date" data-name="day of week">
+<h3>Day of Week</h3>
+<p>Find the weekday for any date.</p>
+<a href="day-of-week.html">Use Tool</a>
+</div>
+
+<!-- 18 -->
+<div class="tool-card" data-category="converter" data-name="decimal to binary">
+<h3>Decimal to Binary</h3>
+<p>Convert decimal numbers to binary.</p>
+<a href="decimal-to-binary.html">Use Tool</a>
+</div>
+
+<!-- 19 -->
+<div class="tool-card" data-category="converter" data-name="decimal to hex">
+<h3>Decimal to Hex</h3>
+<p>Convert decimal numbers to hexadecimal.</p>
+<a href="decimal-to-hex.html">Use Tool</a>
+</div>
+<!-- 36 -->
+<div class="tool-card" data-category="developer" data-name="json formatter">
+<h3>JSON Formatter</h3>
+<p>Format and beautify JSON data.</p>
+<a href="json-formatter.html">Use Tool</a>
+</div>
+
+<!-- 37 -->
+<div class="tool-card" data-category="developer" data-name="json to csv">
+<h3>JSON to CSV</h3>
+<p>Convert JSON data into CSV format.</p>
+<a href="json-to-csv.html">Use Tool</a>
+</div>
+
+<!-- 38 -->
+<div class="tool-card" data-category="developer" data-name="json to yaml">
+<h3>JSON to YAML</h3>
+<p>Convert JSON data into YAML format.</p>
+<a href="json-to-yaml.html">Use Tool</a>
+</div>
+
+<!-- 39 -->
+<div class="tool-card" data-category="developer" data-name="json validator">
+<h3>JSON Validator</h3>
+<p>Check JSON syntax and find errors.</p>
+<a href="json-validator.html">Use Tool</a>
+</div>
+
+<!-- 40 -->
+<div class="tool-card" data-category="seo" data-name="keyword research tool">
+<h3>Keyword Research Tool</h3>
+<p>Generate useful keyword ideas for SEO.</p>
+<a href="keyword-research-tool.html">Use Tool</a>
+</div>
+
+<!-- 41 -->
+<div class="tool-card" data-category="converter" data-name="kg to pounds">
+<h3>KG to Pounds</h3>
+<p>Convert kilograms into pounds.</p>
+<a href="kg-to-pounds.html">Use Tool</a>
+</div>
+
+<!-- 42 -->
+<div class="tool-card" data-category="converter" data-name="kilometer to miles">
+<h3>Kilometer to Miles</h3>
+<p>Convert kilometers into miles.</p>
+<a href="kilometer-to-miles.html">Use Tool</a>
+</div>
+
+<!-- 43 -->
+<div class="tool-card" data-category="date" data-name="leap year checker">
+<h3>Leap Year Checker</h3>
+<p>Check whether a year is a leap year.</p>
+<a href="leap-year-checker.html">Use Tool</a>
+</div>
+
+<!-- 44 -->
+<div class="tool-card" data-category="converter" data-name="length converter">
+<h3>Length Converter</h3>
+<p>Convert between common length units.</p>
+<a href="length-converter.html">Use Tool</a>
+</div>
+
+<!-- 45 -->
+<div class="tool-card" data-category="text" data-name="line counter">
+<h3>Line Counter</h3>
+<p>Count lines in any text.</p>
+<a href="line-counter.html">Use Tool</a>
+</div>
+
+<!-- 46 -->
+<div class="tool-card" data-category="converter" data-name="liters to gallons">
+<h3>Liters to Gallons</h3>
+<p>Convert liters into gallons.</p>
+<a href="liters-to-gallons.html">Use Tool</a>
+</div>
+
+<!-- 47 -->
+<div class="tool-card" data-category="calculator" data-name="loan calculator">
+<h3>Loan Calculator</h3>
+<p>Calculate loan payments and interest.</p>
+<a href="loan-calculator.html">Use Tool</a>
+</div>
+
+<!-- 48 -->
+<div class="tool-card" data-category="text" data-name="lowercase converter">
+<h3>Lowercase Converter</h3>
+<p>Convert text to lowercase letters.</p>
+<a href="lowercase-converter.html">Use Tool</a>
+</div>
+
+<!-- 49 -->
+<div class="tool-card" data-category="developer" data-name="markdown to html">
+<h3>Markdown to HTML</h3>
+<p>Convert Markdown text into HTML code.</p>
+<a href="markdown-to-html.html">Use Tool</a>
+</div>
+
+<!-- 50 -->
+<div class="tool-card" data-category="calculator" data-name="lumpsum calculator">
+<h3>Lumpsum Calculator</h3>
+<p>Calculate returns on a lump-sum investment.</p>
+<a href="lumpsum-calculator.html">Use Tool</a>
+</div>
+
+<!-- 51 -->
+<div class="tool-card" data-category="calculator" data-name="marks percentage">
+<h3>Marks Percentage</h3>
+<p>Calculate percentage from marks.</p>
+<a href="marks-percentage.html">Use Tool</a>
+</div>
+
+<!-- 52 -->
+<div class="tool-card" data-category="seo" data-name="meta tag generator">
+<h3>Meta Tag Generator</h3>
+<p>Generate SEO meta tags for webpages.</p>
+<a href="meta-tag-generator.html">Use Tool</a>
+</div>
+
+<!-- 53 -->
+<div class="tool-card" data-category="converter" data-name="miles to kilometer">
+<h3>Miles to Kilometer</h3>
+<p>Convert miles into kilometers.</p>
+<a href="miles-to-kilometer.html">Use Tool</a>
+</div>
+
+<!-- 54 -->
+<div class="tool-card" data-category="calculator" data-name="nps calculator">
+<h3>NPS Calculator</h3>
+<p>Calculate National Pension System returns.</p>
+<a href="nps-calculator.html">Use Tool</a>
+</div>
+
+<!-- 55 -->
+<div class="tool-card" data-category="seo" data-name="open graph generator">
+<h3>Open Graph Generator</h3>
+<p>Generate Open Graph meta tags.</p>
+<a href="open-graph-generator.html">Use Tool</a>
+</div>
+
+<!-- 56 -->
+<div class="tool-card" data-category="text" data-name="palindrome checker">
+<h3>Palindrome Checker</h3>
+<p>Check whether text is a palindrome.</p>
+<a href="palindrome-checker.html">Use Tool</a>
+</div>
+
+<!-- 57 -->
+<div class="tool-card" data-category="text" data-name="password generator">
+<h3>Password Generator</h3>
+<p>Generate random passwords.</p>
+<a href="password-generator.html">Use Tool</a>
+</div>
+
+<!-- 58 -->
+<div class="tool-card" data-category="calculator" data-name="percentage calculator">
+<h3>Percentage Calculator</h3>
+<p>Calculate percentages quickly.</p>
+<a href="percentage-calculator.html">Use Tool</a>
+</div>
+
+<!-- 59 -->
+<div class="tool-card" data-category="calculator" data-name="percentage decrease">
+<h3>Percentage Decrease</h3>
+<p>Calculate percentage decrease.</p>
+<a href="percentage-decrease.html">Use Tool</a>
+</div>
+
+<!-- 60 -->
+<div class="tool-card" data-category="calculator" data-name="percentage increase">
+<h3>Percentage Increase</h3>
+<p>Calculate percentage increase.</p>
+<a href="percentage-increase.html">Use Tool</a>
+</div>
+
+<!-- 61 -->
+<div class="tool-card" data-category="converter" data-name="pounds to kg">
+<h3>Pounds to KG</h3>
+<p>Convert pounds into kilograms.</p>
+<a href="pounds-to-kg.html">Use Tool</a>
+</div>
+
+<!-- 62 -->
+<div class="tool-card" data-category="calculator" data-name="ppf calculator">
+<h3>PPF Calculator</h3>
+<p>Calculate PPF maturity and returns.</p>
+<a href="ppf-calculator.html">Use Tool</a>
+</div>
+
+<!-- 63 -->
+<div class="tool-card" data-category="calculator" data-name="profit calculator">
+<h3>Profit Calculator</h3>
+<p>Calculate profit, cost and selling price.</p>
+<a href="profit-calculator.html">Use Tool</a>
+</div>
+
+<!-- 64 -->
+<div class="tool-card" data-category="text" data-name="qr code generator">
+<h3>QR Code Generator</h3>
+<p>Generate QR codes from text or URLs.</p>
+<a href="qr-code-generator.html">Use Tool</a>
+</div>
+
+<!-- 65 -->
+<div class="tool-card" data-category="text" data-name="random number generator">
+<h3>Random Number Generator</h3>
+<p>Generate random numbers instantly.</p>
+<a href="random-number-generator.html">Use Tool</a>
+</div>
+
+<!-- 66 -->
+<div class="tool-card" data-category="calculator" data-name="ratio calculator">
+<h3>Ratio Calculator</h3>
+<p>Calculate and simplify ratios.</p>
+<a href="ratio-calculator.html">Use Tool</a>
+</div>
+
+<!-- 67 -->
+<div class="tool-card" data-category="calculator" data-name="rd calculator">
+<h3>RD Calculator</h3>
+<p>Calculate recurring deposit maturity.</p>
+<a href="rd-calculator.html">Use Tool</a>
+</div>
+
+<!-- 68 -->
+<div class="tool-card" data-category="text" data-name="remove extra spaces">
+<h3>Remove Extra Spaces</h3>
+<p>Remove unnecessary spaces from text.</p>
+<a href="remove-extra-spaces.html">Use Tool</a>
+</div>
+
+<!-- 69 -->
+<div class="tool-card" data-category="text" data-name="reverse text">
+<h3>Reverse Text</h3>
+<p>Reverse text characters instantly.</p>
+<a href="reverse-text.html">Use Tool</a>
+</div>
+
+<!-- 70 -->
+<div class="tool-card" data-category="seo" data-name="robots txt generator">
+<h3>Robots.txt Generator</h3>
+<p>Generate robots.txt files for websites.</p>
+<a href="robots-txt-generator.html">Use Tool</a>
+</div>
+<!-- 71 -->
+<div class="tool-card" data-category="seo" data-name="schema markup generator">
+<h3>Schema Markup Generator</h3>
+<p>Generate structured data schema markup.</p>
+<a href="schema-markup-generator.html">Use Tool</a>
+</div>
+
+<!-- 72 -->
+<div class="tool-card" data-category="text" data-name="sentence counter">
+<h3>Sentence Counter</h3>
+<p>Count sentences in your text.</p>
+<a href="sentence-counter.html">Use Tool</a>
+</div>
+
+<!-- 73 -->
+<div class="tool-card" data-category="seo" data-name="serp snippet preview">
+<h3>SERP Snippet Preview</h3>
+<p>Preview how your page may appear in search results.</p>
+<a href="serp-snippet-preview.html">Use Tool</a>
+</div>
+
+<!-- 74 -->
+<div class="tool-card" data-category="calculator" data-name="simple interest calculator">
+<h3>Simple Interest Calculator</h3>
+<p>Calculate simple interest and total amount.</p>
+<a href="simple-interest-calculator.html">Use Tool</a>
+</div>
+
+<!-- 75 -->
+<div class="tool-card" data-category="calculator" data-name="sip calculator">
+<h3>SIP Calculator</h3>
+<p>Calculate estimated SIP investment returns.</p>
+<a href="sip-calculator.html">Use Tool</a>
+</div>
+
+<!-- 76 -->
+<div class="tool-card" data-category="calculator" data-name="sitemap generator">
+<h3>Sitemap Generator</h3>
+<p>Generate XML sitemap files for websites.</p>
+<a href="sitemap-generator.html">Use Tool</a>
+</div>
+
+<!-- 77 -->
+<div class="tool-card" data-category="calculator" data-name="square calculator">
+<h3>Square Calculator</h3>
+<p>Calculate squares of numbers.</p>
+<a href="square-calculator.html">Use Tool</a>
+</div>
+
+<!-- 78 -->
+<div class="tool-card" data-category="calculator" data-name="square root calculator">
+<h3>Square Root Calculator</h3>
+<p>Calculate the square root of a number.</p>
+<a href="square-root-calculator.html">Use Tool</a>
+</div>
+
+<!-- 79 -->
+<div class="tool-card" data-category="calculator" data-name="tds calculator">
+<h3>TDS Calculator</h3>
+<p>Calculate tax deducted at source.</p>
+<a href="tds-calculator.html">Use Tool</a>
+</div>
+
+<!-- 80 -->
+<div class="tool-card" data-category="converter" data-name="temperature converter">
+<h3>Temperature Converter</h3>
+<p>Convert Celsius, Fahrenheit and Kelvin.</p>
+<a href="temperature-converter.html">Use Tool</a>
+</div>
+
+<!-- 81 -->
+<div class="tool-card" data-category="date" data-name="time zone converter">
+<h3>Time Zone Converter</h3>
+<p>Convert time between different time zones.</p>
+<a href="time-zone-converter.html">Use Tool</a>
+</div>
+
+<!-- 82 -->
+<div class="tool-card" data-category="calculator" data-name="tip calculator">
+<h3>Tip Calculator</h3>
+<p>Calculate tips and split bills.</p>
+<a href="tip-calculator.html">Use Tool</a>
+</div>
+
+<!-- 83 -->
+<div class="tool-card" data-category="developer" data-name="tsv to json">
+<h3>TSV to JSON</h3>
+<p>Convert TSV data into JSON format.</p>
+<a href="tsv-to-json.html">Use Tool</a>
+</div>
+
+<!-- 84 -->
+<div class="tool-card" data-category="date" data-name="unix timestamp converter">
+<h3>Unix Timestamp Converter</h3>
+<p>Convert Unix timestamps to readable dates.</p>
+<a href="unix-timestamp-converter.html">Use Tool</a>
+</div>
+
+<!-- 85 -->
+<div class="tool-card" data-category="text" data-name="uppercase converter">
+<h3>Uppercase Converter</h3>
+<p>Convert text to uppercase letters.</p>
+<a href="uppercase-converter.html">Use Tool</a>
+</div>
+
+<!-- 86 -->
+<div class="tool-card" data-category="developer" data-name="url encoder decoder">
+<h3>URL Encoder Decoder</h3>
+<p>Encode or decode URLs online.</p>
+<a href="url-encoder-decoder.html">Use Tool</a>
+</div>
+
+<!-- 87 -->
+<div class="tool-card" data-category="seo" data-name="url slug generator">
+<h3>URL Slug Generator</h3>
+<p>Create clean SEO-friendly URL slugs.</p>
+<a href="url-slug-generator.html">Use Tool</a>
+</div>
+
+<!-- 88 -->
+<div class="tool-card" data-category="developer" data-name="uuid generator">
+<h3>UUID Generator</h3>
+<p>Generate unique UUID identifiers.</p>
+<a href="uuid-generator.html">Use Tool</a>
+</div>
+
+<!-- 89 -->
+<div class="tool-card" data-category="calculator" data-name="vat calculator">
+<h3>VAT Calculator</h3>
+<p>Calculate VAT and final prices.</p>
+<a href="vat-calculator.html">Use Tool</a>
+</div>
+
+<!-- 90 -->
+<div class="tool-card" data-category="text" data-name="vowel counter">
+<h3>Vowel Counter</h3>
+<p>Count vowels in any text.</p>
+<a href="vowel-counter.html">Use Tool</a>
+</div>
+
+<!-- 91 -->
+<div class="tool-card" data-category="converter" data-name="weight converter">
+<h3>Weight Converter</h3>
+<p>Convert between common weight units.</p>
+<a href="weight-converter.html">Use Tool</a>
+</div>
+
+<!-- 92 -->
+<div class="tool-card" data-category="text" data-name="word counter">
+<h3>Word Counter</h3>
+<p>Count words and characters in text.</p>
+<a href="word-counter.html">Use Tool</a>
+</div>
+
+<!-- 93 -->
+<div class="tool-card" data-category="developer" data-name="xml formatter">
+<h3>XML Formatter</h3>
+<p>Format and beautify XML code.</p>
+<a href="xml-formatter.html">Use Tool</a>
+</div>
+
+<!-- 94 -->
+<div class="tool-card" data-category="developer" data-name="xml minifier">
+<h3>XML Minifier</h3>
+<p>Minify XML code and remove unnecessary formatting.</p>
+<a href="xml-minifier.html">Use Tool</a>
+</div>
+
+<!-- 95 -->
+<div class="tool-card" data-category="developer" data-name="yaml to json">
+<h3>YAML to JSON</h3>
+<p>Convert YAML data into JSON format.</p>
+<a href="yaml-to-json.html">Use Tool</a>
+</div>
+
+<!-- 96 -->
+<div class="tool-card" data-category="developer" data-name="css formatter">
+<h3>CSS Formatter</h3>
+<p>Format and beautify CSS code.</p>
+<a href="css-formatter.html">Use Tool</a>
+</div>
+
+<!-- 97 -->
+<div class="tool-card" data-category="developer" data-name="css minifier">
+<h3>CSS Minifier</h3>
+<p>Minify CSS code and reduce file size.</p>
+<a href="css-minifier.html">Use Tool</a>
+</div>
+
+<!-- 98 -->
+<div class="tool-card" data-category="developer" data-name="csv to json">
+<h3>CSV to JSON</h3>
+<p>Convert CSV data into JSON format.</p>
+<a href="csv-to-json.html">Use Tool</a>
+</div>
+
+<!-- 99 -->
+<div class="tool-card" data-category="developer" data-name="csv to xml">
+<h3>CSV to XML</h3>
+<p>Convert CSV data into XML format.</p>
+<a href="csv-to-xml.html">Use Tool</a>
+</div>
+
+<!-- 100 -->
+<div class="tool-card" data-category="developer" data-name="csv to yaml">
+<h3>CSV to YAML</h3>
+<p>Convert CSV data into YAML format.</p>
+<a href="csv-to-yaml.html">Use Tool</a>
+</div>
+
+</div>
+
+<div id="noResults">
+<h3>No tools found</h3>
+<p>Try another search or category.</p>
+</div>
+
 <footer>
-  © 2026 ToolSathi — Free Online Tools
+© 2026 Tools-Sathi — Free Online Tools
 </footer>
+
+</div>
 
 <script>
 
-const tools = [
-
-  /* =========================
-     CALCULATORS
-  ========================= */
-
-  {
-    name: "Percentage Calculator",
-    file: "percentage-calculator.html",
-    category: "Calculator",
-    description: "Calculate percentages quickly."
-  },
-
-  {
-    name: "BMI Calculator",
-    file: "bmi-calculator.html",
-    category: "Calculator",
-    description: "Calculate BMI using height and weight."
-  },
-
-  {
-    name: "Basic Calculator",
-    file: "basic-calculator.html",
-    category: "Calculator",
-    description: "Perform basic mathematical calculations."
-  },
-
-  {
-    name: "Discount Calculator",
-    file: "discount-calculator.html",
-    category: "Calculator",
-    description: "Calculate discounts and final prices."
-  },
-
-  {
-    name: "Profit Calculator",
-    file: "profit-calculator.html",
-    category: "Calculator",
-    description: "Calculate profit and profit percentage."
-  },
-
-  {
-    name: "Average Calculator",
-    file: "average-calculator.html",
-    category: "Calculator",
-    description: "Calculate the average of numbers."
-  },
-
-  {
-    name: "Ratio Calculator",
-    file: "ratio-calculator.html",
-    category: "Calculator",
-    description: "Calculate and simplify ratios."
-  },
-
-  {
-    name: "GST Calculator",
-    file: "gst-calculator.html",
-    category: "Calculator",
-    description: "Calculate GST amount and final price."
-  },
-
-  {
-    name: "Simple Interest Calculator",
-    file: "simple-interest-calculator.html",
-    category: "Calculator",
-    description: "Calculate simple interest."
-  },
-
-  {
-    name: "Compound Interest Calculator",
-    file: "compound-interest-calculator.html",
-    category: "Calculator",
-    description: "Calculate compound interest."
-  },
-
-  {
-    name: "EMI Calculator",
-    file: "emi-calculator.html",
-    category: "Calculator",
-    description: "Calculate monthly loan EMI."
-  },
-
-  {
-    name: "Tip Calculator",
-    file: "tip-calculator.html",
-    category: "Calculator",
-    description: "Calculate tip and split bills."
-  },
-
-  {
-    name: "Square Calculator",
-    file: "square-calculator.html",
-    category: "Calculator",
-    description: "Calculate the square of a number."
-  },
-
-  {
-    name: "Cube Calculator",
-    file: "cube-calculator.html",
-    category: "Calculator",
-    description: "Calculate the cube of a number."
-  },
-
-  {
-    name: "Square Root Calculator",
-    file: "square-root-calculator.html",
-    category: "Calculator",
-    description: "Calculate square roots."
-  },
-
-  {
-    name: "CGPA to Percentage",
-    file: "cgpa-to-percentage.html",
-    category: "Calculator",
-    description: "Convert CGPA into percentage."
-  },
-
-  {
-    name: "Marks Percentage Calculator",
-    file: "marks-percentage.html",
-    category: "Calculator",
-    description: "Calculate marks percentage."
-  },
-
-  {
-    name: "Percentage Increase",
-    file: "percentage-increase.html",
-    category: "Calculator",
-    description: "Calculate percentage increase."
-  },
-
-  {
-    name: "Percentage Decrease",
-    file: "percentage-decrease.html",
-    category: "Calculator",
-    description: "Calculate percentage decrease."
-  },
-
-
-  /* =========================
-     CONVERTERS
-  ========================= */
-
-  {
-    name: "Length Converter",
-    file: "length-converter.html",
-    category: "Converter",
-    description: "Convert different length units."
-  },
-
-  {
-    name: "Weight Converter",
-    file: "weight-converter.html",
-    category: "Converter",
-    description: "Convert kilograms, pounds and more."
-  },
-
-  {
-    name: "Temperature Converter",
-    file: "temperature-converter.html",
-    category: "Converter",
-    description: "Convert Celsius, Fahrenheit and Kelvin."
-  },
-
-  {
-    name: "Kilometer to Miles",
-    file: "kilometer-to-miles.html",
-    category: "Converter",
-    description: "Convert kilometers into miles."
-  },
-
-  {
-    name: "Miles to Kilometer",
-    file: "miles-to-kilometer.html",
-    category: "Converter",
-    description: "Convert miles into kilometers."
-  },
-
-  {
-    name: "Kg to Pounds",
-    file: "kg-to-pounds.html",
-    category: "Converter",
-    description: "Convert kilograms into pounds."
-  },
-
-
-  /* =========================
-     FUTURE TOOLS
-  ========================= */
-
-  {
-    name: "Pounds to Kg",
-    file: "pounds-to-kg.html",
-    category: "Converter",
-    description: "Convert pounds into kilograms."
-  },
-
-  {
-    name: "Liters to Gallons",
-    file: "liters-to-gallons.html",
-    category: "Converter",
-    description: "Convert liters into gallons."
-  },
-
-  {
-    name: "Gallons to Liters",
-    file: "gallons-to-liters.html",
-    category: "Converter",
-    description: "Convert gallons into liters."
-  },
-
-  {
-    name: "Feet to Meters",
-    file: "feet-to-meters.html",
-    category: "Converter",
-    description: "Convert feet into meters."
-  },
-
-  {
-    name: "Word Counter",
-    file: "word-counter.html",
-    category: "Text",
-    description: "Count words in your text."
-  },
-
-  {
-    name: "Character Counter",
-    file: "character-counter.html",
-    category: "Text",
-    description: "Count characters in text."
-  },
-
-  {
-    name: "Sentence Counter",
-    file: "sentence-counter.html",
-    category: "Text",
-    description: "Count sentences in text."
-  },
-
-  {
-    name: "Line Counter",
-    file: "line-counter.html",
-    category: "Text",
-    description: "Count lines in text."
-  },
-
-  {
-    name: "Uppercase Converter",
-    file: "uppercase-converter.html",
-    category: "Text",
-    description: "Convert text to uppercase."
-  },
-
-  {
-    name: "Lowercase Converter",
-    file: "lowercase-converter.html",
-    category: "Text",
-    description: "Convert text to lowercase."
-  },
-
-  {
-    name: "Reverse Text",
-    file: "reverse-text.html",
-    category: "Text",
-    description: "Reverse any text."
-  },
-
-  {
-    name: "Remove Extra Spaces",
-    file: "remove-extra-spaces.html",
-    category: "Text",
-    description: "Remove unnecessary spaces."
-  },
-
-  {
-    name: "Palindrome Checker",
-    file: "palindrome-checker.html",
-    category: "Text",
-    description: "Check whether text is a palindrome."
-  },
-
-  {
-    name: "Vowel Counter",
-    file: "vowel-counter.html",
-    category: "Text",
-    description: "Count vowels in text."
-  },
-
-  {
-    name: "Date Difference",
-    file: "date-difference.html",
-    category: "Date",
-    description: "Calculate difference between dates."
-  },
-
-  {
-    name: "Day of Week",
-    file: "day-of-week.html",
-    category: "Date",
-    description: "Find the day of the week."
-  },
-
-  {
-    name: "Leap Year Checker",
-    file: "leap-year-checker.html",
-    category: "Date",
-    description: "Check whether a year is a leap year."
-  },
-
-  {
-    name: "Add Days to Date",
-    file: "add-days-to-date.html",
-    category: "Date",
-    description: "Add days to any date."
-  },
-
-  {
-    name: "Random Number Generator",
-    file: "random-number-generator.html",
-    category: "Utility",
-    description: "Generate random numbers."
-  },
-
-  {
-    name: "Password Generator",
-    file: "password-generator.html",
-    category: "Utility",
-    description: "Generate random passwords."
-  },
-
-  {
-    name: "Decimal to Binary",
-    file: "decimal-to-binary.html",
-    category: "Utility",
-    description: "Convert decimal numbers to binary."
-  },
-
-  {
-    name: "Decimal to Hex",
-    file: "decimal-to-hex.html",
-    category: "Utility",
-    description: "Convert decimal numbers to hexadecimal."
-  },
-
-  {
-    name: "Base64 Encoder",
-    file: "base64-encoder.html",
-    category: "Utility",
-    description: "Encode text using Base64."
-  },
-
-  {
-    name: "JSON Formatter",
-    file: "json-formatter.html",
-    category: "Utility",
-    description: "Format JSON data easily."
-  }
-
-];
-
-
-/* =========================
-   DISPLAY TOOLS
-========================= */
-
-function displayTools(list) {
-
-  const grid = document.getElementById("toolsGrid");
-  const noResult = document.getElementById("noResult");
-
-  grid.innerHTML = "";
-
-  if (list.length === 0) {
-    noResult.style.display = "block";
-    return;
-  }
-
-  noResult.style.display = "none";
-
-  list.forEach(function(tool) {
-
-    const card = document.createElement("div");
-
-    card.className = "tool-card";
-
-    card.dataset.category = tool.category;
-
-    card.innerHTML = `
-      <h3>${tool.name}</h3>
-
-      <p>${tool.description}</p>
-
-      <a href="${tool.file}">
-        Open Tool
-      </a>
-    `;
-
-    grid.appendChild(card);
-
-  });
+const searchInput =
+document.getElementById("searchInput");
+
+const toolCards =
+document.querySelectorAll(".tool-card");
+
+const categoryButtons =
+document.querySelectorAll(".category-btn");
+
+const noResults =
+document.getElementById("noResults");
+
+let selectedCategory = "all";
+
+function filterTools(){
+
+    const search =
+    searchInput.value.toLowerCase().trim();
+
+    let visible = 0;
+
+    toolCards.forEach(function(card){
+
+        const name =
+        card.dataset.name.toLowerCase();
+
+        const category =
+        card.dataset.category;
+
+        const matchesSearch =
+        name.includes(search);
+
+        const matchesCategory =
+        selectedCategory === "all" ||
+        category === selectedCategory;
+
+        if(matchesSearch && matchesCategory){
+
+            card.style.display = "";
+            visible++;
+
+        }else{
+
+            card.style.display = "none";
+        }
+    });
+
+    noResults.style.display =
+    visible === 0 ? "block" : "none";
 }
 
+searchInput.addEventListener(
+"input",
+filterTools
+);
 
-/* =========================
-   CATEGORY FILTER
-========================= */
+categoryButtons.forEach(function(button){
 
-function filterTools(category, button) {
+    button.addEventListener(
+    "click",
+    function(){
 
-  document.querySelectorAll(".category-btn")
-    .forEach(function(btn) {
-      btn.classList.remove("active");
+        categoryButtons.forEach(function(btn){
+            btn.classList.remove("active");
+        });
+
+        this.classList.add("active");
+
+        selectedCategory =
+        this.dataset.category;
+
+        filterTools();
     });
-
-  button.classList.add("active");
-
-  const searchText =
-    document.getElementById("searchInput")
-      .value
-      .toLowerCase()
-      .trim();
-
-  let filtered = tools;
-
-  if (category !== "All") {
-    filtered = filtered.filter(function(tool) {
-      return tool.category === category;
-    });
-  }
-
-  if (searchText !== "") {
-    filtered = filtered.filter(function(tool) {
-
-      return (
-        tool.name.toLowerCase().includes(searchText) ||
-        tool.description.toLowerCase().includes(searchText)
-      );
-
-    });
-  }
-
-  displayTools(filtered);
-}
-
-
-/* =========================
-   SEARCH
-========================= */
-
-function searchTools() {
-
-  const searchText =
-    document.getElementById("searchInput")
-      .value
-      .toLowerCase()
-      .trim();
-
-  const activeButton =
-    document.querySelector(".category-btn.active");
-
-  const activeCategory =
-    activeButton ? activeButton.textContent.trim() : "All";
-
-  let category = "All";
-
-  if (activeCategory === "Calculators") {
-    category = "Calculator";
-  }
-
-  if (activeCategory === "Converters") {
-    category = "Converter";
-  }
-
-  if (activeCategory === "Text Tools") {
-    category = "Text";
-  }
-
-  if (activeCategory === "Date Tools") {
-    category = "Date";
-  }
-
-  if (activeCategory === "Utility") {
-    category = "Utility";
-  }
-
-  let filtered = tools;
-
-  if (category !== "All") {
-    filtered = filtered.filter(function(tool) {
-      return tool.category === category;
-    });
-  }
-
-  if (searchText !== "") {
-
-    filtered = filtered.filter(function(tool) {
-
-      return (
-        tool.name.toLowerCase().includes(searchText) ||
-        tool.description.toLowerCase().includes(searchText)
-      );
-
-    });
-
-  }
-
-  displayTools(filtered);
-}
-
-
-/* =========================
-   INITIAL LOAD
-========================= */
-
-displayTools(tools);
+});
 
 </script>
 
 </body>
-  </html>
+</html>
