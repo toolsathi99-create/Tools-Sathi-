@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Open Graph Meta Tag Generator - Free SEO Tool</title>
+
+<meta name="description" content="Generate Open Graph meta tags for your website. Create OG title, description, URL, image and social sharing meta tags online for free.">
+
+<style>
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f5f7fb;
+    color:#222;
+}
+
+.container{
+    max-width:950px;
+    margin:auto;
+    padding:20px;
+}
+
+h1{
+    text-align:center;
+    margin-bottom:8px;
+}
+
+.subtitle{
+    text-align:center;
+    color:#666;
+    margin-bottom:25px;
+}
+
+.card{
+    background:#fff;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+}
+
+label{
+    display:block;
+    font-weight:bold;
+    margin:14px 0 7px;
+}
+
+input,
+textarea{
+    width:100%;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:7px;
+    font-size:15px;
+}
+
+textarea{
+    min-height:250px;
+    resize:vertical;
+    font-family:monospace;
+}
+
+.buttons{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin:18px 0;
+}
+
+button{
+    border:0;
+    border-radius:7px;
+    padding:11px 18px;
+    background:#2563eb;
+    color:white;
+    font-size:15px;
+    cursor:pointer;
+}
+
+button:hover{
+    opacity:.9;
+}
+
+.secondary{
+    background:#555;
+}
+
+.danger{
+    background:#dc2626;
+}
+
+.message{
+    margin-top:12px;
+    padding:10px;
+    border-radius:7px;
+    display:none;
+}
+
+.success{
+    display:block;
+    background:#dcfce7;
+    color:#166534;
+}
+
+.error{
+    display:block;
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+footer{
+    text-align:center;
+    margin-top:25px;
+    color:#777;
+    font-size:14px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Open Graph Meta Tag Generator</h1>
+
+<p class="subtitle">
+Generate Open Graph tags for better social media sharing.
+</p>
+
+<div class="card">
+
+<label for="title">Page Title</label>
+<input id="title" type="text" placeholder="My Awesome Website">
+
+<label for="description">Page Description</label>
+<input id="description" type="text" placeholder="A short description of my website">
+
+<label for="url">Page URL</label>
+<input id="url" type="url" placeholder="https://example.com/page">
+
+<label for="image">Image URL</label>
+<input id="image" type="url" placeholder="https://example.com/image.jpg">
+
+<label for="siteName">Website Name</label>
+<input id="siteName" type="text" placeholder="My Website">
+
+<label for="type">Content Type</label>
+<input id="type" type="text" value="website" placeholder="website">
+
+<div class="buttons">
+
+<button onclick="generateTags()">
+Generate Tags
+</button>
+
+<button class="secondary" onclick="copyTags()">
+Copy Tags
+</button>
+
+<button class="danger" onclick="clearAll()">
+Clear
+</button>
+
+</div>
+
+<label for="output">Generated Open Graph Tags</label>
+
+<textarea id="output" readonly></textarea>
+
+<div id="message" class="message"></div>
+
+</div>
+
+<footer>
+© 2026 Tools-Sathi — Free Online Tools
+</footer>
+
+</div>
+
+<script>
+
+function escapeHTML(value){
+    return value
+        .replace(/&/g,"&amp;")
+        .replace(/"/g,"&quot;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;");
+}
+
+function generateTags(){
+
+    const title =
+        document.getElementById("title").value.trim();
+
+    const description =
+        document.getElementById("description").value.trim();
+
+    const url =
+        document.getElementById("url").value.trim();
+
+    const image =
+        document.getElementById("image").value.trim();
+
+    const siteName =
+        document.getElementById("siteName").value.trim();
+
+    const type =
+        document.getElementById("type").value.trim() || "website";
+
+    if(!title && !description && !url && !image){
+
+        showMessage(
+            "Please enter at least one page detail.",
+            "error"
+        );
+
+        return;
+    }
+
+    let tags = "";
+
+    if(title)
+        tags += '<meta property="og:title" content="' +
+            escapeHTML(title) + '">\n';
+
+    if(description)
+        tags += '<meta property="og:description" content="' +
+            escapeHTML(description) + '">\n';
+
+    if(url)
+        tags += '<meta property="og:url" content="' +
+            escapeHTML(url) + '">\n';
+
+    if(image)
+        tags += '<meta property="og:image" content="' +
+            escapeHTML(image) + '">\n';
+
+    if(siteName)
+        tags += '<meta property="og:site_name" content="' +
+            escapeHTML(siteName) + '">\n';
+
+    tags += '<meta property="og:type" content="' +
+        escapeHTML(type) + '">';
+
+    document.getElementById("output").value = tags;
+
+    showMessage(
+        "✓ Open Graph tags generated successfully.",
+        "success"
+    );
+}
+
+function copyTags(){
+
+    const output =
+        document.getElementById("output");
+
+    if(!output.value.trim()){
+
+        showMessage(
+            "Please generate the tags first.",
+            "error"
+        );
+
+        return;
+    }
+
+    navigator.clipboard.writeText(output.value)
+        .then(function(){
+
+            showMessage(
+                "✓ Tags copied to clipboard.",
+                "success"
+            );
+
+        })
+        .catch(function(){
+
+            output.select();
+            document.execCommand("copy");
+
+            showMessage(
+                "✓ Tags copied to clipboard.",
+                "success"
+            );
+
+        });
+}
+
+function clearAll(){
+
+    document.getElementById("title").value = "";
+    document.getElementById("description").value = "";
+    document.getElementById("url").value = "";
+    document.getElementById("image").value = "";
+    document.getElementById("siteName").value = "";
+    document.getElementById("type").value = "website";
+    document.getElementById("output").value = "";
+
+    const message =
+        document.getElementById("message");
+
+    message.textContent = "";
+    message.className = "message";
+}
+
+function showMessage(text,type){
+
+    const message =
+        document.getElementById("message");
+
+    message.textContent = text;
+    message.className = "message " + type;
+}
+
+</script>
+
+</body>
+</html>
