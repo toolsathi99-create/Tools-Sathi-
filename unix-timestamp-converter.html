@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Unix Timestamp Converter - Free Online Tool</title>
+
+<meta name="description" content="Convert Unix timestamps to date and time or convert dates to Unix timestamps with this free online Unix Timestamp Converter.">
+<meta name="keywords" content="unix timestamp converter, timestamp converter, unix time converter, epoch converter, epoch timestamp">
+
+<style>
+*{box-sizing:border-box}
+body{
+    font-family:Arial,sans-serif;
+    background:#f4f7fb;
+    margin:0;
+    padding:20px;
+    color:#222;
+}
+.container{
+    max-width:700px;
+    margin:auto;
+    background:#fff;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 3px 15px rgba(0,0,0,.1);
+}
+h1{text-align:center;margin-top:0}
+h2{font-size:20px;margin-top:28px}
+p{line-height:1.6;color:#555}
+
+input,button{
+    width:100%;
+    padding:12px;
+    margin-top:8px;
+    border:1px solid #ccc;
+    border-radius:7px;
+    font-size:16px;
+}
+
+button{
+    background:#2563eb;
+    color:#fff;
+    border:none;
+    cursor:pointer;
+    margin-top:14px;
+}
+
+button:hover{opacity:.9}
+
+.result{
+    margin-top:15px;
+    padding:15px;
+    background:#eef5ff;
+    border-radius:8px;
+    line-height:1.8;
+    word-break:break-word;
+}
+
+hr{
+    border:0;
+    border-top:1px solid #ddd;
+    margin:30px 0;
+}
+
+.label{
+    font-weight:bold;
+    display:block;
+    margin-top:10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Unix Timestamp Converter</h1>
+
+<p>
+Convert Unix timestamps to readable dates and convert dates to Unix timestamps
+quickly with this free online tool.
+</p>
+
+<h2>Unix Timestamp → Date</h2>
+
+<label class="label" for="timestamp">Unix Timestamp</label>
+<input type="number" id="timestamp" placeholder="Example: 1756108800">
+
+<button onclick="timestampToDate()">Convert Timestamp</button>
+
+<div class="result" id="timestampResult">
+Result will appear here.
+</div>
+
+<hr>
+
+<h2>Date → Unix Timestamp</h2>
+
+<label class="label" for="dateInput">Select Date & Time</label>
+<input type="datetime-local" id="dateInput">
+
+<button onclick="dateToTimestamp()">Convert Date</button>
+
+<div class="result" id="dateResult">
+Result will appear here.
+</div>
+
+<hr>
+
+<h2>Current Unix Timestamp</h2>
+
+<button onclick="currentTimestamp()">Get Current Timestamp</button>
+
+<div class="result" id="currentResult">
+Current timestamp will appear here.
+</div>
+
+</div>
+
+<script>
+
+function timestampToDate(){
+
+    const value=document.getElementById("timestamp").value;
+    const result=document.getElementById("timestampResult");
+
+    if(value===""){
+        result.textContent="Please enter a Unix timestamp.";
+        return;
+    }
+
+    const timestamp=Number(value);
+
+    if(!Number.isFinite(timestamp)){
+        result.textContent="Please enter a valid timestamp.";
+        return;
+    }
+
+    const date=new Date(timestamp*1000);
+
+    if(isNaN(date.getTime())){
+        result.textContent="Invalid Unix timestamp.";
+        return;
+    }
+
+    result.innerHTML=
+        "<strong>Local Date & Time:</strong> "+
+        date.toLocaleString()+
+        "<br><strong>UTC:</strong> "+
+        date.toUTCString()+
+        "<br><strong>ISO 8601:</strong> "+
+        date.toISOString();
+}
+
+
+function dateToTimestamp(){
+
+    const value=document.getElementById("dateInput").value;
+    const result=document.getElementById("dateResult");
+
+    if(!value){
+        result.textContent="Please select a date and time.";
+        return;
+    }
+
+    const date=new Date(value);
+
+    if(isNaN(date.getTime())){
+        result.textContent="Invalid date.";
+        return;
+    }
+
+    const seconds=Math.floor(date.getTime()/1000);
+    const milliseconds=date.getTime();
+
+    result.innerHTML=
+        "<strong>Unix Timestamp:</strong> "+
+        seconds+
+        "<br><strong>Milliseconds:</strong> "+
+        milliseconds;
+}
+
+
+function currentTimestamp(){
+
+    const now=Math.floor(Date.now()/1000);
+
+    document.getElementById("currentResult").innerHTML=
+        "<strong>Current Unix Timestamp:</strong><br>"+
+        now;
+}
+
+</script>
+
+</body>
+  </html>
