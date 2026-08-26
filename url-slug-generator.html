@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>URL Slug Generator Online - Free SEO Tool</title>
+
+<meta name="description" content="Generate clean SEO-friendly URL slugs online for free. Convert titles and text into short, readable URL slugs.">
+
+<style>
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f5f7fb;
+    color:#222;
+}
+
+.container{
+    max-width:850px;
+    margin:auto;
+    padding:20px;
+}
+
+h1{
+    text-align:center;
+    margin-bottom:8px;
+}
+
+.subtitle{
+    text-align:center;
+    color:#666;
+    margin-bottom:25px;
+}
+
+.card{
+    background:#fff;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+}
+
+label{
+    display:block;
+    font-weight:bold;
+    margin-bottom:8px;
+}
+
+textarea,
+input{
+    width:100%;
+    padding:13px;
+    border:1px solid #ccc;
+    border-radius:7px;
+    font-size:15px;
+}
+
+textarea{
+    min-height:150px;
+    resize:vertical;
+}
+
+.buttons{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin:15px 0;
+}
+
+button{
+    border:0;
+    border-radius:7px;
+    padding:11px 18px;
+    background:#2563eb;
+    color:white;
+    font-size:15px;
+    cursor:pointer;
+}
+
+button:hover{
+    opacity:.9;
+}
+
+.secondary{
+    background:#555;
+}
+
+.danger{
+    background:#dc2626;
+}
+
+.result{
+    background:#f8fafc;
+    border:1px solid #ddd;
+    border-radius:7px;
+    padding:15px;
+    font-family:monospace;
+    word-break:break-all;
+    min-height:50px;
+}
+
+.message{
+    margin-top:12px;
+    padding:10px;
+    border-radius:7px;
+    display:none;
+}
+
+.success{
+    display:block;
+    background:#dcfce7;
+    color:#166534;
+}
+
+.error{
+    display:block;
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+footer{
+    text-align:center;
+    margin-top:25px;
+    color:#777;
+    font-size:14px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>URL Slug Generator</h1>
+
+<p class="subtitle">
+Create clean and SEO-friendly URL slugs from titles or text.
+</p>
+
+<div class="card">
+
+<label for="inputText">Enter Title or Text</label>
+
+<textarea
+id="inputText"
+placeholder="Example: Best Online Calculator Tools for Students"
+></textarea>
+
+<div class="buttons">
+
+<button onclick="generateSlug()">
+Generate Slug
+</button>
+
+<button class="secondary" onclick="copySlug()">
+Copy Slug
+</button>
+
+<button class="danger" onclick="clearAll()">
+Clear
+</button>
+
+</div>
+
+<label>Generated URL Slug</label>
+
+<div id="result" class="result"></div>
+
+<div id="message" class="message"></div>
+
+</div>
+
+<footer>
+© 2026 Tools-Sathi — Free Online Tools
+</footer>
+
+</div>
+
+<script>
+
+function generateSlug(){
+
+    const input =
+        document.getElementById("inputText").value.trim();
+
+    if(!input){
+
+        showMessage(
+            "Please enter a title or text.",
+            "error"
+        );
+
+        return;
+    }
+
+    let slug = input
+        .toLowerCase()
+        .normalize("NFKD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9\s-]/g, "")
+        .replace(/\s+/g, "-")
+        .replace(/-+/g, "-")
+        .replace(/^-|-$/g, "");
+
+    document.getElementById("result").textContent =
+        slug;
+
+    showMessage(
+        "✓ SEO-friendly URL slug generated.",
+        "success"
+    );
+}
+
+function copySlug(){
+
+    const slug =
+        document.getElementById("result").textContent;
+
+    if(!slug.trim()){
+
+        showMessage(
+            "Please generate a slug first.",
+            "error"
+        );
+
+        return;
+    }
+
+    navigator.clipboard.writeText(slug)
+        .then(function(){
+
+            showMessage(
+                "✓ Slug copied to clipboard.",
+                "success"
+            );
+
+        })
+        .catch(function(){
+
+            showMessage(
+                "Copy failed. Please copy manually.",
+                "error"
+            );
+
+        });
+}
+
+function clearAll(){
+
+    document.getElementById("inputText").value = "";
+    document.getElementById("result").textContent = "";
+
+    const message =
+        document.getElementById("message");
+
+    message.textContent = "";
+    message.className = "message";
+}
+
+function showMessage(text,type){
+
+    const message =
+        document.getElementById("message");
+
+    message.textContent = text;
+    message.className =
+        "message " + type;
+}
+
+</script>
+
+</body>
+</html>
