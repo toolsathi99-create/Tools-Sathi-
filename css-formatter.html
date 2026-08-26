@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CSS Formatter Online - Free CSS Beautifier</title>
+
+<meta name="description" content="Format and beautify CSS code online for free. Make compressed or messy CSS easier to read and edit.">
+
+<style>
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f5f7fb;
+    color:#222;
+}
+
+.container{
+    max-width:950px;
+    margin:auto;
+    padding:20px;
+}
+
+h1{
+    text-align:center;
+    margin-bottom:8px;
+}
+
+.subtitle{
+    text-align:center;
+    color:#666;
+    margin-bottom:25px;
+}
+
+.card{
+    background:#fff;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+}
+
+label{
+    display:block;
+    font-weight:bold;
+    margin-bottom:8px;
+}
+
+textarea{
+    width:100%;
+    min-height:320px;
+    padding:14px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-family:monospace;
+    font-size:14px;
+    resize:vertical;
+}
+
+.buttons{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin:15px 0;
+}
+
+button{
+    border:0;
+    border-radius:7px;
+    padding:11px 18px;
+    background:#2563eb;
+    color:#fff;
+    font-size:15px;
+    cursor:pointer;
+}
+
+button:hover{
+    opacity:.9;
+}
+
+.secondary{
+    background:#555;
+}
+
+.danger{
+    background:#dc2626;
+}
+
+.message{
+    margin-top:12px;
+    padding:10px;
+    border-radius:7px;
+    display:none;
+}
+
+.success{
+    display:block;
+    background:#dcfce7;
+    color:#166534;
+}
+
+.error{
+    display:block;
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+footer{
+    text-align:center;
+    margin-top:25px;
+    color:#777;
+    font-size:14px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>CSS Formatter</h1>
+
+<p class="subtitle">
+Beautify and format CSS code online for free.
+</p>
+
+<div class="card">
+
+<label for="cssInput">Enter CSS Code</label>
+
+<textarea
+id="cssInput"
+placeholder="Paste your CSS code here..."
+></textarea>
+
+<div class="buttons">
+
+<button onclick="formatCSS()">
+Format CSS
+</button>
+
+<button class="secondary" onclick="copyCSS()">
+Copy
+</button>
+
+<button class="danger" onclick="clearAll()">
+Clear
+</button>
+
+</div>
+
+<label for="cssOutput">Formatted CSS</label>
+
+<textarea
+id="cssOutput"
+readonly
+placeholder="Formatted CSS will appear here..."
+></textarea>
+
+<div id="message" class="message"></div>
+
+</div>
+
+<footer>
+© 2026 Tools-Sathi — Free Online Tools
+</footer>
+
+</div>
+
+<script>
+
+function formatCSS(){
+
+    const input =
+        document.getElementById("cssInput").value.trim();
+
+    if(!input){
+        showMessage(
+            "Please enter CSS code first.",
+            "error"
+        );
+        return;
+    }
+
+    let css = input;
+
+    /*
+     * Remove comments.
+     */
+    css = css.replace(
+        /\/\*[\s\S]*?\*\//g,
+        ""
+    );
+
+    /*
+     * Normalize whitespace.
+     */
+    css = css.replace(/\s+/g, " ");
+
+    /*
+     * Add line breaks and indentation
+     * around CSS blocks.
+     */
+    let result = "";
+    let indent = 0;
+
+    for(let i = 0; i < css.length; i++){
+
+        const char = css[i];
+
+        if(char === "{"){
+
+            result += " {\n";
+            indent++;
+
+            result += "    ".repeat(indent);
+
+        }else if(char === "}"){
+
+            result = result.trimEnd();
+            result += "\n";
+
+            indent = Math.max(0, indent - 1);
+
+            result += "    ".repeat(indent);
+            result += "}";
+
+            if(i < css.length - 1){
+                result += "\n";
+                result += "    ".repeat(indent);
+            }
+
+        }else if(char === ";"){
+
+            result += ";\n";
+            result += "    ".repeat(indent);
+
+        }else{
+
+            result += char;
+        }
+    }
+
+    /*
+     * Clean spaces around common CSS symbols.
+     */
+    result = result.replace(
+        /\s*:\s*/g,
+        ": "
+    );
+
+    result = result.replace(
+        /\s*,\s*/g,
+        ", "
+    );
+
+    result = result.replace(
+        /[ \t]+\n/g,
+        "\n"
+    );
+
+    result = result.replace(
+        /\n{3,}/g,
+        "\n\n"
+    );
+
+    result = result.trim();
+
+    document.getElementById("cssOutput").value =
+        result;
+
+    showMessage(
+        "✓ CSS formatted successfully.",
+        "success"
+    );
+}
+
+function copyCSS(){
+
+    const output =
+        document.getElementById("cssOutput");
+
+    if(!output.value.trim()){
+        showMessage(
+            "Please format CSS first.",
+            "error"
+        );
+        return;
+    }
+
+    navigator.clipboard.writeText(output.value)
+        .then(function(){
+
+            showMessage(
+                "✓ Formatted CSS copied to clipboard.",
+                "success"
+            );
+
+        })
+        .catch(function(){
+
+            output.select();
+            document.execCommand("copy");
+
+            showMessage(
+                "✓ Formatted CSS copied.",
+                "success"
+            );
+
+        });
+}
+
+function clearAll(){
+
+    document.getElementById("cssInput").value = "";
+    document.getElementById("cssOutput").value = "";
+
+    const message =
+        document.getElementById("message");
+
+    message.textContent = "";
+    message.className = "message";
+}
+
+function showMessage(text,type){
+
+    const message =
+        document.getElementById("message");
+
+    message.textContent = text;
+    message.className =
+        "message " + type;
+}
+
+</script>
+
+</body>
+</html>
