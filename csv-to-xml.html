@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CSV to XML Converter Online - Free</title>
+
+<meta name="description" content="Convert CSV to XML online for free. Transform CSV data into clean and structured XML format instantly.">
+
+<style>
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f5f7fb;
+    color:#222;
+}
+
+.container{
+    max-width:950px;
+    margin:auto;
+    padding:20px;
+}
+
+h1{
+    text-align:center;
+    margin-bottom:8px;
+}
+
+.subtitle{
+    text-align:center;
+    color:#666;
+    margin-bottom:25px;
+}
+
+.card{
+    background:#fff;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+}
+
+label{
+    display:block;
+    font-weight:bold;
+    margin:15px 0 8px;
+}
+
+textarea{
+    width:100%;
+    min-height:280px;
+    padding:14px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-family:monospace;
+    font-size:14px;
+    resize:vertical;
+}
+
+.buttons{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin:15px 0;
+}
+
+button{
+    border:0;
+    border-radius:7px;
+    padding:11px 18px;
+    background:#2563eb;
+    color:#fff;
+    font-size:15px;
+    cursor:pointer;
+}
+
+button:hover{
+    opacity:.9;
+}
+
+.secondary{
+    background:#555;
+}
+
+.danger{
+    background:#dc2626;
+}
+
+.message{
+    margin-top:12px;
+    padding:10px;
+    border-radius:7px;
+    display:none;
+}
+
+.success{
+    display:block;
+    background:#dcfce7;
+    color:#166534;
+}
+
+.error{
+    display:block;
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+footer{
+    text-align:center;
+    margin-top:25px;
+    color:#777;
+    font-size:14px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>CSV to XML Converter</h1>
+
+<p class="subtitle">
+Convert CSV data into structured XML online for free.
+</p>
+
+<div class="card">
+
+<label for="csvInput">CSV Input</label>
+
+<textarea
+id="csvInput"
+placeholder="name,age,city
+John,25,Lucknow
+Ali,22,Delhi"
+></textarea>
+
+<div class="buttons">
+
+<button onclick="convertCSV()">
+Convert to XML
+</button>
+
+<button class="secondary" onclick="copyXML()">
+Copy XML
+</button>
+
+<button class="danger" onclick="clearAll()">
+Clear
+</button>
+
+</div>
+
+<label for="xmlOutput">XML Output</label>
+
+<textarea
+id="xmlOutput"
+readonly
+placeholder="XML output will appear here..."
+></textarea>
+
+<div id="message" class="message"></div>
+
+</div>
+
+<footer>
+© 2026 Tools-Sathi — Free Online Tools
+</footer>
+
+</div>
+
+<script>
+
+function parseCSVLine(line){
+
+    const values = [];
+    let current = "";
+    let insideQuotes = false;
+
+    for(let i = 0; i < line.length; i++){
+
+        const char = line[i];
+
+        if(char === '"'){
+
+            if(
+                insideQuotes &&
+                line[i + 1] === '"'
+            ){
+                current += '"';
+                i++;
+            }else{
+                insideQuotes = !insideQuotes;
+            }
+
+        }else if(char === "," && !insideQuotes){
+
+            values.push(current.trim());
+            current = "";
+
+        }else{
+
+            current += char;
+        }
+    }
+
+    values.push(current.trim());
+
+    return values;
+}
+
+function escapeXML(value){
+
+    return String(value)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&apos;");
+}
+
+function safeTagName(name,index){
+
+    let tag = name
+        .trim()
+        .toLowerCase()
+        .replace(/[^a-zA-Z0-9_-]/g,"_");
+
+    if(!tag){
+        tag = "column_" + (index + 1);
+    }
+
+    if(/^[0-9]/.test(tag)){
+        tag = "column_" + tag;
+    }
+
+    return tag;
+}
+
+function convertCSV(){
+
+    const input =
+        document.getElementById("csvInput").value.trim();
+
+    if(!input){
+
+        showMessage(
+            "Please enter CSV data first.",
+            "error"
+        );
+
+        return;
+    }
+
+    const lines =
+        input.split(/\r?\n/)
+        .filter(line => line.trim() !== "");
+
+    if(lines.length < 2){
+
+        showMessage(
+            "CSV must contain a header and at least one data row.",
+            "error"
+        );
+
+        return;
+    }
+
+    const headers =
+        parseCSVLine(lines[0]);
+
+    const tags =
+        headers.map(function(header,index){
+            return safeTagName(header,index);
+        });
+
+    let xml =
+        '<?xml version="1.0" encoding="UTF-8"?>\n';
+    
+    xml += "<records>\n";
+
+    for(let i = 1; i < lines.length; i++){
+
+        const values =
+            parseCSVLine(lines[i]);
+
+        xml += "  <record>\n";
+
+        tags.forEach(function(tag,index){
+
+            const value =
+                values[index] !== undefined
+                    ? values[index]
+                    : "";
+
+            xml +=
+                "    <" +
+                tag +
+                ">" +
+                escapeXML(value) +
+                "</" +
+                tag +
+                ">\n";
+        });
+
+        xml += "  </record>\n";
+    }
+
+    xml += "</records>";
+
+    document.getElementById("xmlOutput").value =
+        xml;
+
+    showMessage(
+        "✓ CSV converted to XML successfully.",
+        "success"
+    );
+}
+
+function copyXML(){
+
+    const output =
+        document.getElementById("xmlOutput");
+
+    if(!output.value.trim()){
+
+        showMessage(
+            "Please convert CSV first.",
+            "error"
+        );
+
+        return;
+    }
+
+    navigator.clipboard.writeText(output.value)
+        .then(function(){
+
+            showMessage(
+                "✓ XML copied to clipboard.",
+                "success"
+            );
+
+        })
+        .catch(function(){
+
+            output.select();
+            document.execCommand("copy");
+
+            showMessage(
+                "✓ XML copied to clipboard.",
+                "success"
+            );
+        });
+}
+
+function clearAll(){
+
+    document.getElementById("csvInput").value = "";
+    document.getElementById("xmlOutput").value = "";
+
+    const message =
+        document.getElementById("message");
+
+    message.textContent = "";
+    message.className = "message";
+}
+
+function showMessage(text,type){
+
+    const message =
+        document.getElementById("message");
+
+    message.textContent = text;
+    message.className =
+        "message " + type;
+}
+
+</script>
+
+</body>
+</html>
