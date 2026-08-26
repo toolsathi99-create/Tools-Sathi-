@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Markdown to HTML Converter Online - Free</title>
+
+<meta name="description" content="Convert Markdown to HTML online for free. Transform Markdown text into clean HTML instantly.">
+
+<style>
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f5f7fb;
+    color:#222;
+}
+
+.container{
+    max-width:950px;
+    margin:auto;
+    padding:20px;
+}
+
+h1{
+    text-align:center;
+    margin-bottom:8px;
+}
+
+.subtitle{
+    text-align:center;
+    color:#666;
+    margin-bottom:25px;
+}
+
+.card{
+    background:#fff;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+}
+
+label{
+    display:block;
+    font-weight:bold;
+    margin:15px 0 8px;
+}
+
+textarea{
+    width:100%;
+    min-height:280px;
+    padding:14px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-family:monospace;
+    font-size:14px;
+    resize:vertical;
+}
+
+.buttons{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin:15px 0;
+}
+
+button{
+    border:0;
+    border-radius:7px;
+    padding:11px 18px;
+    background:#2563eb;
+    color:#fff;
+    font-size:15px;
+    cursor:pointer;
+}
+
+button:hover{
+    opacity:.9;
+}
+
+.secondary{
+    background:#555;
+}
+
+.danger{
+    background:#dc2626;
+}
+
+.message{
+    margin-top:12px;
+    padding:10px;
+    border-radius:7px;
+    display:none;
+}
+
+.success{
+    display:block;
+    background:#dcfce7;
+    color:#166534;
+}
+
+.error{
+    display:block;
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+footer{
+    text-align:center;
+    margin-top:25px;
+    color:#777;
+    font-size:14px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Markdown to HTML Converter</h1>
+
+<p class="subtitle">
+Convert Markdown text into HTML online for free.
+</p>
+
+<div class="card">
+
+<label for="markdownInput">Markdown Input</label>
+
+<textarea id="markdownInput"
+placeholder="# Hello World
+
+This is **bold** text.
+
+- Item one
+- Item two
+
+[Visit Website](https://example.com)"></textarea>
+
+<div class="buttons">
+
+<button onclick="convertMarkdown()">
+Convert to HTML
+</button>
+
+<button class="secondary" onclick="copyHTML()">
+Copy HTML
+</button>
+
+<button class="danger" onclick="clearAll()">
+Clear
+</button>
+
+</div>
+
+<label for="htmlOutput">HTML Output</label>
+
+<textarea id="htmlOutput"
+readonly
+placeholder="HTML output will appear here..."></textarea>
+
+<div id="message" class="message"></div>
+
+</div>
+
+<footer>
+© 2026 Tools-Sathi — Free Online Tools
+</footer>
+
+</div>
+
+<script>
+
+function escapeHTML(text){
+
+    return text
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;");
+}
+
+function inlineMarkdown(text){
+
+    text = escapeHTML(text);
+
+    text = text.replace(
+        /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g,
+        '<a href="$2">$1</a>'
+    );
+
+    text = text.replace(
+        /\*\*(.+?)\*\*/g,
+        "<strong>$1</strong>"
+    );
+
+    text = text.replace(
+        /__(.+?)__/g,
+        "<strong>$1</strong>"
+    );
+
+    text = text.replace(
+        /\*(.+?)\*/g,
+        "<em>$1</em>"
+    );
+
+    text = text.replace(
+        /_(.+?)_/g,
+        "<em>$1</em>"
+    );
+
+    text = text.replace(
+        /`(.+?)`/g,
+        "<code>$1</code>"
+    );
+
+    return text;
+}
+
+function convertMarkdown(){
+
+    const input =
+        document.getElementById("markdownInput")
+        .value;
+
+    if(!input.trim()){
+
+        showMessage(
+            "Please enter Markdown first.",
+            "error"
+        );
+
+        return;
+    }
+
+    const lines =
+        input.split(/\r?\n/);
+
+    let html = "";
+    let inList = false;
+    let inCode = false;
+    let codeContent = "";
+
+    lines.forEach(function(line){
+
+        if(line.trim().startsWith("```")){
+
+            if(!inCode){
+
+                inCode = true;
+                codeContent = "";
+
+            }else{
+
+                html +=
+                    "<pre><code>" +
+                    escapeHTML(codeContent) +
+                    "</code></pre>\n";
+
+                inCode = false;
+            }
+
+            return;
+        }
+
+        if(inCode){
+
+            codeContent += line + "\n";
+            return;
+        }
+
+        const trimmed = line.trim();
+
+        if(!trimmed){
+
+            if(inList){
+
+                html += "</ul>\n";
+                inList = false;
+            }
+
+            return;
+        }
+
+        if(/^###\s+/.test(trimmed)){
+
+            html +=
+                "<h3>" +
+                inlineMarkdown(
+                    trimmed.replace(/^###\s+/,"")
+                ) +
+                "</h3>\n";
+
+        }else if(/^##\s+/.test(trimmed)){
+
+            html +=
+                "<h2>" +
+                inlineMarkdown(
+                    trimmed.replace(/^##\s+/,"")
+                ) +
+                "</h2>\n";
+
+        }else if(/^#\s+/.test(trimmed)){
+
+            html +=
+                "<h1>" +
+                inlineMarkdown(
+                    trimmed.replace(/^#\s+/,"")
+                ) +
+                "</h1>\n";
+
+        }else if(/^[-*]\s+/.test(trimmed)){
+
+            if(!inList){
+
+                html += "<ul>\n";
+                inList = true;
+            }
+
+            html +=
+                "  <li>" +
+                inlineMarkdown(
+                    trimmed.replace(/^[-*]\s+/,"")
+                ) +
+                "</li>\n";
+
+        }else{
+
+            if(inList){
+
+                html += "</ul>\n";
+                inList = false;
+            }
+
+            html +=
+                "<p>" +
+                inlineMarkdown(trimmed) +
+                "</p>\n";
+        }
+    });
+
+    if(inList){
+        html += "</ul>\n";
+    }
+
+    if(inCode){
+
+        html +=
+            "<pre><code>" +
+            escapeHTML(codeContent) +
+            "</code></pre>\n";
+    }
+
+    document.getElementById("htmlOutput").value =
+        html.trim();
+
+    showMessage(
+        "✓ Markdown converted to HTML successfully.",
+        "success"
+    );
+}
+
+function copyHTML(){
+
+    const output =
+        document.getElementById("htmlOutput");
+
+    if(!output.value.trim()){
+
+        showMessage(
+            "Please convert Markdown first.",
+            "error"
+        );
+
+        return;
+    }
+
+    navigator.clipboard.writeText(output.value)
+        .then(function(){
+
+            showMessage(
+                "✓ HTML copied to clipboard.",
+                "success"
+            );
+
+        })
+        .catch(function(){
+
+            output.select();
+            document.execCommand("copy");
+
+            showMessage(
+                "✓ HTML copied to clipboard.",
+                "success"
+            );
+        });
+}
+
+function clearAll(){
+
+    document.getElementById("markdownInput").value = "";
+    document.getElementById("htmlOutput").value = "";
+
+    const message =
+        document.getElementById("message");
+
+    message.textContent = "";
+    message.className = "message";
+}
+
+function showMessage(text,type){
+
+    const message =
+        document.getElementById("message");
+
+    message.textContent = text;
+    message.className =
+        "message " + type;
+}
+
+</script>
+
+</body>
+</html>
