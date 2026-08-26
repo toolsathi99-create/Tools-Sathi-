@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Schema Markup Generator - Free JSON-LD Schema Generator</title>
+
+<meta name="description" content="Generate Schema Markup JSON-LD for your website. Create Article, FAQ, Product, Local Business and Event schema code for free.">
+
+<meta name="keywords" content="schema markup generator, schema generator, JSON-LD generator, structured data generator, SEO schema generator">
+
+<style>
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    padding:20px;
+    font-family:Arial,sans-serif;
+    background:#f4f7fb;
+    color:#222;
+}
+
+.container{
+    max-width:800px;
+    margin:auto;
+    background:#fff;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 3px 15px rgba(0,0,0,.1);
+}
+
+h1{
+    text-align:center;
+    margin-top:0;
+}
+
+p{
+    color:#555;
+    line-height:1.6;
+}
+
+label{
+    display:block;
+    font-weight:bold;
+    margin-top:16px;
+}
+
+input,select,textarea{
+    width:100%;
+    padding:12px;
+    margin-top:7px;
+    border:1px solid #ccc;
+    border-radius:7px;
+    font-size:16px;
+}
+
+textarea{
+    min-height:180px;
+    resize:vertical;
+    font-family:monospace;
+}
+
+button{
+    padding:12px 18px;
+    margin-top:18px;
+    border:0;
+    border-radius:7px;
+    background:#2563eb;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button:hover{
+    opacity:.9;
+}
+
+.secondary{
+    background:#444;
+    margin-left:8px;
+}
+
+.result{
+    margin-top:20px;
+}
+
+#output{
+    min-height:300px;
+    background:#f7f7f7;
+}
+
+.hidden{
+    display:none;
+}
+
+.note{
+    background:#eef5ff;
+    padding:12px;
+    border-radius:7px;
+    margin-top:15px;
+    font-size:14px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Schema Markup Generator</h1>
+
+<p>
+Create SEO-friendly JSON-LD Schema Markup for your website.
+Choose a schema type, enter your information and generate the code instantly.
+</p>
+
+<label for="schemaType">Schema Type</label>
+
+<select id="schemaType" onchange="showFields()">
+    <option value="Article">Article</option>
+    <option value="FAQPage">FAQ Page</option>
+    <option value="Product">Product</option>
+    <option value="LocalBusiness">Local Business</option>
+    <option value="Event">Event</option>
+</select>
+
+<div id="articleFields">
+
+<label>Article Title</label>
+<input type="text" id="articleTitle" placeholder="Example: How to Calculate Percentage">
+
+<label>Article URL</label>
+<input type="url" id="articleUrl" placeholder="https://example.com/article">
+
+<label>Author Name</label>
+<input type="text" id="authorName" placeholder="Author name">
+
+<label>Publication Date</label>
+<input type="date" id="datePublished">
+
+<label>Image URL</label>
+<input type="url" id="articleImage" placeholder="https://example.com/image.jpg">
+
+</div>
+
+
+<div id="faqFields" class="hidden">
+
+<label>Question 1</label>
+<input type="text" id="q1" placeholder="Enter question">
+
+<label>Answer 1</label>
+<textarea id="a1" placeholder="Enter answer"></textarea>
+
+<label>Question 2</label>
+<input type="text" id="q2" placeholder="Enter question">
+
+<label>Answer 2</label>
+<textarea id="a2" placeholder="Enter answer"></textarea>
+
+<label>Question 3</label>
+<input type="text" id="q3" placeholder="Enter question">
+
+<label>Answer 3</label>
+<textarea id="a3" placeholder="Enter answer"></textarea>
+
+</div>
+
+
+<div id="productFields" class="hidden">
+
+<label>Product Name</label>
+<input type="text" id="productName" placeholder="Example: Wireless Headphones">
+
+<label>Product URL</label>
+<input type="url" id="productUrl" placeholder="https://example.com/product">
+
+<label>Image URL</label>
+<input type="url" id="productImage" placeholder="https://example.com/product.jpg">
+
+<label>Brand</label>
+<input type="text" id="brand" placeholder="Brand name">
+
+<label>Price</label>
+<input type="number" id="price" placeholder="99.99" step="any">
+
+<label>Currency</label>
+<input type="text" id="currency" value="USD" placeholder="USD">
+
+</div>
+
+
+<div id="businessFields" class="hidden">
+
+<label>Business Name</label>
+<input type="text" id="businessName" placeholder="Business name">
+
+<label>Website URL</label>
+<input type="url" id="businessUrl" placeholder="https://example.com">
+
+<label>Telephone</label>
+<input type="text" id="telephone" placeholder="+1 123 456 7890">
+
+<label>Address</label>
+<input type="text" id="address" placeholder="Street, City, Country">
+
+</div>
+
+
+<div id="eventFields" class="hidden">
+
+<label>Event Name</label>
+<input type="text" id="eventName" placeholder="Event name">
+
+<label>Event URL</label>
+<input type="url" id="eventUrl" placeholder="https://example.com/event">
+
+<label>Start Date & Time</label>
+<input type="datetime-local" id="eventStart">
+
+<label>Location</label>
+<input type="text" id="eventLocation" placeholder="Event location">
+
+</div>
+
+
+<button onclick="generateSchema()">Generate Schema</button>
+
+<div class="result">
+
+<label for="output">Generated JSON-LD</label>
+
+<textarea id="output" readonly placeholder="Your Schema Markup will appear here..."></textarea>
+
+<button onclick="copyCode()">Copy Code</button>
+
+<button class="secondary" onclick="clearAll()">Clear</button>
+
+</div>
+
+<div class="note">
+Tip: Add the generated JSON-LD code inside the
+<strong>&lt;head&gt;</strong> section of the relevant webpage.
+</div>
+
+</div>
+
+<script>
+
+function showFields(){
+
+    const type=document.getElementById("schemaType").value;
+
+    document.getElementById("articleFields").classList.add("hidden");
+    document.getElementById("faqFields").classList.add("hidden");
+    document.getElementById("productFields").classList.add("hidden");
+    document.getElementById("businessFields").classList.add("hidden");
+    document.getElementById("eventFields").classList.add("hidden");
+
+    if(type==="Article"){
+        document.getElementById("articleFields").classList.remove("hidden");
+    }
+
+    if(type==="FAQPage"){
+        document.getElementById("faqFields").classList.remove("hidden");
+    }
+
+    if(type==="Product"){
+        document.getElementById("productFields").classList.remove("hidden");
+    }
+
+    if(type==="LocalBusiness"){
+        document.getElementById("businessFields").classList.remove("hidden");
+    }
+
+    if(type==="Event"){
+        document.getElementById("eventFields").classList.remove("hidden");
+    }
+}
+
+
+function getValue(id){
+    return document.getElementById(id).value.trim();
+}
+
+
+function generateSchema(){
+
+    const type=document.getElementById("schemaType").value;
+
+    let schema={};
+
+    if(type==="Article"){
+
+        schema={
+            "@context":"https://schema.org",
+            "@type":"Article",
+            "headline":getValue("articleTitle"),
+            "url":getValue("articleUrl"),
+            "author":{
+                "@type":"Person",
+                "name":getValue("authorName")
+            },
+            "datePublished":getValue("datePublished"),
+            "image":getValue("articleImage")
+        };
+
+    }
+
+
+    if(type==="FAQPage"){
+
+        const questions=[];
+
+        for(let i=1;i<=3;i++){
+
+            const question=getValue("q"+i);
+            const answer=getValue("a"+i);
+
+            if(question && answer){
+
+                questions.push({
+                    "@type":"Question",
+                    "name":question,
+                    "acceptedAnswer":{
+                        "@type":"Answer",
+                        "text":answer
+                    }
+                });
+
+            }
+        }
+
+        schema={
+            "@context":"https://schema.org",
+            "@type":"FAQPage",
+            "mainEntity":questions
+        };
+
+    }
+
+
+    if(type==="Product"){
+
+        schema={
+            "@context":"https://schema.org",
+            "@type":"Product",
+            "name":getValue("productName"),
+            "url":getValue("productUrl"),
+            "image":getValue("productImage"),
+            "brand":{
+                "@type":"Brand",
+                "name":getValue("brand")
+            },
+            "offers":{
+                "@type":"Offer",
+                "price":getValue("price"),
+                "priceCurrency":getValue("currency"),
+                "availability":"https://schema.org/InStock"
+            }
+        };
+
+    }
+
+
+    if(type==="LocalBusiness"){
+
+        schema={
+            "@context":"https://schema.org",
+            "@type":"LocalBusiness",
+            "name":getValue("businessName"),
+            "url":getValue("businessUrl"),
+            "telephone":getValue("telephone"),
+            "address":{
+                "@type":"PostalAddress",
+                "streetAddress":getValue("address")
+            }
+        };
+
+    }
+
+
+    if(type==="Event"){
+
+        schema={
+            "@context":"https://schema.org",
+            "@type":"Event",
+            "name":getValue("eventName"),
+            "url":getValue("eventUrl"),
+            "startDate":getValue("eventStart"),
+            "location":{
+                "@type":"Place",
+                "name":getValue("eventLocation")
+            }
+        };
+
+    }
+
+
+    const json=JSON.stringify(schema,null,2);
+
+    document.getElementById("output").value=
+`<script type="application/ld+json">
+${json}
+<\/script>`;
+
+}
+
+
+function copyCode(){
+
+    const output=document.getElementById("output");
+
+    if(!output.value){
+        alert("Please generate the Schema Markup first.");
+        return;
+    }
+
+    navigator.clipboard.writeText(output.value)
+    .then(function(){
+        alert("Schema Markup copied!");
+    })
+    .catch(function(){
+        output.select();
+        document.execCommand("copy");
+        alert("Schema Markup copied!");
+    });
+
+}
+
+
+function clearAll(){
+
+    document.querySelectorAll("input, textarea").forEach(function(element){
+        element.value="";
+    });
+
+    document.getElementById("currency").value="USD";
+    document.getElementById("output").value="";
+
+}
+
+
+showFields();
+
+</script>
+
+</body>
+</html>
