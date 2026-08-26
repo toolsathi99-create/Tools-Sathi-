@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SERP Snippet Preview Tool - Free Google Search Preview</title>
+
+<meta name="description" content="Preview how your webpage may appear in Google search results. Optimize your SEO title, URL and meta description with this free SERP Snippet Preview Tool.">
+
+<meta name="keywords" content="SERP snippet preview, Google snippet preview, SERP preview tool, SEO preview, Google search preview, meta description preview">
+
+<style>
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    padding:20px;
+    font-family:Arial,sans-serif;
+    background:#f4f7fb;
+    color:#222;
+}
+
+.container{
+    max-width:800px;
+    margin:auto;
+    background:#fff;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 3px 15px rgba(0,0,0,.1);
+}
+
+h1{text-align:center;margin-top:0}
+
+p{
+    color:#555;
+    line-height:1.6;
+}
+
+label{
+    display:block;
+    font-weight:bold;
+    margin-top:18px;
+}
+
+input,textarea{
+    width:100%;
+    padding:12px;
+    margin-top:7px;
+    border:1px solid #ccc;
+    border-radius:7px;
+    font-size:16px;
+}
+
+textarea{
+    min-height:120px;
+    resize:vertical;
+}
+
+.counter{
+    text-align:right;
+    font-size:13px;
+    color:#666;
+    margin-top:5px;
+}
+
+.preview{
+    margin-top:25px;
+    padding:20px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    background:#fff;
+}
+
+.preview-label{
+    font-size:13px;
+    color:#666;
+    margin-bottom:12px;
+}
+
+.google-title{
+    color:#1a0dab;
+    font-size:20px;
+    line-height:1.3;
+    margin-bottom:5px;
+    word-break:break-word;
+}
+
+.google-url{
+    color:#188038;
+    font-size:14px;
+    margin-bottom:7px;
+    word-break:break-all;
+}
+
+.google-description{
+    color:#4d5156;
+    font-size:14px;
+    line-height:1.5;
+    word-break:break-word;
+}
+
+.status{
+    margin-top:20px;
+    padding:15px;
+    background:#eef5ff;
+    border-radius:8px;
+    line-height:1.8;
+}
+
+.good{color:green}
+.warning{color:#b36b00}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>SERP Snippet Preview Tool</h1>
+
+<p>
+Preview your SEO title, URL and meta description in a Google-style search
+result before publishing your webpage.
+</p>
+
+<label for="title">SEO Title</label>
+<input type="text" id="title" maxlength="70"
+placeholder="Enter your SEO title"
+oninput="updatePreview()">
+
+<div class="counter">
+<span id="titleCount">0</span>/70 characters
+</div>
+
+<label for="url">Page URL</label>
+<input type="url" id="url"
+placeholder="https://example.com/page"
+oninput="updatePreview()">
+
+<label for="description">Meta Description</label>
+<textarea id="description" maxlength="170"
+placeholder="Enter your meta description"
+oninput="updatePreview()"></textarea>
+
+<div class="counter">
+<span id="descriptionCount">0</span>/170 characters
+</div>
+
+<div class="preview">
+
+<div class="preview-label">Search Preview</div>
+
+<div class="google-title" id="previewTitle">
+Your Page Title
+</div>
+
+<div class="google-url" id="previewUrl">
+https://example.com/
+</div>
+
+<div class="google-description" id="previewDescription">
+Your meta description will appear here. Write a clear and useful description
+that tells users what your page is about.
+</div>
+
+</div>
+
+<div class="status" id="status">
+Enter your title and description to see SEO suggestions.
+</div>
+
+</div>
+
+<script>
+
+function updatePreview(){
+
+    const title=document.getElementById("title").value.trim();
+    const url=document.getElementById("url").value.trim();
+    const description=document.getElementById("description").value.trim();
+
+    document.getElementById("previewTitle").textContent=
+        title || "Your Page Title";
+
+    document.getElementById("previewUrl").textContent=
+        url || "https://example.com/";
+
+    document.getElementById("previewDescription").textContent=
+        description ||
+        "Your meta description will appear here. Write a clear and useful description that tells users what your page is about.";
+
+    document.getElementById("titleCount").textContent=title.length;
+    document.getElementById("descriptionCount").textContent=description.length;
+
+    let messages=[];
+
+    if(title.length===0){
+        messages.push("Add an SEO title.");
+    }else if(title.length<30){
+        messages.push("SEO title is quite short. Consider adding more useful words.");
+    }else if(title.length<=60){
+        messages.push('<span class="good">SEO title length looks good.</span>');
+    }else{
+        messages.push('<span class="warning">SEO title is long and may be truncated.</span>');
+    }
+
+    if(description.length===0){
+        messages.push("Add a meta description.");
+    }else if(description.length<70){
+        messages.push("Meta description is short. Consider making it more informative.");
+    }else if(description.length<=160){
+        messages.push('<span class="good">Meta description length looks good.</span>');
+    }else{
+        messages.push('<span class="warning">Meta description is long and may be truncated.</span>');
+    }
+
+    if(!url){
+        messages.push("Add your webpage URL.");
+    }
+
+    document.getElementById("status").innerHTML=
+        messages.join("<br>");
+
+}
+
+updatePreview();
+
+</script>
+
+</body>
+</html>
